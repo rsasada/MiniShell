@@ -12,7 +12,7 @@ RLDIR = $(shell brew --prefix readline)
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) $(OBJS) 
+	$(CC) $(CFLAGS) -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include -o $(NAME) $(OBJS)
 
 clean:
 		rm -rf $(OBJS)

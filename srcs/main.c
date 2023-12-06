@@ -24,7 +24,7 @@ int	main()
 			add_history(line);
 			free(line);
 		}
-		line = readline("push-1.0");
+		line = readline("push-1.0 ");
 		
 	}
 	return (0);
