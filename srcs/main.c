@@ -12,10 +12,20 @@
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int	main()
 {
-	(void) argc;
-	(void) argv;
-	(void) env;
+	char	*line;
+
+	line = NULL;
+	while (1)
+	{
+		if (line != NULL)
+		{
+			add_history(line);
+			free(line);
+		}
+		line = readline("push-1.0");
+		
+	}
 	return (0);
 }

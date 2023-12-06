@@ -7,11 +7,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS = srcs/main.c
 OBJS = $(SRCS:%.c=%.o)
+RLDIR = $(shell brew --prefix readline)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) 
+	$(CC) $(CFLAGS) -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) $(OBJS) 
 
 clean:
 		rm -rf $(OBJS)
