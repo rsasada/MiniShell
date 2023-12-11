@@ -47,6 +47,7 @@ void init_env(t_app *app, char **envp)
 	t_env	*env_entry;
 
 	i = 0;
+	app->env_lst = NULL;
 	while (envp[i])
 	{
 		env_entry = malloc(sizeof(t_env));
@@ -55,7 +56,7 @@ void init_env(t_app *app, char **envp)
 		env_entry->key = NULL;
 		env_entry->value = NULL;
 		get_env(env_entry, envp, i);
-		ft_lstadd_back(app->env_lst, ft_lstnew(env_entry));
+		ft_lstadd_back(&app->env_lst, ft_lstnew(env_entry));
 		i++;
 	}
 }

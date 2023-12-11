@@ -23,7 +23,7 @@
 
 typedef struct s_app
 {
-	t_list **env_lst;
+	t_list	*env_lst;
 
 }	t_app;
 
@@ -35,5 +35,5 @@ typedef struct s_env
 }	t_env;
 
 // error.c
-void exit_with_error(char *error_message);
+void	exit_with_error(char *error_message);
 #endif
