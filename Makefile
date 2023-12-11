@@ -5,7 +5,9 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = srcs/main.c
+SRCS = srcs/main.c \
+srcs/init_signal.c \
+
 OBJS = $(SRCS:%.c=%.o)
 RLDIR = $(shell brew --prefix readline)
 
@@ -18,6 +20,9 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(LIBFT) :
 	$(MAKE) -j3 -C libft
+
+.c.o :
+		$(CC) $(CFLAG) -c -I $(shell brew --prefix readline)/include $< -o $@
 
 clean:
 		rm -rf $(OBJS)

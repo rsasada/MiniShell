@@ -6,3 +6,6 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+
+void	config_signal(void);

@@ -32,15 +32,19 @@ int	main()
 
 	line = NULL;
 	load_banner();
+	config_signal();
+	rl_initialize();
 	while (1)
 	{
-		if (line != NULL)
+		line = readline("push-1.0 ");
+		printf("line: %s\n", line);
+		if (line == NULL)
+			exit(1);
+		else 
 		{
 			add_history(line);
 			free(line);
 		}
-		line = readline("push-1.0 ");
-		
 	}
 	return (0);
 }
