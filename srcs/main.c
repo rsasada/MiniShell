@@ -26,10 +26,50 @@ void load_banner()
 	ft_printf("\033[0m");
 }
 
-int	main()
+void get_env(t_env *env, char **envp, int i)
 {
+	char *delimit;
+	char *key;
+	char *value;
+
+	key = envp[i];
+	delimit = ft_strchr(envp[i], '=');
+	*delimit = '\0';
+	value = delimit + 1;
+	env->key = ft_strdup(key);
+	env->value = ft_strdup(value);
+}
+
+void init_env(t_app *app, char **envp)
+{
+	int		i;
+	t_env	*env_entry;
+
+	i = 0;
+	app->env_lst = NULL;
+	while (envp[i])
+	{
+		env_entry = malloc(sizeof(t_env));
+		if (!env_entry)
+			exit_with_error("Malloc");
+		env_entry->key = NULL;
+		env_entry->value = NULL;
+		get_env(env_entry, envp, i);
+		ft_lstadd_back(&app->env_lst, ft_lstnew(env_entry));
+		i++;
+	}
+}
+
+int	main(int argc, char **argv, char**envp)
+{
+	t_app	app;
 	char	*line;
 
+	if (argc != 1)
+		return (0);
+	(void) argv;
+	ft_memset(&app, 0, sizeof(t_app));
+	init_env(&app, envp);
 	line = NULL;
 	load_banner();
 	config_signal();
@@ -40,7 +80,7 @@ int	main()
 		printf("line: %s\n", line);
 		if (line == NULL)
 			exit(1);
-		else 
+		else
 		{
 			add_history(line);
 			free(line);

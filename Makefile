@@ -3,11 +3,9 @@
 NAME = minishell
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0
 
-SRCS = srcs/main.c \
-srcs/init_signal.c \
-
+SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
 OBJS = $(SRCS:%.c=%.o)
 RLDIR = $(shell brew --prefix readline)
 
