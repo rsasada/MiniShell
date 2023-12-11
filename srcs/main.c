@@ -73,7 +73,6 @@ int	main(int argc, char **argv, char**envp)
 	line = NULL;
 	load_banner();
 	config_signal();
-	rl_initialize();
 	while (1)
 	{
 		line = readline("push-1.0 ");
@@ -86,5 +85,4 @@ int	main(int argc, char **argv, char**envp)
 			free(line);
 		}
 	}
-	return (0);
 }
