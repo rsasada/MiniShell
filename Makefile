@@ -2,12 +2,17 @@
 
 NAME = minishell
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror -g -O0
+
+ARCH := $(shell uname -m)
+ifeq ($(ARCH), x86_64)
+	RLDIR = $(shell brew --prefix readline)
+else
+    RLDIR = /opt/homebrew/opt/readline
+endif
 
 SRCS = srcs/main.c srcs/error.c srcs/init_signal.c
 OBJS = $(SRCS:%.c=%.o)
-RLDIR = $(shell brew --prefix readline)
 
 LIBFT = libft/libft.a
 INPUTRC = ~/.inputrc
