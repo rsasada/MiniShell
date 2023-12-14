@@ -20,6 +20,9 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
+# include <unistd.h>
+# include <sys/ioctl.h>
 
 typedef struct s_app
 {
@@ -31,7 +34,6 @@ typedef struct s_env
 {
 	char	*key;
 	char	*value;
-
 }	t_env;
 
 // error.c

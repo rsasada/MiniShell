@@ -10,17 +10,21 @@ OBJS = $(SRCS:%.c=%.o)
 RLDIR = $(shell brew --prefix readline)
 
 LIBFT = libft/libft.a
+INPUTRC = ~/.inputrc
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(INPUTRC)
 	$(CC) $(CFLAGS) -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include -o $(NAME) $(OBJS)
 
 $(LIBFT) :
 	$(MAKE) -j3 -C libft
 
+$(INPUTRC) :
+	echo 'set echo-control-characters off' > ~/.inputrc
+
 .c.o :
-		$(CC) $(CFLAG) -c -I $(shell brew --prefix readline)/include $< -o $@
+		$(CC) $(CFLAG) -c -I $(RLDIR)/include $< -o $@
 
 clean:
 		rm -rf $(OBJS)

@@ -76,7 +76,6 @@ int	main(int argc, char **argv, char**envp)
 	while (1)
 	{
 		line = readline("push-1.0 ");
-		printf("line: %s\n", line);
 		if (line == NULL)
 			exit(1);
 		else
