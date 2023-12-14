@@ -76,8 +76,11 @@ int	main(int argc, char **argv, char**envp)
 	while (1)
 	{
 		line = readline("push-1.0 ");
-		if (line == NULL)
+		if (line == NULL || ft_strncmp(line,"exit",5)==0)
+		{
+			ft_printf("exit\n");
 			exit(1);
+		}
 		else
 		{
 			add_history(line);
