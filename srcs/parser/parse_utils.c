@@ -72,7 +72,7 @@ t_ast_node *parse_redirect(t_list **cur_token) {
         return (NULL);
     if (*cur_token && accept_redirect(*cur_token)) {
         redirect = parse_redirect(cur_token);
-        return create_pipeline_node(io_redirect, redirect);
+        return create_pipeline_node(io_redirect, redirect); // TODO : use pipeline or make new function
     }
     return (io_redirect);
 }
@@ -123,11 +123,11 @@ t_ast_node *parse_pipeline(t_list **cur_token) {
         return (NULL);
     if ((*cur_token) != NULL && accept_pipe(*cur_token)) {
         *cur_token = (*cur_token)->next;
-        right = parse_cmd(cur_token);
+        right = parse_pipeline(cur_token);
         if (right == NULL)
             return (NULL); // TODO : error handling, free
         pipe_node = create_pipeline_node(left, right);
-        return (pipe_node);
+        left = pipe_node;
     }
     return (left);
 }

@@ -89,19 +89,44 @@ int main(void) {
 
 	t_ast_node *root;
 	t_list *head = NULL;
-	// "ls | grep 'test'"
-	t_token token1 = {TOKEN_WORD, "ls"};
-	t_token token2 = {TOKEN_PIPE, "|"};
-	t_token token3 = {TOKEN_WORD, "grep"};
-	t_token token4 = {TOKEN_WORD, "test"};
-	t_token token5 = {TOKEN_REDIRECT, ">>"};
-	t_token token6 = {TOKEN_WORD, "test.txt"};
-	ft_lstadd_back(&head, ft_lstnew(&token1));
-	ft_lstadd_back(&head, ft_lstnew(&token2));
-	ft_lstadd_back(&head, ft_lstnew(&token3));
-	ft_lstadd_back(&head, ft_lstnew(&token4));
-	ft_lstadd_back(&head, ft_lstnew(&token5));
-	ft_lstadd_back(&head, ft_lstnew(&token6));
+	//ls -a -l >> a < b > c | grep "" | cat << x > y
+    t_token token1 = {TOKEN_WORD, "ls"};
+    t_token token2 = {TOKEN_WORD, "-a"};
+    t_token token3 = {TOKEN_WORD, "-l"};
+    t_token token4 = {TOKEN_REDIRECT, ">>"};
+    t_token token5 = {TOKEN_WORD, "a"};
+    t_token token6 = {TOKEN_REDIRECT, "<"};
+    t_token token7 = {TOKEN_WORD, "b"};
+    t_token token8 = {TOKEN_REDIRECT, ">"};
+    t_token token9 = {TOKEN_WORD, "c"};
+    t_token token10 = {TOKEN_PIPE, "|"};
+    t_token token11 = {TOKEN_WORD, "grep"};
+    t_token token12 = {TOKEN_WORD, ""};
+    t_token token13 = {TOKEN_PIPE, "|"};
+    t_token token14 = {TOKEN_WORD, "cat"};
+    t_token token15 = {TOKEN_REDIRECT, "<<"};
+    t_token token16 = {TOKEN_WORD, "x"};
+    t_token token17 = {TOKEN_REDIRECT, ">"};
+    t_token token18 = {TOKEN_WORD, "y"};
+
+    ft_lstadd_back(&head, ft_lstnew(&token1));
+    ft_lstadd_back(&head, ft_lstnew(&token2));
+    ft_lstadd_back(&head, ft_lstnew(&token3));
+    ft_lstadd_back(&head, ft_lstnew(&token4));
+    ft_lstadd_back(&head, ft_lstnew(&token5));
+    ft_lstadd_back(&head, ft_lstnew(&token6));
+    ft_lstadd_back(&head, ft_lstnew(&token7));
+    ft_lstadd_back(&head, ft_lstnew(&token8));
+    ft_lstadd_back(&head, ft_lstnew(&token9));
+    ft_lstadd_back(&head, ft_lstnew(&token10));
+    ft_lstadd_back(&head, ft_lstnew(&token11));
+    ft_lstadd_back(&head, ft_lstnew(&token12));
+    ft_lstadd_back(&head, ft_lstnew(&token13));
+    ft_lstadd_back(&head, ft_lstnew(&token14));
+    ft_lstadd_back(&head, ft_lstnew(&token15));
+    ft_lstadd_back(&head, ft_lstnew(&token16));
+    ft_lstadd_back(&head, ft_lstnew(&token17));
+    ft_lstadd_back(&head, ft_lstnew(&token18));
 
 	root = ast_parser(&head);
     print_tree(root, 0);
