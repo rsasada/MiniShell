@@ -51,7 +51,7 @@ void print_tree(t_ast_node *node, int level) {
             printf("Argument List\n");
             t_list *current = node->u_node_data.arg_list;
             while (current != NULL) {
-                t_ast_node *arg_node = (t_ast_node *)(current->content);
+                t_ast_node *arg_node = (t_ast_node *) (current->content);
                 if (arg_node != NULL) {
                     // 들여쓰기
                     for (int i = 0; i < level + 1; ++i) {
