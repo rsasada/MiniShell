@@ -32,7 +32,6 @@ void print_tree(t_ast_node *node, int level) {
         printf("    ");
     }
 
-    // 노드 유형에 따라 출력
     switch (node->node_type) {
         case NODE_PIPELINE:
             printf("Pipeline\n");
@@ -55,15 +54,12 @@ void print_tree(t_ast_node *node, int level) {
             while (current != NULL) {
                 t_ast_node *arg_node = (t_ast_node *)(current->content);
                 if (arg_node != NULL) {
-                    // 들여쓰기
                     for (int i = 0; i < level + 1; ++i) {
                         printf("    ");
                     }
-                    // arg_node의 내용 출력 (예: FILENAME 노드)
                     if (arg_node->node_type == NODE_FILENAME) {
                         printf("Filename: %s\n", arg_node->u_node_data.file_name_val);
                     }
-                    // 추가적으로 다른 노드 유형에 대한 처리가 필요하다면 여기에 추가
                 }
                 current = current->next;
             }
