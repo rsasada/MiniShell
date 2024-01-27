@@ -20,7 +20,7 @@ typedef struct s_tokenizer {
 	t_list			*head;
 	char			*line;
 	t_QuoteState	q_state;
-	bool			is_env;
+	int			is_env;
 	size_t			count;
 	size_t			i;
 }	t_tokenizer;
@@ -31,7 +31,7 @@ typedef struct s_token {
 }	t_token;
 
 
-t_list	*tokenizer(char	*line, bool is_env);
+t_list	*tokenizer(char	*line, int is_env);
 void	init_tokenizer(t_tokenizer *t);
 t_list	*malloc_token(char *value, t_token_type type);
 void	new_token(t_tokenizer *t, t_token_type type);

@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/lexer.h"
 
 bool	ft_is_pipeline(t_tokenizer *t);
 bool	ft_is_redirect(t_tokenizer *t);
 bool	ft_is_quote(t_tokenizer *t);
 bool	skip_blanks(t_tokenizer *t);
 
-t_list	*tokenizer(char	*line, bool is_env)
+t_list	*tokenizer(char	*line, int is_env)
 {
 	t_tokenizer	t;
 

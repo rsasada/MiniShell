@@ -1,6 +1,5 @@
 
 #include "../../include/minishell.h"
-#include "../../include/lexer.h"
 
 void	new_token(t_tokenizer *t, t_token_type type)
 {

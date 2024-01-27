@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../../include/minishell.h"
 
 void append_arg(t_ast_node *args_node, t_ast_node *arg_node) {
     t_list *new_arg;

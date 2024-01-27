@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../../include/minishell.h"
 
 int is_expected(t_list *cur_token, t_token_type expected_type) {
     if (((t_token *) cur_token->content)->type == expected_type)

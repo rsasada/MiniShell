@@ -9,12 +9,6 @@ PARSER_SRCS = srcs/parser/parse_main.c srcs/parser/parse_utils.c srcs/parser/par
 PARSER_OBJS = $(PARSER_SRCS:%.c=%.o)
 PARSER_HDRS = srcs/parser/parser.h
 
-parser: $(PARSER_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include -I srcs/parser -o $(PARSER_NAME) $(PARSER_OBJS)
-
-srcs/parser/%.o: srcs/parser/%.c $(PARSER_HDRS)
-	$(CC) $(CFLAGS) -c -I $(RLDIR)/include -I srcs/parser $< -o $@
-
 ARCH := $(shell uname -m)
 ifeq ($(ARCH), x86_64)
 	RLDIR = $(shell brew --prefix readline)
@@ -23,11 +17,13 @@ else
 endif
 
 SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
-	srcs/lexer/lexer_utils.c srcs/lexer/lexer.c
+		srcs/lexer/lexer_utils.c srcs/lexer/lexer.c \
+		srcs/parser/parse_main.c srcs/parser/parse_utils.c \
+		srcs/parser/parse_helper.c srcs/parser/node_constructor.c
+
 OBJS = $(SRCS:%.c=%.o)
 
 LIBFT = libft/libft.a
-INPUTRC = ~/.inputrc
 
 all: $(NAME)
 

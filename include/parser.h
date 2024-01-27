@@ -13,7 +13,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../../include/minishell.h"
+# include "minishell.h"
 
 typedef struct s_ast_node t_ast_node;
 typedef enum e_node_type t_node_type;
@@ -53,17 +53,8 @@ struct s_ast_node {
 	} u_node_data;
 };
 
-// tempo construct for test
-typedef enum e_token_type {
-	TOKEN_WORD,
-	TOKEN_PIPE,
-	TOKEN_REDIRECT
-} t_token_type;
-
-typedef struct s_token {
-	t_token_type type;
-	char *value;
-} t_token;
+t_ast_node *ast_parser(t_list **token_list);
+void print_tree(t_ast_node *node, int level);
 
 t_ast_node *parse_pipeline(t_list **cur_token);
 t_ast_node *parse_cmd(t_list **cur_token);
