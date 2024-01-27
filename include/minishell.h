@@ -23,6 +23,7 @@
 # include <termios.h>
 # include <unistd.h>
 # include <sys/ioctl.h>
+# include <stdbool.h>
 
 typedef struct s_app
 {

@@ -11,7 +11,8 @@ else
     RLDIR = /opt/homebrew/opt/readline
 endif
 
-SRCS = srcs/main.c srcs/error.c srcs/init_signal.c
+SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
+	srcs/lexer/lexer_utils.c srcs/lexer/lexer.c
 OBJS = $(SRCS:%.c=%.o)
 
 LIBFT = libft/libft.a
@@ -24,9 +25,6 @@ $(NAME): $(OBJS) $(LIBFT) $(INPUTRC)
 
 $(LIBFT) :
 	$(MAKE) -j3 -C libft
-
-$(INPUTRC) :
-	echo 'set echo-control-characters off' > ~/.inputrc
 
 .c.o :
 		$(CC) $(CFLAG) -c -I $(RLDIR)/include $< -o $@
