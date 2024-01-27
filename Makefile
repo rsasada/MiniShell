@@ -4,6 +4,17 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
 
+PARSER_NAME = parser
+PARSER_SRCS = srcs/parser/parse_main.c srcs/parser/parse_utils.c srcs/parser/parse_helper.c srcs/parser/node_constructor.c
+PARSER_OBJS = $(PARSER_SRCS:%.c=%.o)
+PARSER_HDRS = srcs/parser/parser.h
+
+parser: $(PARSER_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include -I srcs/parser -o $(PARSER_NAME) $(PARSER_OBJS)
+
+srcs/parser/%.o: srcs/parser/%.c $(PARSER_HDRS)
+	$(CC) $(CFLAGS) -c -I $(RLDIR)/include -I srcs/parser $< -o $@
+
 ARCH := $(shell uname -m)
 ifeq ($(ARCH), x86_64)
 	RLDIR = $(shell brew --prefix readline)
