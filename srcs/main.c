@@ -87,6 +87,7 @@ int	main(int argc, char **argv, char**envp)
 		{
 			add_history(line);
             tokens = tokenizer(line, 0);
+            expand_env(&tokens);
             root = ast_parser(&tokens);
             ft_lstclear(&tokens, free_token);
 			free(line);

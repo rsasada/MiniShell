@@ -10,38 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-
-t_list *tokenizer(const char *str) {
-    t_list *tokens;
-    char *token_str;
-    t_token *new_token;
-    int start;
-    int end;
-    int i;
-
-    i = 0;
-    token_str = NULL;
-    tokens = NULL;
-    while (str[i] != '\0') {
-        while (str[i] && str[i] == ' ')
-            i++;
-        start = i;
-        while (str[i] && str[i] != ' ')
-            i++;
-        end = i;
-        if (end > start) {
-            token_str = malloc(end - start + 1);
-            ft_strlcpy(token_str, str + start, end - start + 1);
-            token_str[end - start] = '\0';
-            new_token = malloc(sizeof(t_token));
-            new_token->type = TOKEN_WORD;
-            new_token->value = token_str;
-            ft_lstadd_back(&tokens, ft_lstnew(new_token));
-        }
-    }
-    return (tokens);
-}
+#include "../../include/minishell.h"
 
 void replace_tokens(t_list **old, t_list *node_to_change, t_list *new) {
     t_list *next;
@@ -145,7 +114,7 @@ void expand_env(t_list **tokens) {
         if (token && token->type == TOKEN_WORD) {
             new_value = expand_token_value(token->value);
             if (new_value) {
-                new = tokenizer(new_value);
+                new = tokenizer(new_value,1);
                 if (new) {
                     next = cur->next;
                     replace_tokens(tokens, cur, new);

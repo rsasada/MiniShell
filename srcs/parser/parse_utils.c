@@ -26,6 +26,31 @@ void append_arg(t_ast_node *args_node, t_ast_node *arg_node) {
     }
 }
 
+void reorder_tokens(t_list **head) {
+    t_list *cur;
+    t_list *prev;
+
+    prev = NULL;
+    cur = *head;
+    while ((cur != NULL && cur->next == NULL) && !accept_pipe(cur)) {
+        if (accept_redirect(cur) && accept_word(cur->next)) {
+            prev = cur->next;
+            cur = cur->next->next;
+        } else if (accept_word(cur)) {
+            if (prev != NULL) {
+                prev->next = cur->next;
+                cur->next = *head;
+                *head = cur;
+            }
+            break;
+        } else {
+            prev = cur;
+            cur = cur->next;
+        }
+    }
+}
+
+
 t_ast_node *parse_argv(t_list **cur_token) {
     t_ast_node *args_node;
     t_ast_node *arg_node;
@@ -90,8 +115,10 @@ t_ast_node *parse_simple_cmd(t_list **cur_token) {
     t_ast_node *file_path_node;
     t_ast_node *argv_node;
 
-    if (*cur_token == NULL || !accept_word(*cur_token))
+    if (*cur_token == NULL || !accept_word(*cur_token)) {
+        print_syntax_error(((t_token *) (*cur_token)->content)->value);
         return (NULL);
+    }
     file_path_node = create_file_path_node(((t_token *) (*cur_token)->content)->value);
     *cur_token = (*cur_token)->next;
     if (*cur_token != NULL && accept_word(*cur_token)) {
@@ -132,6 +159,7 @@ t_ast_node *parse_pipeline(t_list **cur_token) {
 
     if (cur_token == NULL || *cur_token == NULL)
         return (NULL);
+    reorder_tokens(cur_token);
     left = parse_cmd(cur_token);
     if (left == NULL)
         return (NULL);
