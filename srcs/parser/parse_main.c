@@ -16,11 +16,9 @@ t_ast_node *ast_parser(t_list **token_list)
 {
 	t_ast_node	*root;
 
-	if (token_list == NULL)
-		return (NULL);//TODO:Error handling
+	if (token_list == NULL || *token_list == NULL)
+		return (NULL);
 	root = parse_pipeline(token_list);
-	if (root == NULL)
-		return (NULL);//TODO:Error handling
 	return (root);
 }
 

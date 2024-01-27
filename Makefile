@@ -19,7 +19,8 @@ endif
 SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
 		srcs/lexer/lexer_utils.c srcs/lexer/lexer.c \
 		srcs/parser/parse_main.c srcs/parser/parse_utils.c \
-		srcs/parser/parse_helper.c srcs/parser/node_constructor.c
+		srcs/parser/parse_helper.c srcs/parser/node_constructor.c \
+		srcs/memory_utils.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -34,7 +35,7 @@ $(LIBFT) :
 	$(MAKE) -j3 -C libft
 
 .c.o :
-		$(CC) $(CFLAG) -c -I $(RLDIR)/include $< -o $@
+		$(CC) $(CFLAGS) -c -I $(RLDIR)/include $< -o $@
 
 clean:
 		rm -rf $(OBJS)
