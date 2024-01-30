@@ -88,7 +88,7 @@ int	main(int argc, char **argv, char**envp)
 			add_history(line);
             tokens = tokenizer(line, 0);
             root = ast_parser(&tokens);
-            print_tree(root, 0);
+			print_tree(root, 0);
 
 			free(line);
 		}
