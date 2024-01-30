@@ -60,11 +60,20 @@ int	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 			close(prev_fd[0]);
 			close(prev_fd[1]);
 		}
-
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
+		execute_redirect();
 	}
 	else
 	{
-		
+		if (prev_fd != NO_PIPE)
+		{
+			close(prev_fd[0]);
+			close(prev_fd[1]);
+		}
+		prev_fd[0] = pipe_fd[0];
+		prev_fd[1] = pipe_fd[1];
 	}
 }
 
