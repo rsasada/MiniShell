@@ -89,7 +89,7 @@ int	main(int argc, char **argv, char**envp)
             tokens = tokenizer(line, 0);
             expand_env(&tokens);
             root = ast_parser(&tokens);
-            ft_lstclear(&tokens, free_token);
+			ft_lstclear(&tokens, free_token);
 			free(line);
             if(!root)
                 continue;
