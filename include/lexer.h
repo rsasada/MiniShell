@@ -20,7 +20,7 @@ typedef struct s_tokenizer {
 	t_list			*head;
 	char			*line;
 	t_QuoteState	q_state;
-	int			is_env;
+	int				is_env;
 	size_t			count;
 	size_t			i;
 }	t_tokenizer;
