@@ -26,6 +26,7 @@
 # include <unistd.h>
 # include <sys/ioctl.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 typedef struct s_app
 {

@@ -53,9 +53,11 @@ struct s_ast_node {
 	} u_node_data;
 };
 
-t_ast_node *ast_parser(t_list **token_list);
+//TODO: delete later.
 void print_tree(t_ast_node *node, int level);
+void print_token_list(t_list *tokens);
 
+t_ast_node *ast_parser(t_list **token_list);
 void expand_env(t_list **tokens);
 void free_token(void *token_ptr);
 t_ast_node *parse_pipeline(t_list **cur_token);
