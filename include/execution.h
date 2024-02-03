@@ -16,4 +16,4 @@ void	prepare_pipe(int *pipe_fd);
 void	process_redirects(t_ast_node *s_r);
 void	execute(t_ast_node *ast, t_app *app);
 
-#endif 
+#endif
