@@ -39,10 +39,16 @@ void print_token_list(t_list *tokens) {
 t_ast_node *ast_parser(t_list **token_list)
 {
 	t_ast_node	*root;
+    int error_code;
 
 	if (token_list == NULL || *token_list == NULL)
 		return (NULL);
-	root = parse_pipeline(token_list);
+    error_code = PARSE_OK;
+	root = parse_pipeline(token_list, &error_code);
+    if (error_code == SYNTAX_ERROR) {
+        free_ast(root);
+        return NULL;
+    }
 	return (root);
 }
 

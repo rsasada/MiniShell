@@ -14,6 +14,10 @@
 # define PARSER_H
 
 # include "minishell.h"
+# define HERE_DOC_MAX 128
+# define PARSE_OK 0
+# define SYNTAX_ERROR -1
+
 
 typedef struct s_ast_node t_ast_node;
 typedef enum e_node_type t_node_type;
@@ -60,11 +64,11 @@ void print_token_list(t_list *tokens);
 t_ast_node *ast_parser(t_list **token_list);
 void expand_env(t_list **tokens);
 void free_token(void *token_ptr);
-t_ast_node *parse_pipeline(t_list **cur_token);
-t_ast_node *parse_cmd(t_list **cur_token);
+t_ast_node *parse_pipeline(t_list **cur_token, int *error_code);
+t_ast_node *parse_cmd(t_list **cur_token, int *error_code);
 t_ast_node *parse_simple_cmd(t_list **cur_token);
-t_ast_node *parse_redirect(t_list **cur_token);
-t_ast_node *parse_io_redirect(t_list **cur_token);
+t_ast_node *parse_redirect(t_list **cur_token, int *error_code);
+t_ast_node *parse_io_redirect(t_list **cur_token, int *error_code);
 void free_ast_node(void *node_);
 void reorder_tokens(t_list **token_list);
 
