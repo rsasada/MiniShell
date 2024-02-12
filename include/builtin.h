@@ -15,4 +15,6 @@
 
 # include "minishell.h"
 
+void ft_env(t_app *app, t_list *arg);
+
 #endif
