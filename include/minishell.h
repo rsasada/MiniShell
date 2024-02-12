@@ -27,7 +27,7 @@
 # include <sys/ioctl.h>
 # include <stdbool.h>
 
-int	g_exit_code = 0;
+int	g_exit_code;
 
 typedef struct s_app
 {
