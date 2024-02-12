@@ -31,7 +31,8 @@ char **get_args(t_list *arg_nodes) {
 		exit_with_error("malloc");
 	cur = arg_nodes;
 	i = 0;
-	while (cur) {
+	while (cur)
+	{
 		node = (t_ast_node *) (cur->content);
 		if (node->node_type == NODE_FILENAME) {
 			ret[i] = ft_strdup(node->u_node_data.file_name_val);
