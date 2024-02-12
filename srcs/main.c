@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "../include/execution.h"
 
 void load_banner()
 {
@@ -88,6 +89,7 @@ int	main(int argc, char **argv, char**envp)
 			add_history(line);
             tokens = tokenizer(line, 0);
             root = ast_parser(&tokens);
+			execute(root, &app);
 			print_tree(root, 0);
 
 			free(line);

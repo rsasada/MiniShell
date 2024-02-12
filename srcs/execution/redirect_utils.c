@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: risasada <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 18:35:42 by risasada          #+#    #+#             */
-/*   Updated: 2024/02/02 18:35:44 by risasada         ###   ########.fr       */
+/*   Created: 2024/02/08 21:38:54 by risasada          #+#    #+#             */
+/*   Updated: 2024/02/08 21:38:56 by risasada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,18 @@
 #include "../../include/execution.h"
 #include "../../include/parser.h"
 
-void	redirect_input_to_pipe(int	*pipe_fd)
+void	add_pid_storage(t_list *pid_storage, pid_t chil_pid)
 {
-	if (pipe_fd == NULL)
+	t_list	*new;
+	pid_t	*content;
+
+	if (chil_pid < 0)
 		return ;
-	dup2(pipe_fd[0], STDIN_FILENO);
-	close_pipe(pipe_fd);
+	content = malloc(sizeof(pid_t));
+	if (content == NULL)
+		exit(1);
+	*content = chil_pid;
+	new = ft_lstnew((void *)content);
+	ft_lstadd_back(&pid_storage, new);
 }
 
-void	redirect_output_to_pipe(int *pipe_fd)
-{
-	if (pipe_fd == NULL)
-		return ;
-	dup2(pipe_fd[1], STDOUT_FILENO);
-	close_pipe(pipe_fd);
-}
-
-void	close_pipe(int	*fd)
-{
-	if (fd == NULL)
-		return ;
-	close(fd[0]);
-	close(fd[1]);
-}
