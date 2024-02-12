@@ -12,13 +12,12 @@
 
 #include "libft.h"
 
-int	ft_lstfind(t_list *list, void *value_to_find, size_t size)
+void	ft_index_of
 {
 	while (list != NULL)
 	{
 		if (ft_memcmp(list->content, value_to_find, size) == 0)
-			return (1);
+			del(list->)
 		list = list->next;
 	}
-	return (0);
 }

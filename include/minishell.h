@@ -49,6 +49,9 @@ void print_syntax_error(char *error);
 // init_signal.c
 void	config_signal(void);
 
+// utils.c
+int	find_env(t_list *env_list, char *key);
+void	free_env(void *env);
 
 void free_token(void *token);
 void free_ast(t_ast_node *node);

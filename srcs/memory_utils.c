@@ -56,3 +56,16 @@ void free_ast(t_ast_node *node)
         free(node->u_node_data.file_path_val);
     free(node);
 }
+
+void	free_env(void *env)
+{
+	t_env	*e;
+
+	if (env != NULL)
+	{
+		e = (t_env *) env;
+		free(e->key);
+		free(e->value);
+		free(e);
+	}
+}
