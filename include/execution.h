@@ -11,8 +11,9 @@
 void	close_pipe(int	*fd);
 void	redirect_output_to_pipe(int *pipe_fd);
 void	redirect_input_to_pipe(int	*pipe_fd);
+void	prepare_pipe(int *pipe_fd);
 
 void	process_redirects(t_ast_node *s_r);
-void	execute(t_ast_node *ast);
+void	execute(t_ast_node *ast, t_app *app);
 
 #endif 

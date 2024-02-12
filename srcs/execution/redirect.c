@@ -27,7 +27,7 @@ void	process_redirects(t_ast_node *s_r)
 		{
 			process_redirects(s_r->u_node_data.s_pipeline.left);
 			process_redirects(s_r->u_node_data.s_pipeline.right);
-		}  
+		}
 		else
 		{
 			process_redirects(s_r->u_node_data.s_pipeline.left);

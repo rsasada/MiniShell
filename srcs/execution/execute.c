@@ -32,7 +32,6 @@ void	execute(t_ast_node *ast, t_app *app)
 
 void	process_cmds(t_ast_node *ast, int *prev_fd)
 {
-
 	if (ast->node_type == NODE_PIPELINE)
 	{
 		if (ast->u_node_data.s_pipeline.right->node_type == NODE_PIPELINE)
@@ -65,7 +64,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 			redirect_input_to_pipe(prev_fd);
 		redirect_output_to_pipe(pipe_fd);
 		process_redirects(ast->u_node_data.s_cmd.redirection);
-		execute_execuve();
+		execute_execuve(ast->u_node_data.s_cmd.simple_cmd);
 		exit(0);
 	}
 	else
@@ -99,11 +98,10 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd)
 	}
 }
 
-void	prepare_pipe(int *pipe_fd)
+void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 {
-	if (pipe(pipe_fd) == -1)
-	{
-		perror("pipe");
-		exit(EXIT_FAILURE);
-	}
+	char	**env_path;
+
+	env_path = split_env_path(app);
+	check_access(simple_cmd->u_node_data.s_simple_cmd.file_path, env_path);
 }
