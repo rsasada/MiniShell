@@ -14,17 +14,17 @@
 #include "../../include/execution.h"
 #include "../../include/parser.h"
 
-void	add_pid_storage(t_list *pid_storage, pid_t chil_pid)
+void	add_pid_storage(t_list *pid_storage, pid_t child_pid)
 {
 	t_list	*new;
 	pid_t	*content;
 
-	if (chil_pid < 0)
+	if (child_pid < 0)
 		return ;
 	content = malloc(sizeof(pid_t));
 	if (content == NULL)
 		exit(1);
-	*content = chil_pid;
+	*content = child_pid;
 	new = ft_lstnew((void *)content);
 	ft_lstadd_back(&pid_storage, new);
 }

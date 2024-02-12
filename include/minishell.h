@@ -32,7 +32,7 @@ int	g_exit_code;
 typedef struct s_app
 {
 	t_list	*env_lst;
-
+	t_list	*pid_storage;
 }	t_app;
 
 typedef struct s_env
@@ -40,6 +40,8 @@ typedef struct s_env
 	char	*key;
 	char	*value;
 }	t_env;
+
+
 
 // error.c
 void	exit_with_error(char *error_message);

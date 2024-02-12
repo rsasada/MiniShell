@@ -37,3 +37,12 @@ void	close_pipe(int	*fd)
 	close(fd[0]);
 	close(fd[1]);
 }
+
+void	prepare_pipe(int *pipe_fd)
+{
+	if (pipe(pipe_fd) == -1)
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
+	}
+}

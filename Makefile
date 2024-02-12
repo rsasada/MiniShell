@@ -20,7 +20,7 @@ SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
 		srcs/lexer/lexer_utils.c srcs/lexer/lexer.c \
 		srcs/parser/parse_main.c srcs/parser/parse_utils.c \
 		srcs/parser/parse_helper.c srcs/parser/node_constructor.c \
-		srcs/execution/exec_utils.c srcs/execution/exec.c \
+		srcs/execution/execute_utils.c srcs/execution/execute.c \
 		srcs/execution/redirect.c srcs/execution/redirect_utils.c \
 
 OBJS = $(SRCS:%.c=%.o)
