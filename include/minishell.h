@@ -48,4 +48,7 @@ void	exit_with_error(char *error_message);
 // init_signal.c
 void	config_signal(void);
 
+// utils.c
+int	find_env(t_list *env_list, char *key);
+void	free_env(void *env);
 #endif

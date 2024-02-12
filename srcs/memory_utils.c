@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfind.c                                       :+:      :+:    :+:   */
+/*   memory_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 20:45:34 by jongykim          #+#    #+#             */
-/*   Updated: 2024/02/12 20:45:34 by jongykim         ###   ########.fr       */
+/*   Created: 2024/01/28 03:35:07 by jongykim          #+#    #+#             */
+/*   Updated: 2024/01/28 03:35:07 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-void	ft_index_of
+void	free_env(void *env)
 {
-	while (list != NULL)
+	t_env	*e;
+
+	if (env != NULL)
 	{
-		if (ft_memcmp(list->content, value_to_find, size) == 0)
-			del(list->)
-		list = list->next;
+		e = (t_env *) env;
+		free(e->key);
+		free(e->value);
+		free(e);
 	}
 }
