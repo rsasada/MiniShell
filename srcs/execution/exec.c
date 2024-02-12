@@ -14,12 +14,19 @@
 #include "../../include/execution.h"
 #include "../../include/parser.h"
 
-void	execute(t_ast_node *ast)
+void	prepare_pipe(int *pipe_fd);
+void	execute_last_cmd(t_ast_node *ast, int *prev_fd);
+void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process);
+void	process_cmds(t_ast_node *ast, int *prev_fd);
+
+void	execute(t_ast_node *ast, t_app *app)
 {
 	int	prev_fd[2];
 
 	prev_fd[0] = NO_PIPE;
 	prev_fd[1] = NO_PIPE;
+	if (ast == NULL)
+		return ;
 	process_cmds(ast, prev_fd);
 }
 
@@ -43,7 +50,7 @@ void	process_cmds(t_ast_node *ast, int *prev_fd)
 		execute_cmd(ast, prev_fd, true);
 }
 
-int	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
+void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -57,7 +64,9 @@ int	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 		if (prev_fd[0] != NO_PIPE)
 			redirect_input_to_pipe(prev_fd);
 		redirect_output_to_pipe(pipe_fd);
-		execute_redirect();
+		process_redirects(ast->u_node_data.s_cmd.redirection);
+		execute_execuve();
+		exit(0);
 	}
 	else
 	{
@@ -69,7 +78,7 @@ int	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 	}
 }
 
-int	execute_last_cmd(t_ast_node *ast, int *prev_fd)
+void	execute_last_cmd(t_ast_node *ast, int *prev_fd)
 {
 	pid_t	pid;
 
@@ -78,13 +87,15 @@ int	execute_last_cmd(t_ast_node *ast, int *prev_fd)
 	{
 		if (prev_fd[0] != NO_PIPE)
 			redirect_input_to_pipe(prev_fd);
-		execute_redirect(ast->u_node_data.s_cmd.redirection);
+		process_redirects(ast->u_node_data.s_cmd.redirection);
+		write(1, "test", 5);
+		exit(0);
 	}
 	else
 	{
 		if (prev_fd[0] != NO_PIPE)
 			close_pipe(prev_fd);
-		
+		wait(&pid);
 	}
 }
 
