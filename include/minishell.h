@@ -27,6 +27,8 @@
 # include <sys/ioctl.h>
 # include <stdbool.h>
 
+int	g_exit_code = 0;
+
 typedef struct s_app
 {
 	t_list	*env_lst;
