@@ -104,6 +104,7 @@ t_ast_node *parse_here_doc(t_list **cur_token) {
             break;
         }
         write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
         free(line);
     }
     close(fd);
