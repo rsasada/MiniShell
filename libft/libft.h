@@ -65,6 +65,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
+int		ft_lstfind(t_list *list, void *value_to_find, size_t size);
 size_t	ft_count_word(char const *s, char c);
 
 #endif
