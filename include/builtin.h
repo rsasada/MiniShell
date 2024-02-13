@@ -15,4 +15,5 @@
 
 # include "minishell.h"
 
+void ft_unset(t_app *app, t_list *argv, pid_t *pid);
 #endif

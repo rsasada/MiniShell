@@ -50,7 +50,8 @@ void print_syntax_error(char *error);
 void	config_signal(void);
 
 // utils.c
-int	find_env(t_list *env_list, char *key);
+void init_env(t_app *app, char **envp);
+void remove_env(t_list **env_list, char *arg);
 void	free_env(void *env);
 
 void free_token(void *token);

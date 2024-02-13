@@ -55,9 +55,11 @@ t_ast_node *create_file_path_node(char *file_path)
 t_ast_node *create_file_name_node(char *file_path) {
     t_ast_node *node;
 
+    if(file_path != NULL)
+        return (NULL);
     node = malloc(sizeof(t_ast_node));
     if(!node)
-        return NULL;
+        return (NULL);
     node->node_type = NODE_FILENAME;
     node->u_node_data.file_name_val = ft_strdup(file_path);
     if(!node->u_node_data.file_name_val) {
