@@ -1,0 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 01:15:51 by jongykim          #+#    #+#             */
+/*   Updated: 2024/02/14 01:15:51 by jongykim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minishell.h"
+
+void get_env(t_env *env, char **envp, int i) {
+    char *delimit;
+    char *key;
+    char *value;
+
+    key = envp[i];
+    delimit = ft_strchr(envp[i], '=');
+    *delimit = '\0';
+    value = delimit + 1;
+    env->key = ft_strdup(key);
+    env->value = ft_strdup(value);
+}
+
+void init_env(t_app *app, char **envp) {
+    int i;
+    t_env *env_entry;
+
+    i = 0;
+    app->env_lst = NULL;
+    while (envp[i]) {
+        env_entry = malloc(sizeof(t_env));
+        if (!env_entry )
+            exit_with_error("Malloc");
+        env_entry->key = NULL;
+        env_entry->value = NULL;
+        get_env(env_entry, envp, i);
+        ft_lstadd_back(&app->env_lst, ft_lstnew(env_entry));
+        i++;
+    }
+}
+
+void	free_env(void *env)
+{
+    t_env	*e;
+
+    if (env != NULL)
+    {
+        e = (t_env *) env;
+        free(e->key);
+        free(e->value);
+        free(e);
+    }
+}
+
+void remove_env(t_list **env_list, char *arg) {
+    t_list *cur;
+    t_list *prev;
+    char *env;
+
+    cur = *env_list;
+    prev = NULL;
+    while (cur != NULL) {
+        env = ((t_env *) (cur->content))->key;
+        if (ft_strncmp(env, arg, ft_strlen(arg) + 1) == 0) {
+            if (prev == NULL)
+                *env_list = cur->next;
+            else
+                prev->next = cur->next;
+            ft_lstdelone(cur, free_env);
+            return;
+        }
+        prev = cur;
+        cur = cur->next;
+    }
+}

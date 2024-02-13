@@ -12,6 +12,20 @@
 
 #include "../../include/minishell.h"
 
+void append_arg(t_ast_node *args_node, t_ast_node *arg_node);
+
+static int is_valid_arg(char *arg) {
+    char *a;
+
+    a = arg;
+    while (a && *a != '\0') {
+        if (!ft_isalnum(*a) && *a != '_')
+            return (0);
+        a++;
+    }
+    return (1);
+}
+
 void ft_unset(t_app *app, t_list *argv, pid_t *pid) {
     pid_t *first_pid;
     t_list *argv_cur;
@@ -24,14 +38,18 @@ void ft_unset(t_app *app, t_list *argv, pid_t *pid) {
         return;
     argv_cur = argv;
     while (argv_cur) {
-        arg = ((t_ast_node *)(argv_cur->content))->u_node_data.file_name_val;
+        arg = ((t_ast_node *) (argv_cur->content))->u_node_data.file_name_val;
+        if (!is_valid_arg(arg)) {
+            ft_putstr_fd("push: unset: `", STDERR_FILENO);
+            ft_putstr_fd(arg, STDERR_FILENO);
+            handling_error("': not a valid identifier", 1);
+        }
         remove_env(&(app->env_lst), arg);
         argv_cur = argv_cur->next;
     }
 }
 
-void add_env(t_list **lst, char *key, char *value)
-{
+void add_env(t_list **lst, char *key, char *value) {
     t_env *env = malloc(sizeof(t_env));
     if (!env)
         return;
@@ -40,24 +58,20 @@ void add_env(t_list **lst, char *key, char *value)
     ft_lstadd_back(lst, ft_lstnew(env));
 }
 
-void print_env_list(t_list *lst)
-{
+void print_env_list(t_list *lst) {
     t_list *current = lst;
     t_env *env;
-    while (current)
-    {
-        env = (t_env *)current->content;
+    while (current) {
+        env = (t_env *) current->content;
         printf("%s=%s\n", env->key, env->value);
         current = current->next;
     }
 }
 
-t_list *create_arg_list(char **args)
-{
+t_list *create_arg_list(char **args) {
     t_list *head = NULL;
     t_list **current = &head;
-    while (*args)
-    {
+    while (*args) {
         *current = ft_lstnew(*args);
         current = &(*current)->next;
         args++;
@@ -66,7 +80,6 @@ t_list *create_arg_list(char **args)
 }
 // main 함수
 
-void append_arg(t_ast_node *args_node, t_ast_node *arg_node);
 
 t_ast_node *create_argv_from_array(char *args[]) {
     t_ast_node *args_node = create_arg_list_node();
@@ -110,8 +123,7 @@ void add_env_var_to_list(t_list **env_list, const char *key, const char *value) 
 }
 
 
-int main(void)
-{
+int main(void) {
     t_app app;
     pid_t dummy_pid = 123; // ft_unset 함수에서 사용되는 pid, 예제를 위한 임시 값
 
@@ -129,14 +141,13 @@ int main(void)
     printf("Before unset:\n");
     print_env_list(app.env_lst);
 
-// 더미 데이터 생성을 위한 인자 리스트 생성
-    char *args_to_unset[] = {}; // 삭제될 환경 변수 이름
+    // 더미 데이터 생성을 위한 인자 리스트 생성
+    char *args_to_unset[] = {"arg12+", "HOME", NULL}; // 삭제될 환경 변수 이름
     t_ast_node *args_node = create_argv_from_array(args_to_unset); // 이 함수는 문자열 배열을 기반으로 인자 리스트를 생성합니다.
 
     // `ft_unset`을 위한 `t_list` 생성 및 실행
-    t_list *unset_argv = NULL;
-    ft_lstadd_back(&unset_argv, ft_lstnew(args_node));// ft_lstnew는 t_list를 생성하는 함수입니다.
-    ft_unset(&app, args_node->u_node_data.arg_list, 0);
+    // 주의: 여기서 args_node의 arg_list를 직접 전달
+    ft_unset(&app, args_node->u_node_data.arg_list, &dummy_pid);
 
 
     // 삭제 후 프린트

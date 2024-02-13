@@ -45,6 +45,7 @@ typedef struct s_env
 // error.c
 void	exit_with_error(char *error_message);
 void print_syntax_error(char *error);
+void handling_error(char *error_message,int exit_code);
 
 // init_signal.c
 void	config_signal(void);
