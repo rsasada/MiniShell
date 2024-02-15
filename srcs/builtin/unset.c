@@ -18,6 +18,9 @@ static int is_valid_arg(char *arg) {
     char *a;
 
     a = arg;
+    if (!ft_isalpha(*a) && *a != '_')
+        return (0);
+    a++;
     while (a && *a != '\0') {
         if (!ft_isalnum(*a) && *a != '_')
             return (0);
@@ -142,7 +145,7 @@ int main(void) {
     print_env_list(app.env_lst);
 
     // 더미 데이터 생성을 위한 인자 리스트 생성
-    char *args_to_unset[] = {"arg12+", "HOME", NULL}; // 삭제될 환경 변수 이름
+    char *args_to_unset[] = {"=2aa", "1aa", "l233", NULL}; // 삭제될 환경 변수 이름
     t_ast_node *args_node = create_argv_from_array(args_to_unset); // 이 함수는 문자열 배열을 기반으로 인자 리스트를 생성합니다.
 
     // `ft_unset`을 위한 `t_list` 생성 및 실행
