@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/execution.h"
 
 void	execute_execve(t_ast_node *simple_cmd, t_app *app);
 void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app);

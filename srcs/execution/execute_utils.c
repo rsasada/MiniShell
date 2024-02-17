@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/execution.h"
 
 void	redirect_input_to_pipe(int	*pipe_fd)
 {

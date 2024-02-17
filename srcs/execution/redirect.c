@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/execution.h"
 
 void	redirect(t_ast_node *s_r);
 void	redirect_input(t_ast_node *s_r);

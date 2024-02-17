@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/execution.h"
 
 
 void	add_pid_storage(t_list *pid_storage, pid_t child_pid)

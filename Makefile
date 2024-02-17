@@ -19,7 +19,6 @@ SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
 		srcs/execution/execute_utils.c srcs/execution/execute.c \
 		srcs/execution/redirect.c srcs/execution/redirect_utils.c \
 		srcs/execution/parse_env.c srcs/utils.c \
-		srcs/parser/parse_helper.c srcs/parser/node_constructor.c \
 		srcs/memory_utils.c srcs/parser/expand.c \
 
 OBJS = $(SRCS:%.c=%.o)
