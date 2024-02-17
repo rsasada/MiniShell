@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_lstfind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 19:18:31 by jongykim          #+#    #+#             */
-/*   Updated: 2023/12/10 19:18:31 by jongykim         ###   ########.fr       */
+/*   Created: 2024/02/12 20:45:34 by jongykim          #+#    #+#             */
+/*   Updated: 2024/02/12 20:45:34 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void exit_with_error(char *error_message)
+int	ft_lstfind(t_list *list, void *value_to_find, size_t size)
 {
-	ft_putendl_fd(error_message, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
-
-void print_syntax_error(char *error)
-{
-    ft_putstr_fd("push: syntax error near unexpected token `", 2);
-    ft_putstr_fd(error, 2);
-    ft_putendl_fd("`",2);
+	while (list != NULL)
+	{
+		if (ft_memcmp(list->content, value_to_find, size) == 0)
+			return (1);
+		list = list->next;
+	}
+	return (0);
 }

@@ -11,16 +11,15 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+void print_token_list(t_list *tokens);
 
 t_ast_node *ast_parser(t_list **token_list)
 {
 	t_ast_node	*root;
 
-	if (token_list == NULL)
-		return (NULL);//TODO:Error handling
+	if (token_list == NULL || *token_list == NULL)
+		return (NULL);
 	root = parse_pipeline(token_list);
-	if (root == NULL)
-		return (NULL);//TODO:Error handling
 	return (root);
 }
 
@@ -52,7 +51,7 @@ void print_tree(t_ast_node *node, int level) {
             printf("Argument List\n");
             t_list *current = node->u_node_data.arg_list;
             while (current != NULL) {
-                t_ast_node *arg_node = (t_ast_node *)(current->content);
+                t_ast_node *arg_node = (t_ast_node *) (current->content);
                 if (arg_node != NULL) {
                     for (int i = 0; i < level + 1; ++i) {
                         printf("    ");

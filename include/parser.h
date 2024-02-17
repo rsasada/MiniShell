@@ -56,11 +56,15 @@ struct s_ast_node {
 t_ast_node *ast_parser(t_list **token_list);
 void print_tree(t_ast_node *node, int level);
 
+void expand_env(t_list **tokens);
+void free_token(void *token_ptr);
 t_ast_node *parse_pipeline(t_list **cur_token);
 t_ast_node *parse_cmd(t_list **cur_token);
 t_ast_node *parse_simple_cmd(t_list **cur_token);
 t_ast_node *parse_redirect(t_list **cur_token);
 t_ast_node *parse_io_redirect(t_list **cur_token);
+void free_ast_node(void *node_);
+void reorder_tokens(t_list **token_list);
 
 t_ast_node *create_cmd_node(t_ast_node *simple_cmd, t_ast_node *redirection);
 t_ast_node *create_pipeline_node(t_ast_node *left, t_ast_node *right);

@@ -45,8 +45,13 @@ typedef struct s_env
 
 // error.c
 void	exit_with_error(char *error_message);
+void print_syntax_error(char *error);
 
 // init_signal.c
 void	config_signal(void);
+
+
+void free_token(void *token);
+void free_ast(t_ast_node *node);
 
 #endif

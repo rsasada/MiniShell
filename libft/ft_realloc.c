@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 19:18:31 by jongykim          #+#    #+#             */
-/*   Updated: 2023/12/10 19:18:31 by jongykim         ###   ########.fr       */
+/*   Created: 2024/01/23 00:46:20 by jongykim          #+#    #+#             */
+/*   Updated: 2024/01/23 00:46:20 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void exit_with_error(char *error_message)
+void *ft_realloc(void *ptr, size_t size)
 {
-	ft_putendl_fd(error_message, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
+    char *src;
+    char *dst;
+    int i;
 
-void print_syntax_error(char *error)
-{
-    ft_putstr_fd("push: syntax error near unexpected token `", 2);
-    ft_putstr_fd(error, 2);
-    ft_putendl_fd("`",2);
+    src = (char *) ptr;
+    dst = (char *) malloc(size);
+    if (!dst) {
+        return (NULL);
+    }
+    if (src != NULL) {
+        i = 0;
+        while (src[i]) {
+            dst[i] = src[i];
+            i++;
+        }
+    }
+    free(ptr);
+    return ((void *) dst);
 }
