@@ -101,7 +101,14 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd)
 void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 {
 	char	**env_path;
+	char	*cmd_path;
+	char	**args;
 
+	args = 
 	env_path = split_env_path(app);
-	check_access(simple_cmd->u_node_data.s_simple_cmd.file_path, env_path);
+	cmd_path = check_access(simple_cmd->u_node_data.s_simple_cmd.file_path,
+			env_path);
+	if (cmd_path == NULL)
+		//error_massage
+	execve()
 }

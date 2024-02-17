@@ -14,17 +14,28 @@
 #include "../../include/execution.h"
 #include "../../include/parser.h"
 
-void	check_access(t_ast_node *file_path, char **env_path)
+char	*check_access(t_ast_node *file_path, char **env_path)
 {
 	int		i;
-	char	*file_path;
+	char	*path;
+	char	*tmp;
+	char	*absol_path;
 
 	i = 0;
-	file_path = file_path->u_node_data.file_path_val;
+	path = file_path->u_node_data.file_path_val;
+	if (access(path, X_OK) == 0)
+		return (path);
 	while (env_path[i] != NULL)
 	{
-		
+		tmp = ft_strjoin(env_path[i], "/");
+		absol_path = ft_strjoin(tmp, file_path);
+		free(tmp);
+		if (access(absol_path, X_OK) == 0)
+			return (absol_path);
+		free(absol_path);
+		i ++;
 	}
+	return (NULL);
 }
 
 char	**split_env_path(t_list *env_list)
