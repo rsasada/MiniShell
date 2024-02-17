@@ -14,7 +14,6 @@
 #include "../../include/execution.h"
 #include "../../include/parser.h"
 
-<<<<<<< HEAD
 void	redirect(t_ast_node *s_r);
 void	redirect_input(t_ast_node *s_r);
 void	redirect_output(t_ast_node *s_r);
@@ -89,31 +88,4 @@ void	redirect_append(t_ast_node *s_r)
 			O_CREAT | O_WRONLY | O_APPEND | O_TRUNC, 0644);
 	dup2(file_fd, 1);
 	close(file_fd);
-=======
-void	execute_redirect(t_ast_node *s_r)
-{
-	int	prev_fd;
-
-	if (s_r == NULL)
-		return ;
-	prev_fd = 1;
-	process_redirect(s_r, &prev_fd);
-}
-
-void	process_redirect(t_ast_node *s_r, int *prev_fd)
-{
-	if (s_r->node_type == NODE_PIPELINE)
-	{
-		redirect(s_r, prev_fd);
-		process_redirect(s_r->u_node_data.s_pipeline.right, prev_fd);
-	}
-	else if (s_r->node_type == NODE_REDIRECTION)
-	{
-		redirect(s_r, prev_fd);
-		redirect(s_r, prev_fd);
-	}
-	else if (s_r->node_type == NODE_REDIRECTION && *prev_fd == 1)
-	{
-	}
->>>>>>> 5e14497a4aeaa3072d7b5ae226773715b93dabef
 }

@@ -14,7 +14,7 @@
 #include "../../include/execution.h"
 #include "../../include/parser.h"
 
-void	prepare_pipe(int *pipe_fd);
+void	execute_execve(t_ast_node *simple_cmd, t_app *app);
 void	execute_last_cmd(t_ast_node *ast, int *prev_fd);
 void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process);
 void	process_cmds(t_ast_node *ast, int *prev_fd);
