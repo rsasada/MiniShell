@@ -4,10 +4,6 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
 
-PARSER_NAME = parser
-PARSER_SRCS = srcs/parser/parse_main.c srcs/parser/parse_utils.c srcs/parser/parse_helper.c srcs/parser/node_constructor.c
-PARSER_OBJS = $(PARSER_SRCS:%.c=%.o)
-PARSER_HDRS = srcs/parser/parser.h
 
 ARCH := $(shell uname -m)
 ifeq ($(ARCH), x86_64)
@@ -22,6 +18,7 @@ SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
 		srcs/parser/parse_helper.c srcs/parser/node_constructor.c \
 		srcs/execution/execute_utils.c srcs/execution/execute.c \
 		srcs/execution/redirect.c srcs/execution/redirect_utils.c \
+		srcs/execution/parse_env.c srcs/utils.c \
 		srcs/parser/parse_helper.c srcs/parser/node_constructor.c \
 		srcs/memory_utils.c srcs/parser/expand.c \
 

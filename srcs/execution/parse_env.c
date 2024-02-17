@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/execution.h"
-#include "../../include/parser.h"
+
 
 char	*check_access(t_ast_node *file_path, char **env_path)
 {
@@ -28,7 +27,7 @@ char	*check_access(t_ast_node *file_path, char **env_path)
 	while (env_path[i] != NULL)
 	{
 		tmp = ft_strjoin(env_path[i], "/");
-		absol_path = ft_strjoin(tmp, file_path);
+		absol_path = ft_strjoin(tmp, path);
 		free(tmp);
 		if (access(absol_path, X_OK) == 0)
 			return (absol_path);
@@ -49,7 +48,7 @@ char	**split_env_path(t_list *env_list)
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
 			path = env->value;
-			return (ft_split(path, ":"));
+			return (ft_split(path, ':'));
 		}
 		env_list = env_list->next;
 	}

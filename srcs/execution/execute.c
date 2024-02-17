@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/execution.h"
-#include "../../include/parser.h"
 
 void	execute_execve(t_ast_node *simple_cmd, t_app *app);
-void	execute_last_cmd(t_ast_node *ast, int *prev_fd);
-void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process);
-void	process_cmds(t_ast_node *ast, int *prev_fd);
+void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app);
+void	execute_cmd(t_ast_node *ast, int *prev_fd,
+			bool last_process, t_app *app);
+void	process_cmds(t_ast_node *ast, int *prev_fd, t_app *app);
 
 void	execute(t_ast_node *ast, t_app *app)
 {
@@ -27,35 +26,36 @@ void	execute(t_ast_node *ast, t_app *app)
 	prev_fd[1] = NO_PIPE;
 	if (ast == NULL)
 		return ;
-	process_cmds(ast, prev_fd);
+	process_cmds(ast, prev_fd, app);
 }
 
-void	process_cmds(t_ast_node *ast, int *prev_fd)
+void	process_cmds(t_ast_node *ast, int *prev_fd, t_app *app)
 {
 	if (ast->node_type == NODE_PIPELINE)
 	{
 		if (ast->u_node_data.s_pipeline.right->node_type == NODE_PIPELINE)
 		{
-			execute_cmd(ast->u_node_data.s_pipeline.left, prev_fd, false);
-			process_cmds(ast->u_node_data.s_pipeline.right, prev_fd);
+			execute_cmd(ast->u_node_data.s_pipeline.left, prev_fd, false, app);
+			process_cmds(ast->u_node_data.s_pipeline.right, prev_fd, app);
 		}
 		else
 		{
-			execute_cmd(ast->u_node_data.s_pipeline.left, prev_fd, false);
-			execute_cmd(ast->u_node_data.s_pipeline.right, prev_fd, true);
+			execute_cmd(ast->u_node_data.s_pipeline.left, prev_fd, false, app);
+			execute_cmd(ast->u_node_data.s_pipeline.right, prev_fd, true, app);
 		}
 	}
 	else if (ast->node_type == NODE_CMD && prev_fd[0] == NO_PIPE)
-		execute_cmd(ast, prev_fd, true);
+		execute_cmd(ast, prev_fd, true, app);
 }
 
-void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
+void	execute_cmd(t_ast_node *ast, int *prev_fd,
+				bool last_process, t_app *app)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
 
 	if (last_process)
-		return (execute_last_cmd(ast, prev_fd));
+		return (execute_last_cmd(ast, prev_fd, app));
 	prepare_pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0)
@@ -64,7 +64,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 			redirect_input_to_pipe(prev_fd);
 		redirect_output_to_pipe(pipe_fd);
 		process_redirects(ast->u_node_data.s_cmd.redirection);
-		execute_execuve(ast->u_node_data.s_cmd.simple_cmd);
+		execute_execve(ast->u_node_data.s_cmd.simple_cmd, app);
 		exit(0);
 	}
 	else
@@ -77,7 +77,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd, bool last_process)
 	}
 }
 
-void	execute_last_cmd(t_ast_node *ast, int *prev_fd)
+void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
 {
 	pid_t	pid;
 
@@ -87,7 +87,7 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd)
 		if (prev_fd[0] != NO_PIPE)
 			redirect_input_to_pipe(prev_fd);
 		process_redirects(ast->u_node_data.s_cmd.redirection);
-		write(1, "test", 5);
+		execute_execve(ast->u_node_data.s_cmd.simple_cmd, app);
 		exit(0);
 	}
 	else
@@ -104,11 +104,13 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	char	*cmd_path;
 	char	**args;
 
-	args = 
-	env_path = split_env_path(app);
+	args = get_args(simple_cmd->u_node_data.arg_list);
+	env_path = split_env_path(app->env_lst);
 	cmd_path = check_access(simple_cmd->u_node_data.s_simple_cmd.file_path,
 			env_path);
 	if (cmd_path == NULL)
-		//error_massage
-	execve()
+		exit(1);
+	if (execve(cmd_path, args, env_path) == -1)
+		exit(1);
+
 }

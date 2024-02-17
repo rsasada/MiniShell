@@ -17,6 +17,7 @@
 # include "../libft/includes/ft_printf.h"
 # include "lexer.h"
 # include "parser.h"
+# include "execution.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -41,17 +42,16 @@ typedef struct s_env
 	char	*value;
 }	t_env;
 
-
-
 // error.c
 void	exit_with_error(char *error_message);
-void print_syntax_error(char *error);
+void	print_syntax_error(char *error);
 
 // init_signal.c
 void	config_signal(void);
 
+void	free_token(void *token);
+void	free_ast(t_ast_node *node);
 
-void free_token(void *token);
-void free_ast(t_ast_node *node);
+char	**get_args(t_list *arg_nodes);
 
 #endif

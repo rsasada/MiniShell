@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/execution.h"
-#include "../../include/parser.h"
 
 void	redirect(t_ast_node *s_r);
 void	redirect_input(t_ast_node *s_r);
@@ -40,9 +38,6 @@ void	process_redirects(t_ast_node *s_r)
 
 void	redirect(t_ast_node *s_r)
 {
-	int			file_fd;
-	t_ast_node	*file_name;
-
 	if (s_r == NULL || s_r->node_type != NODE_REDIRECTION)
 		return ;
 	if (ft_strncmp(s_r->u_node_data.s_redirection.op, ">", 2) == 0)
