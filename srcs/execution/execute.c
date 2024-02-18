@@ -111,5 +111,5 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	if (cmd_path == NULL)
 		exit(1);
 	if (execve(cmd_path, args, env_path) == -1)
-		printf("error");
+		exit(1);
 }

@@ -57,8 +57,6 @@ void	redirect_input(t_ast_node *s_r)
 	t_ast_node	*file_name;
 
 	file_name = s_r->u_node_data.s_redirection.file_name;
-	printf("tm_file:  %s \n", file_name->u_node_data.file_name_val);
-	fflush(stdout);
 	file_fd = open(file_name->u_node_data.file_name_val,
 			O_RDONLY, 0644);
 	dup2(file_fd, 0);
