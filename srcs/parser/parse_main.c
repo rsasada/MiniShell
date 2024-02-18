@@ -11,15 +11,44 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-void print_token_list(t_list *tokens);
+
+void print_token_list(t_list *tokens) {
+	while (tokens) {
+		t_token *token = (t_token *)tokens->content;
+		const char *type_str = "";
+
+		switch (token->type) {
+			case TOKEN_WORD:
+				type_str = "WORD";
+				break;
+			case TOKEN_REDIRECT:
+				type_str = "REDIRECT";
+				break;
+			case TOKEN_PIPE:
+				type_str = "PIPE";
+				break;
+			default:
+				type_str = "UNKNOWN";
+		}
+
+		printf("Token Type: %s, Value: %s\n", type_str, token->value);
+		tokens = tokens->next;
+	}
+}
 
 t_ast_node *ast_parser(t_list **token_list)
 {
 	t_ast_node	*root;
+    int error_code;
 
 	if (token_list == NULL || *token_list == NULL)
 		return (NULL);
-	root = parse_pipeline(token_list);
+    error_code = PARSE_OK;
+	root = parse_pipeline(token_list, &error_code);
+    if (error_code == SYNTAX_ERROR) {
+        free_ast(root);
+        return NULL;
+    }
 	return (root);
 }
 
