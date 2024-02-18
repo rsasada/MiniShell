@@ -19,6 +19,8 @@ void	redirect_append(t_ast_node *s_r);
 
 void	process_redirects(t_ast_node *s_r)
 {
+	if (s_r == NULL)
+		return ;
 	if (s_r->node_type == NODE_PIPELINE)
 	{
 		if (s_r->u_node_data.s_pipeline.right->node_type == NODE_PIPELINE)

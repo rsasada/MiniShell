@@ -42,8 +42,8 @@ char	**split_env_path(t_list *env_list)
 	char	*path;
 	t_env	*env;
 
-	while (env_list == NULL)
-	{
+	while (env_list != NULL)
+	{ 
 		env = env_list->content;
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{

@@ -104,13 +104,12 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	char	*cmd_path;
 	char	**args;
 
-	args = get_args(simple_cmd->u_node_data.arg_list);
-	env_path = split_env_path(app->env_lst);
+	args = get_args(simple_cmd);
+	env_path = convert_env_to_char(app->env_lst);
 	cmd_path = check_access(simple_cmd->u_node_data.s_simple_cmd.file_path,
-			env_path);
+			split_env_path(app->env_lst));
 	if (cmd_path == NULL)
 		exit(1);
 	if (execve(cmd_path, args, env_path) == -1)
-		exit(1);
-
+		printf("error");
 }

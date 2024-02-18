@@ -92,12 +92,10 @@ int	main(int argc, char **argv, char**envp)
             root = ast_parser(&tokens);
 			execute(root, &app);
 			print_tree(root, 0);
-
 			ft_lstclear(&tokens, free_token);
 			free(line);
             if(!root)
                 continue;
-            print_tree(root, 0);
 		}
 	}
 }
