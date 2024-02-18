@@ -51,6 +51,6 @@ void	config_signal(void);
 void	free_token(void *token);
 void	free_ast(t_ast_node *node);
 
-char	**get_args(t_list *arg_nodes);
+char **get_args(t_ast_node *simple_cmd);
 
 #endif
