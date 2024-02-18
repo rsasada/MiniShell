@@ -57,8 +57,10 @@ void	redirect_input(t_ast_node *s_r)
 	t_ast_node	*file_name;
 
 	file_name = s_r->u_node_data.s_redirection.file_name;
+	printf("tm_file:  %s \n", file_name->u_node_data.file_name_val);
+	fflush(stdout);
 	file_fd = open(file_name->u_node_data.file_name_val,
-			O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			O_RDONLY, 0644);
 	dup2(file_fd, 0);
 	close(file_fd);
 }
@@ -82,7 +84,7 @@ void	redirect_append(t_ast_node *s_r)
 
 	file_name = s_r->u_node_data.s_redirection.file_name;
 	file_fd = open(file_name->u_node_data.file_name_val,
-			O_CREAT | O_WRONLY | O_APPEND | O_TRUNC, 0644);
+			O_CREAT | O_WRONLY | O_APPEND, 0644);
 	dup2(file_fd, 1);
 	close(file_fd);
 }
