@@ -52,6 +52,10 @@ void	config_signal(void);
 void	free_token(void *token);
 void	free_ast(t_ast_node *node);
 
+//env.c
+void init_env(t_app *app, char **envp);
+t_list	*find_env(t_list **env_list, char *key);
+
 char **get_args(t_ast_node *simple_cmd);
 
 #endif
