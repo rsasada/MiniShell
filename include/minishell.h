@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "../libft/includes/ft_printf.h"
 # include "lexer.h"
 # include "parser.h"
 # include <signal.h>
@@ -48,14 +47,12 @@ void	print_syntax_error(char *error);
 
 // init_signal.c
 void	config_signal(void);
-
-void	free_token(void *token);
 void	free_ast(t_ast_node *node);
 
 //env.c
-void init_env(t_app *app, char **envp);
+void	init_env(t_app *app, char **envp);
 t_list	*find_env(t_list **env_list, char *key);
+char	**get_args(t_ast_node *simple_cmd);
 
-char **get_args(t_ast_node *simple_cmd);
-
+void	*ft_realloc(void *ptr, size_t size);
 #endif

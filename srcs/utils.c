@@ -12,22 +12,25 @@
 
 #include "../include/minishell.h"
 
-int get_list_size(t_list *list) {
-	t_list *cur;
-	int len;
+int	get_list_size(t_list *list)
+	{
+	t_list	*cur;
+	int		len;
 
 	len = 0;
 	cur = list;
-	while (cur) {
+	while (cur)
+	{
 		len++;
 		cur = cur->next;
 	}
 	return (len);
 }
 
-t_list *merge_args(t_ast_node *node) {
-	t_list *simple_cmd;
-	t_list *arg_list;
+t_list	*merge_args(t_ast_node *node)
+	{
+	t_list	*simple_cmd;
+	t_list	*arg_list;
 
 	simple_cmd = ft_lstnew(node->u_node_data.s_simple_cmd.file_path);
 	if (node->u_node_data.s_simple_cmd.args != NULL)
@@ -38,12 +41,13 @@ t_list *merge_args(t_ast_node *node) {
 	return (arg_list);
 }
 
-char **get_args(t_ast_node *simple_cmd) {
-	t_list *cur;
-	t_ast_node *node;
-	int len;
-	char **ret;
-	int i;
+char	**get_args(t_ast_node *simple_cmd)
+	{
+	t_list		*cur;
+	t_ast_node	*node;
+	int			len;
+	char		**ret;
+	int			i;
 
 	cur = merge_args(simple_cmd);
 	len = get_list_size(cur);
@@ -51,7 +55,8 @@ char **get_args(t_ast_node *simple_cmd) {
 	if (ret == NULL)
 		exit_with_error("malloc");
 	i = 0;
-	while (cur != NULL) {
+	while (cur != NULL)
+	{
 		node = (t_ast_node *) cur->content;
 		if (node->node_type == NODE_FILENAME)
 			ret[i] = ft_strdup(node->u_node_data.file_name_val);

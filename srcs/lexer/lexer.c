@@ -123,5 +123,3 @@ bool	ft_is_redirect(t_tokenizer *t)
 	}
 	return (false);
 }
-
-

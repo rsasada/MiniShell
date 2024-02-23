@@ -20,7 +20,7 @@ SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
 		srcs/execution/redirect.c srcs/execution/redirect_utils.c \
 		srcs/execution/parse_env.c srcs/utils.c \
 		srcs/memory_utils.c srcs/parser/expand.c \
-		srcs/env.c
+		srcs/env.c srcs/libft_extented/ft_realloc.c
 
 OBJS = $(SRCS:%.c=%.o)
 

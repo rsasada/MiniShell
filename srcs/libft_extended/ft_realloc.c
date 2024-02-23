@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 21:30:02 by jongykim          #+#    #+#             */
-/*   Updated: 2023/06/11 16:32:40 by jongykim         ###   ########.fr       */
+/*   Created: 2024/01/23 00:46:20 by jongykim          #+#    #+#             */
+/*   Updated: 2024/01/23 00:46:20 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../../include/minishell.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "../libft.h"
+void	*ft_realloc(void *ptr, size_t size)
+{
+	char	*src;
+	char	*dst;
+	int		i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
-# endif
-
-char	*get_next_line(int fd);
-#endif
+	src = (char *) ptr;
+	dst = (char *) malloc(size);
+	if (!dst)
+		return (NULL);
+	if (src != NULL)
+	{
+		i = 0;
+		while (src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+	}
+	free(ptr);
+	return ((void *) dst);
+}

@@ -12,7 +12,6 @@
 
 #include "../../include/execution.h"
 
-
 void	add_pid_storage(t_list *pid_storage, pid_t child_pid)
 {
 	t_list	*new;
@@ -27,4 +26,3 @@ void	add_pid_storage(t_list *pid_storage, pid_t child_pid)
 	new = ft_lstnew((void *)content);
 	ft_lstadd_back(&pid_storage, new);
 }
-

@@ -12,7 +12,6 @@
 
 #include "../../include/execution.h"
 
-
 char	*check_access(t_ast_node *file_path, char **env_path)
 {
 	int		i;
@@ -43,7 +42,7 @@ char	**split_env_path(t_list *env_list)
 	t_env	*env;
 
 	while (env_list != NULL)
-	{ 
+	{
 		env = env_list->content;
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
