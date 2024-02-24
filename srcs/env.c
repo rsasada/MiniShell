@@ -58,6 +58,13 @@ t_list	*find_env(t_list **env_list, char *key)
 	return (NULL);
 }
 
+void add_env(t_list **env_list, char *arg)
+{
+	t_env *env;
+
+	env = malloc
+}
+
 void free_env(void *env) {
 	t_env *e;
 

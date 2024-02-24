@@ -26,7 +26,6 @@
 # include <unistd.h>
 # include <sys/ioctl.h>
 # include <stdbool.h>
-# include <fcntl.h>
 
 int	g_exit_code;
 
@@ -34,6 +33,7 @@ typedef struct s_app
 {
 	t_list	*env_lst;
 	t_list	*pid_storage;
+
 }	t_app;
 
 typedef struct s_env
@@ -44,18 +44,18 @@ typedef struct s_env
 
 // error.c
 void	exit_with_error(char *error_message);
-void	print_syntax_error(char *error);
+void print_syntax_error(char *error);
+void handling_error(char *error_message,int exit_code);
 
 // init_signal.c
 void	config_signal(void);
 
-void	free_token(void *token);
-void	free_ast(t_ast_node *node);
-
-//env.c
+// utils.c
 void init_env(t_app *app, char **envp);
-t_list	*find_env(t_list **env_list, char *key);
+void remove_env(t_list **env_list, char *arg);
+void	free_env(void *env);
 
-char **get_args(t_ast_node *simple_cmd);
+void free_token(void *token);
+void free_ast(t_ast_node *node);
 
 #endif
