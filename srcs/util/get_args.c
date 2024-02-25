@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 18:26:40 by jongykim          #+#    #+#             */
-/*   Updated: 2024/02/12 18:26:40 by jongykim         ###   ########.fr       */
+/*   Created: 2024/02/25 22:45:17 by jongykim          #+#    #+#             */
+/*   Updated: 2024/02/25 22:57:45 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	get_list_size(t_list *list)
-	{
+static int	get_list_size(t_list *list)
+{
 	t_list	*cur;
 	int		len;
 
@@ -27,8 +27,8 @@ int	get_list_size(t_list *list)
 	return (len);
 }
 
-t_list	*merge_args(t_ast_node *node)
-	{
+static t_list	*merge_args(t_ast_node *node)
+{
 	t_list	*simple_cmd;
 	t_list	*arg_list;
 
@@ -41,37 +41,56 @@ t_list	*merge_args(t_ast_node *node)
 	return (arg_list);
 }
 
-char	**get_args(t_ast_node *simple_cmd)
-	{
-	t_list		*cur;
-	t_ast_node	*node;
-	int			len;
-	char		**ret;
-	int			i;
+static char	**allocate_args(int len)
+{
+	char	**ret;
 
-	cur = merge_args(simple_cmd);
-	len = get_list_size(cur);
 	ret = (char **) malloc(sizeof(char *) * (len + 1));
-	if (ret == NULL)
+	if (!ret)
 		exit_with_error("malloc");
+	ft_memset(ret, 0, sizeof(char *) * (len + 1));
+	return (ret);
+}
+
+static int	fill_args(char **args, t_list *cur)
+{
+	int			i;
+	t_ast_node	*node;
+
 	i = 0;
-	while (cur != NULL)
+	while (cur)
 	{
 		node = (t_ast_node *) cur->content;
 		if (node->node_type == NODE_FILENAME)
-			ret[i] = ft_strdup(node->u_node_data.file_name_val);
+			args[i] = ft_strdup(node->u_node_data.file_name_val);
 		else if (node->node_type == NODE_FILEPATH)
-			ret[i] = ft_strdup(node->u_node_data.file_path_val);
-		if (!ret[i])
-		{
-			while (i > 0)
-				free(ret[--i]);
-			free(ret);
-			return (NULL);
-		}
+			args[i] = ft_strdup(node->u_node_data.file_path_val);
+		if (!args[i])
+			return (i);
 		i++;
 		cur = cur->next;
 	}
-	ret[i] = NULL;
+	args[i] = NULL;
+	return (-1);
+}
+
+char	**get_args(t_ast_node *simple_cmd)
+{
+	t_list		*cur;
+	int			len;
+	int			failed_index;
+	char		**ret;
+
+	cur = merge_args(simple_cmd);
+	len = get_list_size(cur);
+	ret = allocate_args(len);
+	failed_index = fill_args(ret, cur);
+	if (failed_index != -1)
+	{
+		while (failed_index > 0)
+			free(ret[--failed_index]);
+		free(ret);
+		return (NULL);
+	}
 	return (ret);
 }

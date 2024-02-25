@@ -64,27 +64,55 @@ struct s_ast_node
 	} u_node_data;
 };
 
+//parse_main.c
 void		print_tree(t_ast_node *node, int level); //TODO: delete later.
 void		print_token_list(t_list *tokens); //TODO: delete later.
 t_ast_node	*ast_parser(t_list **token_list);
-void		expand_env(t_list **tokens);
+
+//parse_pipeline.c
 t_ast_node	*parse_pipeline(t_list **cur_token, int *error_code);
-t_ast_node	*parse_cmd(t_list **cur_token, int *error_code);
-t_ast_node	*parse_simple_cmd(t_list **cur_token);
-t_ast_node	*parse_redirect(t_list **cur_token, int *error_code);
-t_ast_node	*parse_io_redirect(t_list **cur_token, int *error_code);
-void		free_ast_node(void *node_);
-void		reorder_tokens(t_list **token_list);
-t_ast_node	*create_cmd_node(t_ast_node *simple_cmd, t_ast_node *redirection);
 t_ast_node	*create_pipeline_node(t_ast_node *left, t_ast_node *right);
-t_ast_node	*create_redirection_node(char *op, t_ast_node *file_name_node);
-t_ast_node	*create_file_path_node(char *file_path);
-t_ast_node	*create_file_name_node(char *file_path);
+void		free_pipeline_node(t_ast_node *node);
+
+//parse_cmd.c
+t_ast_node	*parse_cmd(t_list **cur_token, int *error_code);
+t_ast_node	*create_cmd_node(t_ast_node *simple_cmd, t_ast_node *redirection);
+void		free_cmd_node(t_ast_node *node);
+
+//parse_simple_cmd.c
+t_ast_node	*parse_simple_cmd(t_list **cur_token);
 t_ast_node	*create_simple_cmd_node(t_ast_node *file_path_node, \
 		t_ast_node *arg_list);
+void		free_simple_cmd_node(t_ast_node *node);
+
+//parse_redirect.c
+t_ast_node	*parse_redirect(t_list **cur_token, int *error_code);
+t_ast_node	*create_redirection_node(char *op, t_ast_node *file_name_node);
+void		free_redirection_node(t_ast_node *node);
+
+//parse_io_redirect.c
+t_ast_node	*parse_io_redirect(t_list **cur_token, int *error_code);
+
+//parse_here_doc.c
+char		*create_temp_file(void);
+t_ast_node	*parse_here_doc(t_list **cur_token);
+
+//parse_argv.c
+t_ast_node	*parse_argv(t_list **cur_token);
 t_ast_node	*create_arg_list_node(void);
+void		free_arg_list_node(t_ast_node *node);
+
+//parse_helper.c
 int			accept_pipe(t_list *cur_token);
 int			accept_redirect(t_list *cur_token);
 int			accept_word(t_list *cur_token);
+void		free_ast(t_ast_node *node);
+
+//node_constructor.c
+t_ast_node	*create_file_path_node(char *file_path);
+t_ast_node	*create_file_name_node(char *file_path);
+
+void		expand_env(t_list **tokens);
+void		reorder_tokens(t_list **token_list);
 
 #endif

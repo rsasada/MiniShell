@@ -18,9 +18,11 @@ void	exit_with_error(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-void	print_syntax_error(char *error)
+void	*print_syntax_error(char *error, int *error_code)
 {
 	ft_putstr_fd("push: syntax error near unexpected token `", 2);
 	ft_putstr_fd(error, 2);
 	ft_putendl_fd("`", 2);
+	*error_code = SYNTAX_ERROR;
+	return (NULL);
 }

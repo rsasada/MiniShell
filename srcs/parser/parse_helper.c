@@ -35,38 +35,23 @@ int	accept_word(t_list *cur_token)
 	return (is_expected(cur_token, TOKEN_WORD));
 }
 
-void	free_ast_node(void *node_)
+void	free_ast(t_ast_node *node)
 {
-	t_ast_node	*node;
-
-	node = (t_ast_node *) node_;
 	if (node == NULL)
 		return ;
 	if (node->node_type == NODE_PIPELINE)
-	{
-		free_ast_node(node->u_node_data.s_pipeline.left);
-		free_ast_node(node->u_node_data.s_pipeline.right);
-	}
+		free_pipeline_node(node);
 	else if (node->node_type == NODE_CMD)
-	{
-		free_ast_node(node->u_node_data.s_cmd.simple_cmd);
-		free_ast_node(node->u_node_data.s_cmd.redirection);
-	}
+		free_cmd_node(node);
 	else if (node->node_type == NODE_SIMPLE_CMD)
-	{
-		free_ast_node(node->u_node_data.s_simple_cmd.file_path);
-		free_ast_node(node->u_node_data.s_simple_cmd.args);
-	}
+		free_simple_cmd_node(node);
 	else if (node->node_type == NODE_REDIRECTION)
-	{
-		free(node->u_node_data.s_redirection.op);
-		free_ast_node(node->u_node_data.s_redirection.file_name);
-	}
+		free_redirection_node(node);
+	else if (node->node_type == NODE_ARG_LIST)
+		free_arg_list_node(node);
 	else if (node->node_type == NODE_FILENAME)
 		free(node->u_node_data.file_name_val);
 	else if (node->node_type == NODE_FILEPATH)
 		free(node->u_node_data.file_path_val);
-	else if (node->node_type == NODE_ARG_LIST)
-		ft_lstclear(&(node->u_node_data.arg_list), &free_ast_node);
 	free(node);
 }

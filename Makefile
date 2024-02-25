@@ -12,15 +12,18 @@ else
     RLDIR = /opt/homebrew/opt/readline
 endif
 
-SRCS = srcs/main.c srcs/error.c srcs/init_signal.c \
-		srcs/lexer/lexer_utils.c srcs/lexer/lexer.c \
-		srcs/parser/parse_main.c srcs/parser/parse_utils.c \
-		srcs/parser/parse_helper.c srcs/parser/node_constructor.c \
-		srcs/execution/execute_utils.c srcs/execution/execute.c \
-		srcs/execution/redirect.c srcs/execution/redirect_utils.c \
-		srcs/execution/parse_env.c srcs/utils.c \
-		srcs/memory_utils.c srcs/parser/expand.c \
-		srcs/env.c srcs/libft_extented/ft_realloc.c
+SRCS_MAIN		= srcs/main.c srcs/error.c srcs/init_signal.c \
+					srcs/memory_utils.c srcs/env.c
+SRCS_LEXER		= srcs/lexer/lexer_utils.c srcs/lexer/lexer.c
+SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/parse_argv.c \
+					srcs/parser/parse_cmd.c srcs/parser/parse_helper.c srcs/parser/parse_here_doc.c \
+					srcs/parser/parse_io_redirect.c srcs/parser/parse_main.c srcs/parser/parse_pipeline.c \
+					srcs/parser/parse_redirect.c srcs/parser/parse_simple_cmd.c srcs/parser/parse_utils.c
+SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/execution/parse_env.c \
+					srcs/execution/redirect.c srcs/execution/redirect_utils.c
+SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c
+SRCS_UTIL		= srcs/util/get_args.c
+SRCS = ${SRCS_MAIN} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_EXECUTION} ${SRCS_LIB_EX} ${SRCS_UTIL}
 
 OBJS = $(SRCS:%.c=%.o)
 

@@ -17,6 +17,7 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app);
 void	execute_cmd(t_ast_node *ast, int *prev_fd,
 			bool last_process, t_app *app);
 void	process_cmds(t_ast_node *ast, int *prev_fd, t_app *app);
+char	**get_args(t_ast_node *simple_cmd);
 
 void	execute(t_ast_node *ast, t_app *app)
 {
