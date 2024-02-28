@@ -27,12 +27,12 @@ void load_banner()
 	ft_printf("\033[0m");
 }
 
-int	main(int argc, char **argv, char**envp)
+int main(int argc, char **argv, char **envp)
 {
-	t_app	app;
-	char	*line;
-    t_list *tokens;
-    t_ast_node *root;
+	t_app app;
+	char *line;
+	t_list *tokens;
+	t_ast_node *root;
 
 	if (argc != 1)
 		return (0);
@@ -45,22 +45,21 @@ int	main(int argc, char **argv, char**envp)
 	while (1)
 	{
 		line = readline("push-1.0 ");
-		if (line == NULL || ft_strncmp(line,"exit",5)==0)
+		if (line == NULL || ft_strncmp(line, "exit", 5) == 0)
 		{
 			ft_printf("exit\n");
 			exit(1);
-		}
-		else
+		} else
 		{
 			add_history(line);
-            tokens = tokenizer(line, 0);
-            expand_env(&tokens);
-            root = ast_parser(&tokens);
+			tokens = tokenizer(line, 0);
+			expand_env(&app, &tokens);
+			root = ast_parser(&tokens);
 			execute(root, &app);
 			ft_lstclear(&tokens, free_token);
 			free(line);
-            if(!root)
-                continue;
+			if (!root)
+				continue;
 		}
 	}
 }

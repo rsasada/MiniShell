@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 00:46:20 by jongykim          #+#    #+#             */
-/*   Updated: 2024/01/23 00:46:20 by jongykim         ###   ########.fr       */
+/*   Created: 2024/02/27 02:21:14 by jongykim          #+#    #+#             */
+/*   Updated: 2024/02/29 01:33:02 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+void	toggle_quote(int *quote_flag, int *i)
 {
-	void	*new_ptr;
+	*quote_flag = !(*quote_flag);
+	(*i)++;
+}
 
-	if (size == 0 && ptr != NULL)
-	{
-		free(ptr);
-		return (malloc(1));
-	}
-	if (!ptr)
-		return (malloc(size));
-	new_ptr = malloc(size);
-	if (!new_ptr)
-		return (NULL);
-	ft_memcpy(new_ptr, ptr, size);
-	free(ptr);
-	return (new_ptr);
+char	*adjust_result(char *result, char c, int *len)
+{
+	char	*temp;
+
+	(*len)++;
+	temp = ft_realloc(result, *len + 1);
+	if (!temp)
+		exit_with_error("realloc");
+	temp[*len - 1] = c;
+	temp[*len] = '\0';
+	return (temp);
 }

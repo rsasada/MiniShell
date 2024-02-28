@@ -94,7 +94,7 @@ t_ast_node *parse_here_doc(t_list **cur_token) {
     filename = create_temp_file();
     if (!filename)
         return (NULL);
-    fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    fd = open(filename, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC, 0644);
     if (fd == -1)
         exit_with_error("here_doc");
     while (1) {

@@ -58,4 +58,6 @@ t_list	*find_env(t_list **env_list, char *key);
 
 char **get_args(t_ast_node *simple_cmd);
 
+void	expand_env(t_app *app, t_list **tokens);
+char	*expand_env_helper(t_app *app, const char *value, int *i, int *len);
 #endif

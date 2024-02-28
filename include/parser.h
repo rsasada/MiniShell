@@ -62,7 +62,7 @@ void print_tree(t_ast_node *node, int level);
 void print_token_list(t_list *tokens);
 
 t_ast_node *ast_parser(t_list **token_list);
-void expand_env(t_list **tokens);
+
 void free_token(void *token_ptr);
 t_ast_node *parse_pipeline(t_list **cur_token, int *error_code);
 t_ast_node *parse_cmd(t_list **cur_token, int *error_code);
@@ -82,4 +82,7 @@ t_ast_node *create_arg_list_node();
 int accept_pipe(t_list *cur_token);
 int accept_redirect(t_list *cur_token);
 int accept_word(t_list *cur_token);
+
+void toggle_quote(int *quote_flag, int *i);
+char *adjust_result(char *result, char c, int *len);
 #endif
