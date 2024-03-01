@@ -27,7 +27,7 @@ void	load_banner(void)
 	printf("\033[0m");
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	t_app		app;
 	char		*line;
@@ -49,12 +49,11 @@ int	main(int argc, char **argv, char **envp)
 		{
 			printf("exit\n");
 			exit(1);
-		}
-		else
+		} else
 		{
 			add_history(line);
 			tokens = tokenizer(line, 0);
-			expand_env(&tokens);
+			expand_env(&app, &tokens);
 			root = ast_parser(&tokens);
 			execute(root, &app);
 			ft_lstclear(&tokens, free_token);

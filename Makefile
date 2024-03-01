@@ -18,7 +18,8 @@ SRCS_LEXER		= srcs/lexer/lexer_utils.c srcs/lexer/lexer.c
 SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/parse_argv.c \
 					srcs/parser/parse_cmd.c srcs/parser/parse_helper.c srcs/parser/parse_here_doc.c \
 					srcs/parser/parse_io_redirect.c srcs/parser/parse_main.c srcs/parser/parse_pipeline.c \
-					srcs/parser/parse_redirect.c srcs/parser/parse_simple_cmd.c srcs/parser/parse_utils.c
+					srcs/parser/parse_redirect.c srcs/parser/parse_simple_cmd.c srcs/parser/parse_utils.c \
+					srcs/parser/expand_utils.c srcs/parser/expand_helper.c
 SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/execution/parse_env.c \
 					srcs/execution/redirect.c srcs/execution/redirect_utils.c
 SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c

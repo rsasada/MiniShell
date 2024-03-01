@@ -65,8 +65,6 @@ struct s_ast_node
 };
 
 //parse_main.c
-void		print_tree(t_ast_node *node, int level); //TODO: delete later.
-void		print_token_list(t_list *tokens); //TODO: delete later.
 t_ast_node	*ast_parser(t_list **token_list);
 
 //parse_pipeline.c
@@ -114,5 +112,6 @@ t_ast_node	*create_file_name_node(char *file_path);
 
 void		expand_env(t_list **tokens);
 void		reorder_tokens(t_list **token_list);
-
+void toggle_quote(int *quote_flag, int *i);
+char *adjust_result(char *result, char c, int *len);
 #endif

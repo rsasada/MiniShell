@@ -55,4 +55,6 @@ t_list	*find_env(t_list **env_list, char *key);
 // libft_extension
 void	*ft_realloc(void *ptr, size_t size);
 
+void	expand_env(t_app *app, t_list **tokens);
+char	*expand_env_helper(t_app *app, const char *value, int *i, int *len);
 #endif
