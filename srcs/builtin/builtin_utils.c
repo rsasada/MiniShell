@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-static void ft_chdir(char *path)
+void ft_chdir(char *path)
 {
     if(chdir(path) == -1)
     {

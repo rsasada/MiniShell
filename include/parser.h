@@ -92,7 +92,6 @@ void		free_redirection_node(t_ast_node *node);
 t_ast_node	*parse_io_redirect(t_list **cur_token, int *error_code);
 
 //parse_here_doc.c
-char		*create_temp_file(void);
 t_ast_node	*parse_here_doc(t_list **cur_token);
 
 //parse_argv.c
@@ -109,7 +108,6 @@ void		free_ast(t_ast_node *node);
 //node_constructor.c
 t_ast_node	*create_file_path_node(char *file_path);
 t_ast_node	*create_file_name_node(char *file_path);
-
 
 void		reorder_tokens(t_list **token_list);
 void		toggle_quote(int *quote_flag, int *i);

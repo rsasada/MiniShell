@@ -15,7 +15,6 @@
 
 # include "minishell.h"
 
-
 void ft_chdir(char *path);
 void ft_env(t_app *app, t_list *arg);
 
