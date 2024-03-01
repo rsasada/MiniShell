@@ -110,8 +110,8 @@ void		free_ast(t_ast_node *node);
 t_ast_node	*create_file_path_node(char *file_path);
 t_ast_node	*create_file_name_node(char *file_path);
 
-void		expand_env(t_list **tokens);
+
 void		reorder_tokens(t_list **token_list);
-void toggle_quote(int *quote_flag, int *i);
-char *adjust_result(char *result, char c, int *len);
+void		toggle_quote(int *quote_flag, int *i);
+char		*adjust_result(char *result, char c, int *len);
 #endif
