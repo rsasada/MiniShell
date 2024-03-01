@@ -92,16 +92,15 @@ void	remove_env(t_list **env_list, char *arg)
 	while (cur != NULL)
 	{
 		env = ((t_env *)(cur->content))->key;
-		if (ft_strncmp(env, arg, ft_strlen(arg) + 1) == 0)
-		{
-			if (prev == NULL)
-				*env_list = cur->next;
-			else
-				prev->next = cur->next;
-			ft_lstdelone(cur, free_env);
-			return ;
-		}
-		prev = cur;
-		cur = cur->next;
-	}
+		if (ft_strncmp(env, arg, ft_strlen(arg) + 1) == 0){
+            if (prev == NULL)
+                *env_list = cur->next;
+            else
+                prev->next = cur->next;
+            ft_lstdelone(cur, free_env);
+            return;
+        }
+        prev = cur;
+        cur = cur->next;
+    }
 }

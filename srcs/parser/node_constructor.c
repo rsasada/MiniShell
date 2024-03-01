@@ -33,7 +33,8 @@ t_ast_node	*create_file_name_node(char *file_path)
 {
 	t_ast_node	*node;
 
-	node = malloc(sizeof(t_ast_node));
+	if(file_path == NULL)
+        return (NULL);node = malloc(sizeof(t_ast_node));
 	if (!node)
 		return (NULL);
 	node->node_type = NODE_FILENAME;
