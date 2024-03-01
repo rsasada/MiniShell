@@ -22,6 +22,7 @@ SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/p
 					srcs/parser/expand_utils.c srcs/parser/expand_helper.c
 SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/execution/parse_env.c \
 					srcs/execution/redirect.c srcs/execution/redirect_utils.c
+SRCS_BUILTIN	= srcs/builtin/env.c
 SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c
 SRCS_UTIL		= srcs/util/get_args.c
 SRCS = ${SRCS_MAIN} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_EXECUTION} ${SRCS_LIB_EX} ${SRCS_UTIL}
