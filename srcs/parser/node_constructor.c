@@ -33,8 +33,9 @@ t_ast_node	*create_file_name_node(char *file_path)
 {
 	t_ast_node	*node;
 
-	if(file_path == NULL)
-        return (NULL);node = malloc(sizeof(t_ast_node));
+	if (file_path == NULL)
+		return (NULL);
+	node = malloc(sizeof(t_ast_node));
 	if (!node)
 		return (NULL);
 	node->node_type = NODE_FILENAME;
@@ -45,14 +46,4 @@ t_ast_node	*create_file_name_node(char *file_path)
 		return (NULL);
 	}
 	return (node);
-}
-
-void	free_filename_node(t_ast_node *node)
-{
-	free(node->u_node_data.file_name_val);
-}
-
-void	free_filepath_node(t_ast_node *node)
-{
-	free(node->u_node_data.file_path_val);
 }

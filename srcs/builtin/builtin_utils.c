@@ -10,18 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/builtin.h"
 
-void ft_chdir(char *path)
+void	ft_chdir(char *path)
 {
-    if(chdir(path) == -1)
-    {
-        ft_putstr_fd("push: cd:", STDERR_FILENO);
-        perror(path);
-        g_exit_code = EXIT_FAILURE;
-        return;
-    }
+	if (chdir(path) == -1)
+	{
+		ft_putstr_fd("push: cd:", STDERR_FILENO);
+		perror(path);
+		g_exit_code = EXIT_FAILURE;
+		return ;
+	}
 }
+
 void	print_env(t_app *app, int is_export)
 {
 	t_list	*env_list;

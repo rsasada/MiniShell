@@ -49,7 +49,6 @@ typedef struct s_token
 t_list	*tokenizer(char *line, int is_env);
 void	init_tokenizer(t_tokenizer *t);
 t_list	*malloc_token(char *value, t_token_type type);
-void	free_token(void *token_ptr);
 void	new_token(t_tokenizer *t, t_token_type type);
 void	check_quote_error(t_tokenizer *t);
 

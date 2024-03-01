@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/lexer.h"
 
 void	new_token(t_tokenizer *t, t_token_type type)
 {
@@ -28,7 +28,6 @@ void	new_token(t_tokenizer *t, t_token_type type)
 	ft_lstadd_back(&t->head, new);
 	t->count = 0;
 	t->q_state = OUTSIDE_QUOTES;
-	return ;
 }
 
 t_list	*malloc_token(char *value, t_token_type type)
@@ -55,7 +54,6 @@ void	init_tokenizer(t_tokenizer *t)
 	t->count = 0;
 	t->q_state = OUTSIDE_QUOTES;
 	t->head = NULL;
-	return ;
 }
 
 void	check_quote_error(t_tokenizer *t)
@@ -64,5 +62,4 @@ void	check_quote_error(t_tokenizer *t)
 		exit_with_error("minishell: syntax error near Unclosed single quote");
 	else if (t->q_state == INSIDE_SINGLE_QUOTES)
 		exit_with_error("minishell: syntax error near Unclosed double quote");
-	return ;
 }

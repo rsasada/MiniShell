@@ -13,7 +13,7 @@ else
 endif
 
 SRCS_MAIN		= srcs/main.c srcs/error.c srcs/init_signal.c \
-					srcs/memory_utils.c srcs/env.c
+					 srcs/env.c
 SRCS_LEXER		= srcs/lexer/lexer_utils.c srcs/lexer/lexer.c
 SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/parse_argv.c \
 					srcs/parser/parse_cmd.c srcs/parser/parse_helper.c srcs/parser/parse_here_doc.c \
@@ -24,7 +24,7 @@ SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/ex
 					srcs/execution/redirect.c srcs/execution/redirect_utils.c
 SRCS_BUILTIN	= srcs/builtin/ft_cd.c srcs/builtin/ft_env.c
 SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c
-SRCS_UTIL		= srcs/util/get_args.c
+SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c
 SRCS = ${SRCS_MAIN} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_EXECUTION} ${SRCS_LIB_EX} ${SRCS_UTIL}
 
 OBJS = $(SRCS:%.c=%.o)

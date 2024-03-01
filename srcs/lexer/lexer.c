@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/lexer.h"
 
 bool	ft_is_pipeline(t_tokenizer *t);
 bool	ft_is_redirect(t_tokenizer *t);

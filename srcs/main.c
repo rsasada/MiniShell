@@ -27,21 +27,31 @@ void	load_banner(void)
 	printf("\033[0m");
 }
 
-int main(int argc, char **argv, char **envp)
+void	init_app(t_app *app, char **envp)
 {
-	t_app		app;
-	char		*line;
+	ft_memset(app, 0, sizeof(t_app));
+	init_env(app, envp);
+	load_banner();
+	config_signal();
+}
+
+void	handle_line(char *line, t_app *app)
+{
 	t_list		*tokens;
 	t_ast_node	*root;
 
-	if (argc != 1)
-		return (0);
-	(void) argv;
-	ft_memset(&app, 0, sizeof(t_app));
-	init_env(&app, envp);
-	line = NULL;
-	load_banner();
-	config_signal();
+	add_history(line);
+	tokens = tokenizer(line, 0);
+	expand_env(app, &tokens);
+	root = ast_parser(&tokens);
+	execute(root, app);
+	ft_lstclear(&tokens, free_token);
+}
+
+void	run_shell_loop(t_app *app)
+{
+	char	*line;
+
 	while (1)
 	{
 		line = readline("push-1.0 ");
@@ -49,17 +59,20 @@ int main(int argc, char **argv, char **envp)
 		{
 			printf("exit\n");
 			exit(1);
-		} else
-		{
-			add_history(line);
-			tokens = tokenizer(line, 0);
-			expand_env(&app, &tokens);
-			root = ast_parser(&tokens);
-			execute(root, &app);
-			ft_lstclear(&tokens, free_token);
-			free(line);
-			if (!root)
-				continue ;
 		}
+		handle_line(line, app);
+		free(line);
 	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_app	app;
+
+	if (argc != 1)
+		return (0);
+	(void) argv;
+	init_app(&app, envp);
+	run_shell_loop(&app);
+	return (0);
 }

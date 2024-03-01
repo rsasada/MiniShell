@@ -103,7 +103,6 @@ void		free_arg_list_node(t_ast_node *node);
 int			accept_pipe(t_list *cur_token);
 int			accept_redirect(t_list *cur_token);
 int			accept_word(t_list *cur_token);
-void		free_ast(t_ast_node *node);
 
 //node_constructor.c
 t_ast_node	*create_file_path_node(char *file_path);
@@ -112,4 +111,5 @@ t_ast_node	*create_file_name_node(char *file_path);
 void		reorder_tokens(t_list **token_list);
 void		toggle_quote(int *quote_flag, int *i);
 char		*adjust_result(char *result, char c, int *len);
+void		free_ast(t_ast_node *node);
 #endif

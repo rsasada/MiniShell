@@ -16,7 +16,6 @@
 
 # include "minishell.h"
 # include "parser.h"
-# include <fcntl.h>
 
 # define NO_PIPE -10
 

@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/builtin.h"
 
-void ft_pwd(void)
+void	ft_pwd(void)
 {
-    char *cwd;
+	char	*cwd;
 
-    cwd = getcwd(NULL,0);
-    if(!cwd)
-        exit_with_error("getcwd");
-    ft_putendl_fd(cwd, STDOUT_FILENO);
-    free(cwd);
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		exit_with_error("getcwd");
+	ft_putendl_fd(cwd, STDOUT_FILENO);
+	free(cwd);
 }

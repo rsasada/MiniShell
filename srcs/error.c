@@ -18,10 +18,10 @@ void	exit_with_error(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-void handling_error(char *error_message,int exit_code)
+void	handling_error(char *error_message, int exit_code)
 {
-    ft_putendl_fd(error_message, STDERR_FILENO);
-    g_exit_code = exit_code;
+	ft_putendl_fd(error_message, STDERR_FILENO);
+	g_exit_code = exit_code;
 }
 
 void	*print_syntax_error(char *error, int *error_code)

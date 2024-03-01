@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	free_token(void *content)
 {
@@ -21,5 +21,18 @@ void	free_token(void *content)
 	{
 		free(token->value);
 		free(token);
+	}
+}
+
+void	free_env(void *env)
+{
+	t_env	*e;
+
+	if (env != NULL)
+	{
+		e = (t_env *) env;
+		free(e->key);
+		free(e->value);
+		free(e);
 	}
 }

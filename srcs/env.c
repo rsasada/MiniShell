@@ -61,24 +61,27 @@ t_list	*find_env(t_list **env_list, char *key)
 	return (NULL);
 }
 
-void add_env(t_list **env_list, char *arg)
+void	add_env(t_list **env_list, char *key, char *value)
 {
-	t_env *env;
+	t_env	*env;
+	t_list	*tmp;
 
-	env = malloc
-}
-
-void	free_env(void *env)
-{
-	t_env	*e;
-
-	if (env != NULL)
+	env = malloc(sizeof(t_env));
+	if (!env)
+		exit_with_error("malloc");
+	env->key = key;
+	env->value = value;
+	tmp = NULL;
+	ft_memcpy(tmp, find_env(env_list, key), sizeof(t_list));
+	remove_env(env_list, key);
+	ft_lstadd_back(env_list, ft_lstnew(env));
+	if (find_env(env_list, key) == NULL)
 	{
-		e = (t_env *) env;
-		free(e->key);
-		free(e->value);
-		free(e);
+		ft_putendl_fd("push: failed to add env", STDERR_FILENO);
+		ft_lstadd_back(env_list, ft_lstnew(tmp));
 	}
+	else
+		free(tmp);
 }
 
 void	remove_env(t_list **env_list, char *arg)
@@ -92,15 +95,16 @@ void	remove_env(t_list **env_list, char *arg)
 	while (cur != NULL)
 	{
 		env = ((t_env *)(cur->content))->key;
-		if (ft_strncmp(env, arg, ft_strlen(arg) + 1) == 0){
-            if (prev == NULL)
-                *env_list = cur->next;
-            else
-                prev->next = cur->next;
-            ft_lstdelone(cur, free_env);
-            return;
-        }
-        prev = cur;
-        cur = cur->next;
-    }
+		if (ft_strncmp(env, arg, ft_strlen(arg) + 1) == 0)
+		{
+			if (prev == NULL)
+				*env_list = cur->next;
+			else
+				prev->next = cur->next;
+			ft_lstdelone(cur, free_env);
+			return ;
+		}
+		prev = cur;
+		cur = cur->next;
+	}
 }
