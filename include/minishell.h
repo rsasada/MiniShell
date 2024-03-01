@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "lexer.h"
 # include "parser.h"
+# include "builtin.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -33,6 +34,7 @@ typedef struct s_app
 {
 	t_list	*env_lst;
 	t_list	*pid_storage;
+    char    *home_path;
 }	t_app;
 
 typedef struct s_env
