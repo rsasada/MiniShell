@@ -73,6 +73,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 			close_pipe(prev_fd);
 		prev_fd[0] = pipe_fd[0];
 		prev_fd[1] = pipe_fd[1];
+		add_pid_storage(app->pid_storage, pid);
 		return ;
 	}
 }
@@ -81,6 +82,9 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
 {
 	pid_t	pid;
 
+	if (prev_fd[0] == NO_PIPE && check_builtin_cmd(
+			ast->u_node_data.s_cmd.simple_cmd->u_node_data.s_simple_cmd.file_path))
+		return (execute_single_builtin_cmd(ast, app));
 	pid = fork();
 	if (pid == 0)
 	{
