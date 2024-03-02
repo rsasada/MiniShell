@@ -19,7 +19,7 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 	int			stdout_backup;
 
 	if (ast == NULL)
-		return (1);
+		return (0);
 	stdin_backup = dup(STDIN_FILENO);
 	stdout_backup = dup(STDOUT_FILENO);
 	if (stdin_backup < 0 || stdout_backup < 0)
@@ -28,7 +28,7 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 	builtin_functions(ast->u_node_data.s_cmd.simple_cmd, app);
 	dup2(stdin_backup, STDIN_FILENO);
 	dup2(stdout_backup, STDOUT_FILENO);
-	return (true);
+	return (1);
 }
 
 bool	check_builtin_cmd(t_ast_node *file_path)

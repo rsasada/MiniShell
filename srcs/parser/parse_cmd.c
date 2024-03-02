@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/parser.h"
 
 t_ast_node	*parse_cmd(t_list **cur_token, int *error_code)
 {

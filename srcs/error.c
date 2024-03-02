@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "../include/parser.h"
 
 void	exit_with_error(char *error_message)
 {

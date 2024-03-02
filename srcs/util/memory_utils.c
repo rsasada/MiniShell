@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/lexer.h"
 
 void	free_token(void *content)
 {

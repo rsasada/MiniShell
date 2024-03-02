@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/lexer.h"
 
 t_ast_node	*create_simple_cmd_node(t_ast_node *file_path_node, \
 t_ast_node *arg_list)

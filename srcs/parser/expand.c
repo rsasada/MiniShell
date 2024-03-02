@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/lexer.h"
 
 void	replace_tokens(t_list **old, t_list *node_to_change, t_list *new)
 {

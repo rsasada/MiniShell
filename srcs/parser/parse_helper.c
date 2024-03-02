@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/lexer.h"
 
 int	is_expected(t_list *cur_token, t_token_type expected_type)
 {

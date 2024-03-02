@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "../../include/builtin.h"
-#include "../../include/execution.h"
 
 bool	check_option(char **args);
+char	**get_args(t_ast_node *simple_cmd);
 
 int	ft_echo(t_app *app, t_ast_node *simple_cmd)
 {
@@ -60,4 +60,3 @@ bool	check_option(char **args)
 	}
 	return (false);
 }
-

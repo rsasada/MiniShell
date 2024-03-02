@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/lexer.h"
 
 t_ast_node	*parse_io_redirect(t_list **cur_token, int *error_code)
 {

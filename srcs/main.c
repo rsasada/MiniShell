@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 #include "../include/execution.h"
+#include "../include/lexer.h"
 
 void	load_banner(void)
 {
