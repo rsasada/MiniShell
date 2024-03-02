@@ -17,8 +17,6 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 {
 	int			stdin_backup;
 	int			stdout_backup;
-	t_ast_node	*simple_cmd;
-	t_ast_node	*redirection;
 
 	if (ast == NULL)
 		return (1);
