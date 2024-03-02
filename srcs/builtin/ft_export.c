@@ -31,18 +31,6 @@ static int	is_valid_arg(char *arg)
 	return (1);
 }
 
-static int	validate_pid(t_app *app, pid_t *pid)
-{
-	pid_t	*first_pid;
-
-	if (!app || !app->pid_storage || !pid)
-		return (0);
-	first_pid = (pid_t *)(app->pid_storage->content);
-	if (pid != first_pid)
-		return (0);
-	return (1);
-}
-
 static int	process_first_arg(t_app *app, t_list *argv)
 {
 	char	*first_arg;
@@ -75,11 +63,10 @@ static void	process_args(t_list *argv)
 	}
 }
 
-void	ft_export(t_app *app, t_list *argv, pid_t *pid)
+int	ft_export(t_app *app, t_list *argv)
 {
-	if (!validate_pid(app, pid))
-		return ;
 	if (!process_first_arg(app, argv))
-		return ;
+		return (0);
 	process_args(argv);
+	return (1);
 }

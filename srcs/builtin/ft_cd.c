@@ -74,16 +74,15 @@ static void	chdir_home_with_path(t_app *app, t_list *env_list, char *path)
 	free(full_path);
 }
 
-void	ft_cd(t_app *app, t_list *argv)
+int	ft_cd(t_app *app, t_list *argv)
 {
 	char	*path;
 	char	*cwd;
 	t_list	*env_list;
 
+	env_list = NULL;
 	if (!argv)
-	{
 		chdir_home(app, env_list, 0);
-	}
 	else
 	{
 		path = ((t_ast_node *)(argv->content))->u_node_data.file_name_val;
@@ -100,4 +99,5 @@ void	ft_cd(t_app *app, t_list *argv)
 	cwd = getcwd(NULL, 0);
 	update_pwd(app, cwd);
 	free(cwd);
+	return (1);
 }

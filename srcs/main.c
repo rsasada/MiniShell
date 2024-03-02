@@ -55,11 +55,6 @@ void	run_shell_loop(t_app *app)
 	while (1)
 	{
 		line = readline("push-1.0 ");
-		if (line == NULL || ft_strncmp(line, "exit", 5) == 0)
-		{
-			printf("exit\n");
-			exit(1);
-		}
 		handle_line(line, app);
 		free(line);
 	}

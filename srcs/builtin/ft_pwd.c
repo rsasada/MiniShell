@@ -12,13 +12,16 @@
 
 #include "../../include/builtin.h"
 
-void	ft_pwd(void)
+int	ft_pwd(t_app *app, t_list *argv)
 {
 	char	*cwd;
 
+	(void)app;
+	(void)argv;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		exit_with_error("getcwd");
 	ft_putendl_fd(cwd, STDOUT_FILENO);
 	free(cwd);
+	return (0);
 }

@@ -54,10 +54,11 @@ static void	exit_with_code(char *code)
 	exit((unsigned char) num_code);
 }
 
-void	ft_exit(t_app *app, t_list *argv)
+int	ft_exit(t_app *app, t_list *argv)
 {
 	char	*first_arg;
 
+	(void) app;
 	if (!argv)
 		exit_with_code("0");
 	first_arg = ((t_ast_node *)(argv->content))->u_node_data.file_name_val;
@@ -76,4 +77,5 @@ void	ft_exit(t_app *app, t_list *argv)
 	}
 	else
 		exit_with_code(first_arg);
+	return (1);
 }

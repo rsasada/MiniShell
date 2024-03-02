@@ -16,8 +16,14 @@
 # include "minishell.h"
 
 void	ft_chdir(char *path);
-void	ft_env(t_app *app, t_list *arg);
-
 void	print_env(t_app *app, int is_export);
-void	ft_unset(t_app *app, t_list *argv, pid_t *pid);
+
+int		ft_cd(t_app *app, t_list *argv);
+int		ft_env(t_app *app, t_list *argv);
+int		ft_unset(t_app *app, t_list *argv);
+int		ft_export(t_app *app, t_list *argv);
+int		ft_pwd(t_app *app, t_list *argv);
+int		ft_exit(t_app *app, t_list *argv);
+int		ft_echo(t_app *app, t_list *argv);
+
 #endif

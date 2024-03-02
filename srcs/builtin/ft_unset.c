@@ -31,17 +31,13 @@ static int	is_valid_arg(char *arg)
 	return (1);
 }
 
-void	ft_unset(t_app *app, t_list *argv, pid_t *pid)
+int	ft_unset(t_app *app, t_list *argv)
 {
-	pid_t	*first_pid;
 	t_list	*argv_cur;
 	char	*arg;
 
-	if (!app || !app->pid_storage || !argv || !pid)
-		return ;
-	first_pid = (pid_t *)(app->pid_storage->content);
-	if (pid != first_pid)
-		return ;
+	if (!app)
+		return (0);
 	argv_cur = argv;
 	while (argv_cur)
 	{
@@ -55,4 +51,5 @@ void	ft_unset(t_app *app, t_list *argv, pid_t *pid)
 		remove_env(&(app->env_lst), arg);
 		argv_cur = argv_cur->next;
 	}
+	return (1);
 }

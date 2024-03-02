@@ -12,7 +12,7 @@
 
 #include "../../include/builtin.h"
 
-void	ft_env(t_app *app, t_list *arg)
+int	ft_env(t_app *app, t_list *arg)
 {
 	t_list	*env_list;
 	t_list	*cur;
@@ -21,7 +21,7 @@ void	ft_env(t_app *app, t_list *arg)
 	{
 		g_exit_code = 1;
 		ft_putendl_fd("push: too many arguments", 2);
-		return ;
+		return (0);
 	}
 	env_list = app->env_lst;
 	cur = env_list;
@@ -34,4 +34,5 @@ void	ft_env(t_app *app, t_list *arg)
 		cur = cur->next;
 	}
 	g_exit_code = 0;
+	return (1);
 }
