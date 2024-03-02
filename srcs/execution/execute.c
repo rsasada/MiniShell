@@ -81,10 +81,12 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 
 void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
 {
-	pid_t	pid;
+	pid_t		pid;
+	t_ast_node	*simple_cmd;
 
+	simple_cmd = ast->u_node_data.s_cmd.simple_cmd;
 	if (prev_fd[0] == NO_PIPE && check_builtin_cmd(
-			ast->u_node_data.s_cmd.simple_cmd->u_node_data.s_simple_cmd.file_path))
+			simple_cmd->u_node_data.s_simple_cmd.file_path))
 		return (execute_single_builtin_cmd(ast, app));
 	pid = fork();
 	if (pid == 0)
@@ -109,6 +111,9 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	char	*cmd_path;
 	char	**args;
 
+
+	if (check_builtin_cmd(simple_cmd->u_node_data.s_simple_cmd.file_path))
+		return (builtin_functions(simple_cmd, app));
 	args = get_args(simple_cmd);
 	env_path = convert_env_to_char(app->env_lst);
 	cmd_path = check_access(simple_cmd->u_node_data.s_simple_cmd.file_path,
