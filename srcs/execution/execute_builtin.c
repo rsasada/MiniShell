@@ -1,13 +1,15 @@
 
 #include "../../include/execution.h"
 
-bool	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
+int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 {
 	int			stdin_backup;
 	int			stdout_backup;
 	t_ast_node	*simple_cmd;
 	t_ast_node	*redirection;
 
+	if (ast == NULL)
+		return (1);
 	stdin_backup = dup(STDIN_FILENO);
 	stdout_backup = dup(STDOUT_FILENO);
 	if (stdin_backup < 0 || stdout_backup < 0)
@@ -32,24 +34,26 @@ bool	check_builtin_cmd(char *cmd_name)
 	return (false);
 }
 
-bool	builtin_functions(t_ast_node *simple_cmd, t_app *app)
+int	builtin_functions(t_ast_node *simple_cmd, t_app *app)
 {
-	char	*file_path;
+	t_ast_node	*file_path;
+	t_ast_node	*args;
 
 	file_path = simple_cmd->u_node_data.s_simple_cmd.file_path;
-	if (ft_strncmp(file_path, "echo", 5) == 0)
-		return (ft_echo(simple_cmd, app));
-	else if (ft_strncmp(file_path, "export", 7) == 0)
-		return (ft_export(simple_cmd, app));
-	else if (ft_strncmp(file_path, "pwd", 4) == 0)
-		return (ft_pwd(simple_cmd, app));
-	else if (ft_strncmp(file_path, "cd", 3) == 0)
-		return (ft_cd(simple_cmd, app));
-	else if (ft_strncmp(file_path, "env", 4) == 0)
-		return (ft_env(simple_cmd, app));
-	else if (ft_strncmp(file_path, "unset", 6) == 0)
-		return (ft_unset(simple_cmd, app));
-	else if (ft_strncmp(file_path, "exit", 5) == 0)
-		return (ft_exit(simple_cmd, app));
-	return (false);
+	args = simple_cmd->u_node_data.s_simple_cmd.args;
+	if (ft_strncmp(file_path->u_node_data.file_path_val, "echo", 5) == 0)
+		return (ft_echo(app, args->u_node_data.arg_list));
+	else if (ft_strncmp(file_path->u_node_data.file_path_val, "export", 7) == 0)
+		return (ft_export(app, args->u_node_data.arg_list));
+	else if (ft_strncmp(file_path->u_node_data.file_path_val, "pwd", 4) == 0)
+		return (ft_pwd(app, args->u_node_data.arg_list));
+	else if (ft_strncmp(file_path->u_node_data.file_path_val, "cd", 3) == 0)
+		return (ft_cd(app, args->u_node_data.arg_list));
+	else if (ft_strncmp(file_path->u_node_data.file_path_val, "env", 4) == 0)
+		return (ft_env(app, args->u_node_data.arg_list));
+	else if (ft_strncmp(file_path->u_node_data.file_path_val, "unset", 6) == 0)
+		return (ft_unset(app, args->u_node_data.arg_list));
+	else if (ft_strncmp(file_path->u_node_data.file_path_val, "exit", 5) == 0)
+		return (ft_exit(app, args->u_node_data.arg_list));
+	return (1);
 }
