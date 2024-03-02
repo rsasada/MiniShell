@@ -24,6 +24,6 @@ int		ft_unset(t_app *app, t_list *argv);
 int		ft_export(t_app *app, t_list *argv);
 int		ft_pwd(t_app *app, t_list *argv);
 int		ft_exit(t_app *app, t_list *argv);
-int		ft_echo(t_app *app, t_list *argv);
+int		ft_echo(t_app *app, t_ast_node *simple_cmd);
 
 #endif

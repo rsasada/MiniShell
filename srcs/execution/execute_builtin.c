@@ -55,7 +55,7 @@ int	builtin_functions(t_ast_node *simple_cmd, t_app *app)
 	file_path = simple_cmd->u_node_data.s_simple_cmd.file_path;
 	args = simple_cmd->u_node_data.s_simple_cmd.args;
 	if (ft_strncmp(file_path->u_node_data.file_path_val, "echo", 5) == 0)
-		return (ft_echo(app, args->u_node_data.arg_list));
+		return (ft_echo(app, simple_cmd));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "export", 7) == 0)
 		return (ft_export(app, args->u_node_data.arg_list));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "pwd", 4) == 0)
