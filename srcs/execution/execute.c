@@ -111,7 +111,6 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	char	*cmd_path;
 	char	**args;
 
-
 	if (check_builtin_cmd(simple_cmd->u_node_data.s_simple_cmd.file_path))
 		return (builtin_functions(simple_cmd, app));
 	args = get_args(simple_cmd);
