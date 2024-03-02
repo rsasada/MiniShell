@@ -31,6 +31,6 @@ char	**convert_env_to_char(t_list *env_list);
 char	**split_env_path(t_list *env_list);
 char	*check_access(t_ast_node *file_path, char **env_path);
 
-bool	check_builtin_cmd(char *cmd_name);
+bool	check_builtin_cmd(t_ast_node *file_path);
 int		builtin_functions(t_ast_node *simple_cmd, t_app *app);
 #endif
