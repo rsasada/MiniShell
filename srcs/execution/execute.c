@@ -87,7 +87,10 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
 	simple_cmd = ast->u_node_data.s_cmd.simple_cmd;
 	if (prev_fd[0] == NO_PIPE && check_builtin_cmd(
 			simple_cmd->u_node_data.s_simple_cmd.file_path))
-		return (execute_single_builtin_cmd(ast, app));
+	{
+		execute_single_builtin_cmd(ast, app);
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 	{

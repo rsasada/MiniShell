@@ -23,6 +23,7 @@ void	close_pipe(int	*fd);
 void	redirect_output_to_pipe(int *pipe_fd);
 void	redirect_input_to_pipe(int	*pipe_fd);
 void	prepare_pipe(int *pipe_fd);
+void	add_pid_storage(t_list *pid_storage, pid_t child_pid);
 
 void	process_redirects(t_ast_node *s_r);
 void	execute(t_ast_node *ast, t_app *app);
@@ -33,4 +34,6 @@ char	*check_access(t_ast_node *file_path, char **env_path);
 
 bool	check_builtin_cmd(t_ast_node *file_path);
 int		builtin_functions(t_ast_node *simple_cmd, t_app *app);
+int		execute_single_builtin_cmd(t_ast_node *ast, t_app *app);
+
 #endif
