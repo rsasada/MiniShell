@@ -50,23 +50,28 @@ bool	check_builtin_cmd(t_ast_node *file_path)
 int	builtin_functions(t_ast_node *simple_cmd, t_app *app)
 {
 	t_ast_node	*file_path;
-	t_ast_node	*args;
+	t_ast_node	*argv;
+	t_list		*arg_list;
 
 	file_path = simple_cmd->u_node_data.s_simple_cmd.file_path;
-	args = simple_cmd->u_node_data.s_simple_cmd.args;
+	argv = simple_cmd->u_node_data.s_simple_cmd.args;
+	if (argv)
+		arg_list = argv->u_node_data.arg_list;
+	else
+		arg_list = NULL;
 	if (ft_strncmp(file_path->u_node_data.file_path_val, "echo", 5) == 0)
 		return (ft_echo(app, simple_cmd));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "export", 7) == 0)
-		return (ft_export(app, args->u_node_data.arg_list));
+		return (ft_export(app, arg_list));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "pwd", 4) == 0)
-		return (ft_pwd(app, args->u_node_data.arg_list));
+		return (ft_pwd(app, arg_list));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "cd", 3) == 0)
-		return (ft_cd(app, args->u_node_data.arg_list));
+		return (ft_cd(app, arg_list));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "env", 4) == 0)
-		return (ft_env(app, args->u_node_data.arg_list));
+		return (ft_env(app, arg_list));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "unset", 6) == 0)
-		return (ft_unset(app, args->u_node_data.arg_list));
+		return (ft_unset(app, arg_list));
 	else if (ft_strncmp(file_path->u_node_data.file_path_val, "exit", 5) == 0)
-		return (ft_exit(app, args->u_node_data.arg_list));
+		return (ft_exit(app, arg_list));
 	return (1);
 }

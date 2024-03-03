@@ -27,7 +27,8 @@
 
 int	g_exit_code;
 
-typedef struct s_app {
+typedef struct s_app
+{
 	t_list	*env_lst;
 	t_list	*pid_storage;
 	char	*home_path;

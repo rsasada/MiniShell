@@ -80,13 +80,12 @@ int	ft_cd(t_app *app, t_list *argv)
 	char	*cwd;
 	t_list	*env_list;
 
-	env_list = NULL;
+	env_list = app->env_lst;
 	if (!argv)
 		chdir_home(app, env_list, 0);
 	else
 	{
 		path = ((t_ast_node *)(argv->content))->u_node_data.file_name_val;
-		env_list = app->env_lst;
 		if (ft_strncmp(path, "~", 2) == 0)
 			chdir_home(app, env_list, 1);
 		else if (ft_strncmp(path, "~/", 2) == 0)
