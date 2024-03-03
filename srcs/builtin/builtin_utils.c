@@ -16,7 +16,7 @@ void	ft_chdir(char *path)
 {
 	if (chdir(path) == -1)
 	{
-		ft_putstr_fd("push: cd:", STDERR_FILENO);
+		ft_putstr_fd("push: cd: ", STDERR_FILENO);
 		perror(path);
 		g_exit_code = EXIT_FAILURE;
 		return ;

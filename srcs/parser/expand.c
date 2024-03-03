@@ -15,20 +15,25 @@
 
 void	replace_tokens(t_list **old, t_list *node_to_change, t_list *new)
 {
-	t_list	*next;
 	t_list	*prev;
+	t_list	*cur;
+	t_list	*new_last;
 
-	next = node_to_change->next;
-	ft_lstadd_back(&new, next);
-	if (node_to_change == *old)
-		*old = new;
-	else
+	prev = NULL;
+	cur = *old;
+	while (cur && cur != node_to_change)
 	{
-		prev = *old;
-		while (prev->next != node_to_change)
-			prev = prev->next;
-		prev->next = new;
+		prev = cur;
+		cur = cur->next;
 	}
+	new_last = new;
+	while (new_last -> next != NULL)
+		new_last = new_last->next;
+	new_last->next = node_to_change->next;
+	if (prev)
+		prev->next = new;
+	else
+		*old = new;
 	ft_lstdelone(node_to_change, free_token);
 }
 
@@ -63,6 +68,8 @@ char	*expand_token_value(t_app *app, const char *value)
 			result = adjust_result(result, value[i], &len);
 		i++;
 	}
+	if (!result)
+		result = strdup("");
 	return (result);
 }
 
@@ -78,8 +85,6 @@ void	replace_new_value(t_list **tokens, t_list **cur, char *new_value)
 		replace_tokens(tokens, *cur, new);
 		*cur = next;
 	}
-	else
-		free(new_value);
 }
 
 void	expand_env(t_app *app, t_list **tokens)
@@ -98,7 +103,8 @@ void	expand_env(t_app *app, t_list **tokens)
 			if (new_value)
 			{
 				replace_new_value(tokens, &cur, new_value);
-				continue ;
+				if (*new_value)
+					continue ;
 			}
 		}
 		cur = cur->next;

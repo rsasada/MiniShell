@@ -34,8 +34,8 @@ static void	replace_with_env(char *var_value, char **result, int *len)
 	size_t	var_value_len;
 
 	var_value_len = ft_strlen(var_value);
-	result = ft_realloc(result, *len + var_value_len + 1);
-	if (!result)
+	*result = ft_realloc(*result, *len + var_value_len + 1);
+	if (!(*result))
 		exit_with_error("malloc");
 	ft_strlcpy(*result + *len, var_value, var_value_len + 1);
 	*len += var_value_len;
@@ -75,7 +75,7 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, int *len)
 	if (env_node)
 		var_value = ((t_env *) env_node->content)->value;
 	else
-		var_value = "";
+		var_value = ft_strdup("");
 	handle_var_value(&var_value, &result, len);
 	free(var_name);
 	*i += var_len;

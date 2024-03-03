@@ -22,11 +22,11 @@ char	*adjust_result(char *result, char c, int *len)
 {
 	char	*temp;
 
-	(*len)++;
-	temp = ft_realloc(result, *len + 1);
+	temp = ft_realloc(result, *len + 2);
 	if (!temp)
 		exit_with_error("realloc");
-	temp[*len - 1] = c;
+	temp[*len] = c;
+	(*len)++;
 	temp[*len] = '\0';
 	return (temp);
 }

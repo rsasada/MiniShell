@@ -2,7 +2,7 @@
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -O0
+CFLAGS = -Wall -Wextra -Werror -g3 -O0 -fsanitize=address
 
 
 ARCH := $(shell uname -m)
