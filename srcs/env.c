@@ -72,7 +72,7 @@ void	add_env(t_list **env_list, char *key, char *value)
 		exit_with_error("malloc");
 	env->key = key;
 	env->value = value;
-	tmp = (t_env *)malloc(sizeof(t_env ));
+	tmp = (t_env *) malloc(sizeof(t_env));
 	ft_memcpy(tmp, (find_env(env_list, key))->content, sizeof(t_env *));
 	remove_env(env_list, key);
 	ft_lstadd_back(env_list, ft_lstnew(env));
