@@ -57,6 +57,7 @@ t_list	*find_env(t_list **env_list, char *key)
 		env_key = ((t_env *)(cur->content))->key;
 		if (ft_strncmp(env_key, key, ft_strlen(key) + 1) == 0)
 			return (cur);
+		cur = cur->next;
 	}
 	return (NULL);
 }
@@ -64,15 +65,15 @@ t_list	*find_env(t_list **env_list, char *key)
 void	add_env(t_list **env_list, char *key, char *value)
 {
 	t_env	*env;
-	t_list	*tmp;
+	t_env	*tmp;
 
 	env = malloc(sizeof(t_env));
 	if (!env)
 		exit_with_error("malloc");
 	env->key = key;
 	env->value = value;
-	tmp = NULL;
-	ft_memcpy(tmp, find_env(env_list, key), sizeof(t_list));
+	tmp = (t_env *)malloc(sizeof(t_env ));
+	ft_memcpy(tmp, (find_env(env_list, key))->content, sizeof(t_env *));
 	remove_env(env_list, key);
 	ft_lstadd_back(env_list, ft_lstnew(env));
 	if (find_env(env_list, key) == NULL)
