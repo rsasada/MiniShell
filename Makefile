@@ -26,7 +26,7 @@ SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/ex
 SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c
 SRCS_BUILTIN	= srcs/builtin/ft_cd.c srcs/builtin/ft_env.c srcs/builtin/ft_exit.c srcs/builtin/ft_export.c \
 					srcs/builtin/ft_pwd.c srcs/builtin/ft_unset.c srcs/builtin/ft_echo.c srcs/builtin/builtin_utils.c
-SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c
+SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c srcs/libft_extended/ft_merge_list_at.c
 SRCS = ${SRCS_MAIN} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_EXECUTION} ${SRCS_LIB_EX} ${SRCS_UTIL} ${SRCS_BUILTIN}
 
 OBJS = $(SRCS:%.c=%.o)

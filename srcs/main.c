@@ -45,7 +45,7 @@ void	handle_line(char *line, t_app *app)
 
 	add_history(line);
 	tokens = tokenizer(line, 0);
-//	expand_env(app, &tokens);
+	expand_env(app, &tokens);
 	root = ast_parser(&tokens);
 	execute(root, app);
 	ft_lstclear(&tokens, free_token);

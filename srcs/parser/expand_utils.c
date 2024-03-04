@@ -18,7 +18,7 @@ void	toggle_quote(int *quote_flag, int *i)
 	(*i)++;
 }
 
-char	*adjust_result(char *result, char c, int *len)
+char	*copy_char_to_result(char *result, char c, size_t *len)
 {
 	char	*temp;
 

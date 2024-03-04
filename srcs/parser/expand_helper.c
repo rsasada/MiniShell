@@ -29,7 +29,7 @@ static char	*create_var_name(const char *value, int *i, int *var_len)
 	return (ret);
 }
 
-static void	replace_with_env(char *var_value, char **result, int *len)
+static void	replace_with_env(char *var_value, char **result, size_t *len)
 {
 	size_t	var_value_len;
 
@@ -41,7 +41,7 @@ static void	replace_with_env(char *var_value, char **result, int *len)
 	*len += var_value_len;
 }
 
-static void	handle_var_value(char **var_value, char **result, int *len)
+static void	handle_var_value(char **var_value, char **result, size_t *len)
 {
 	if (*var_value)
 	{
@@ -49,17 +49,9 @@ static void	handle_var_value(char **var_value, char **result, int *len)
 		if (!*result)
 			return ;
 	}
-	else
-	{
-		*result = ft_realloc(*result, *len + 1);
-		if (!*result)
-			exit_with_error("malloc");
-		(*result)[*len] = '\0';
-		*len += 1;
-	}
 }
 
-char	*expand_env_helper(t_app *app, const char *value, int *i, int *len)
+char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 {
 	t_list	*env_node;
 	char	*var_name;

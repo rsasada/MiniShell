@@ -63,3 +63,29 @@ void	check_quote_error(t_tokenizer *t)
 	else if (t->q_state == INSIDE_SINGLE_QUOTES)
 		exit_with_error("minishell: syntax error near Unclosed double quote");
 }
+
+void	delete_token_from_list(t_list **tokens, t_list *to_delete)
+{
+	t_list	*temp;
+
+	if (tokens == NULL || *tokens == NULL || to_delete == NULL)
+		return ;
+	temp = *tokens;
+	if (temp == to_delete)
+	{
+		*tokens = temp->next;
+	}
+	else
+	{
+		while (temp->next && temp->next != to_delete)
+		{
+			temp = temp->next;
+		}
+		if (temp->next)
+		{
+			temp->next = to_delete->next;
+		}
+	}
+	free_token(to_delete->content);
+	free(to_delete);
+}

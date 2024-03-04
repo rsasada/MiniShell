@@ -110,6 +110,6 @@ t_ast_node	*create_file_name_node(char *file_path);
 
 void		reorder_tokens(t_list **token_list);
 void		toggle_quote(int *quote_flag, int *i);
-char		*adjust_result(char *result, char c, int *len);
+char		*copy_char_to_result(char *result, char c, size_t *len);
 void		free_ast(t_ast_node *node);
 #endif
