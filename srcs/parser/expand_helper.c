@@ -6,7 +6,7 @@
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:47:54 by jongykim          #+#    #+#             */
-/*   Updated: 2024/02/29 01:33:02 by jongykim         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:04:51 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 	int		var_len;
 
 	result = NULL;
+	if (ft_strncmp(value, "$?", 3) == 0)
+	{
+		(*i)++;
+		return (ft_itoa(g_exit_code));
+	}
 	var_name = create_var_name(value, i, &var_len);
 	if (!var_name)
 		return (NULL);

@@ -17,13 +17,14 @@ static void	update_pwd(t_app *app, char *cwd)
 	char	*pwd;
 	char	*oldpwd;
 
-	pwd = ft_strjoin("PWD=", cwd);
-	oldpwd = ft_strjoin("OLDPWD=", \
-	((t_env *)(find_env(&app->env_lst, "PWD")->content))->value);
-	if (!pwd || !oldpwd)
+	pwd = cwd;
+	oldpwd = ft_strdup(((t_env *) \
+			(find_env(&app->env_lst, "PWD")->content))->value);
+	if (!oldpwd)
 		exit_with_error("Malloc");
 	add_env(&app->env_lst, "PWD", pwd);
 	add_env(&app->env_lst, "OLDPWD", oldpwd);
+	free(oldpwd);
 }
 
 static void	chdir_oldpwd(t_list *env_list)
@@ -64,7 +65,7 @@ static void	chdir_home_with_path(t_app *app, t_list *env_list, char *path)
 	char	*home_path;
 	char	*full_path;
 
-	home_path = ((t_env *)(find_env(&env_list, "HOME")))->value;
+	home_path = ((t_env *)(find_env(&env_list, "HOME")->content))->value;
 	if (!home_path && !app->home_path)
 		exit_with_error("Unexpected : No Home path set");
 	full_path = ft_strjoin(home_path, (path + 1));

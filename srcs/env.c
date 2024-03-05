@@ -64,25 +64,15 @@ t_list	*find_env(t_list **env_list, char *key)
 
 void	add_env(t_list **env_list, char *key, char *value)
 {
-	t_env	*env;
-	t_env	*tmp;
+	t_env	*temp;
 
-	env = malloc(sizeof(t_env));
-	if (!env)
+	temp = (t_env *)malloc(sizeof(t_env));
+	if (!temp)
 		exit_with_error("malloc");
-	env->key = key;
-	env->value = value;
-	tmp = (t_env *) malloc(sizeof(t_env));
-	ft_memcpy(tmp, (find_env(env_list, key))->content, sizeof(t_env *));
+	temp->key = ft_strdup(key);
+	temp->value = ft_strdup(value);
 	remove_env(env_list, key);
-	ft_lstadd_back(env_list, ft_lstnew(env));
-	if (find_env(env_list, key) == NULL)
-	{
-		ft_putendl_fd("push: failed to add env", STDERR_FILENO);
-		ft_lstadd_back(env_list, ft_lstnew(tmp));
-	}
-	else
-		free(tmp);
+	ft_lstadd_back(env_list, ft_lstnew(temp));
 }
 
 void	remove_env(t_list **env_list, char *arg)
