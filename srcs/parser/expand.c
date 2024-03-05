@@ -28,7 +28,7 @@ int	check_char_after_dollar(const char *value, int *i)
 		*i += 2;
 		return (0);
 	}
-	else if (!is_valid_env_char(value[*i + 1]))
+	else if (!is_valid_env_char(value[*i + 1]) && value[*i + 1] != '?')
 		return (0);
 	else
 		return (1);
@@ -36,6 +36,7 @@ int	check_char_after_dollar(const char *value, int *i)
 
 char	*expand_token_value(t_app *app, const char *value)
 {
+	char	*temp;
 	char	*result;
 	int		i;
 	size_t	len;
@@ -50,13 +51,15 @@ char	*expand_token_value(t_app *app, const char *value)
 			quote_flag = !(quote_flag);
 		else if (value[i] == '$' && !quote_flag && \
 		check_char_after_dollar(value, &i))
-			result = expand_env_helper(app, value, &i, &len);
+		{
+			temp = expand_env_helper(app, value, &i, &len);
+			result = ft_strjoin(result, temp);
+			free(temp);
+		}
 		else
 			result = copy_char_to_result(result, value[i], &len);
 		i++;
 	}
-	if (!result || !*result)
-		return (NULL);
 	return (result);
 }
 

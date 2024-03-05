@@ -37,7 +37,7 @@ static void	replace_with_env(char *var_value, char **result, size_t *len)
 	*result = ft_realloc(*result, *len + var_value_len + 1);
 	if (!(*result))
 		exit_with_error("malloc");
-	ft_strlcpy(*result + *len, var_value, var_value_len + 1);
+	ft_strlcpy(*result, var_value, var_value_len + 1);
 	*len += var_value_len;
 }
 
@@ -60,9 +60,10 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 	int		var_len;
 
 	result = NULL;
-	if (ft_strncmp(value, "$?", 3) == 0)
+	if (ft_strncmp(value, "$?", 2) == 0)
 	{
 		(*i)++;
+		(*len)++;
 		return (ft_itoa(g_exit_code));
 	}
 	var_name = create_var_name(value, i, &var_len);
