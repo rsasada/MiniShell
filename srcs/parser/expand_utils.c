@@ -12,10 +12,9 @@
 
 #include "../../include/parser.h"
 
-void	toggle_quote(int *quote_flag, int *i)
+int	is_valid_env_char(char c)
 {
-	*quote_flag = !(*quote_flag);
-	(*i)++;
+	return (ft_isalnum(c) || c == '_');
 }
 
 char	*copy_char_to_result(char *result, char c, size_t *len)

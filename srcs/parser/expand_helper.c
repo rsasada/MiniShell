@@ -66,8 +66,6 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 		return (ft_itoa(g_exit_code));
 	}
 	var_name = create_var_name(value, i, &var_len);
-	if (!var_name)
-		return (NULL);
 	env_node = find_env(&app->env_lst, var_name);
 	if (env_node)
 		var_value = ((t_env *) env_node->content)->value;

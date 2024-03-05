@@ -109,7 +109,7 @@ t_ast_node	*create_file_path_node(char *file_path);
 t_ast_node	*create_file_name_node(char *file_path);
 
 void		reorder_tokens(t_list **token_list);
-void		toggle_quote(int *quote_flag, int *i);
+int			is_valid_env_char(char c);
 char		*copy_char_to_result(char *result, char c, size_t *len);
 void		free_ast(t_ast_node *node);
 #endif

@@ -21,13 +21,15 @@ static void	init_variables(int *i, size_t *len, int *quote_flag, char **result)
 	*result = NULL;
 }
 
-int	is_valid_env_char(const char *value, int *i)
+int	check_char_after_dollar(const char *value, int *i)
 {
 	if (ft_isdigit(value[*i + 1]))
 	{
 		*i += 2;
 		return (0);
 	}
+	else if (!is_valid_env_char(value[*i + 1]))
+		return (0);
 	else
 		return (1);
 }
@@ -46,7 +48,8 @@ char	*expand_token_value(t_app *app, const char *value)
 	{
 		if (value[i] == '\'')
 			quote_flag = !(quote_flag);
-		else if (value[i] == '$' && !quote_flag && is_valid_env_char(value, &i))
+		else if (value[i] == '$' && !quote_flag && \
+		check_char_after_dollar(value, &i))
 			result = expand_env_helper(app, value, &i, &len);
 		else
 			result = copy_char_to_result(result, value[i], &len);
