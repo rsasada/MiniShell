@@ -35,5 +35,5 @@ char	*check_access(t_ast_node *file_path, char **env_path);
 bool	check_builtin_cmd(t_ast_node *file_path);
 int		builtin_functions(t_ast_node *simple_cmd, t_app *app);
 int		execute_single_builtin_cmd(t_ast_node *ast, t_app *app);
-
+void	wait_child(int pid);
 #endif

@@ -104,7 +104,7 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
 	{
 		if (prev_fd[0] != NO_PIPE)
 			close_pipe(prev_fd);
-		wait(&pid);
+		wait_child(pid);
 	}
 }
 
