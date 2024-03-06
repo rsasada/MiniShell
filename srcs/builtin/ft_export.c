@@ -36,6 +36,11 @@ static int	process_first_arg(t_app *app, t_list *argv)
 {
 	char	*first_arg;
 
+	if (!argv)
+	{
+		print_env(app, 1);
+		return (0);
+	}
 	first_arg = ((t_ast_node *) argv->content)->u_node_data.file_name_val;
 	if (first_arg && *first_arg == '#')
 	{
