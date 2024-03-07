@@ -43,9 +43,14 @@ static void	chdir_oldpwd(t_list *env_list)
 
 static void	chdir_home(t_app *app, t_list *env_list, int argc)
 {
+	t_list	*home_env;
 	char	*home_path;
 
-	home_path = ((t_env *)(find_env(&env_list, "HOME")->content))->value;
+	home_env = (find_env(&env_list, "HOME"));
+	if (home_env)
+		home_path = ((t_env *)home_env->content)->value;
+	else
+		home_path = NULL;
 	if (!home_path && !app->home_path)
 		exit_with_error("Unexpected : No Home path set");
 	if (!home_path && argc == 0)

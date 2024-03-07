@@ -44,6 +44,8 @@ void	init_env(t_app *app, char **envp)
 		ft_lstadd_back(&app->env_lst, ft_lstnew(env_entry));
 		i++;
 	}
+	app->home_path = ft_strdup(\
+			((t_env *) find_env(&app->env_lst, "HOME")->content)->value);
 }
 
 t_list	*find_env(t_list **env_list, char *key)
