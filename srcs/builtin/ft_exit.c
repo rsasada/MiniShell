@@ -36,7 +36,7 @@ static int	is_num(char *code)
 		c++;
 	if (*c == '\0')
 		return (0);
-	while (c)
+	while (*c)
 	{
 		if (ft_isdigit(*c))
 			return (0);
@@ -62,7 +62,7 @@ int	ft_exit(t_app *app, t_list *argv)
 	if (!argv)
 		exit_with_code("0");
 	first_arg = ((t_ast_node *)(argv->content))->u_node_data.file_name_val;
-	if (is_num(first_arg) && is_overflow(first_arg))
+	if (is_num(first_arg) || is_overflow(first_arg))
 	{
 		printf("exit\n");
 		ft_putstr_fd("bash: exit: ", STDERR_FILENO);
