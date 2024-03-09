@@ -21,18 +21,18 @@ void	trim_token(t_list *token)
 		return ;
 	while (token != NULL)
 	{
-		content = (char *)token->content;
-		if (content[0] == '\"')
+		content = ((t_token *)token->content)->value;
+		if (content[0] == '\'')
 		{
 			tmp = ft_strtrim(content, "\'");
-			free(content);
-			content = tmp;
+			free(((t_token *)token->content)->value);
+			((t_token *)token->content)->value = tmp;
 		}
 		else if (content[0] == '\"')
 		{
 			tmp = ft_strtrim(content, "\"");
-			free(content);
-			content = tmp; 
+			free(((t_token *)token->content)->value);
+			((t_token *)token->content)->value = tmp;
 		}
 		token = token->next;
 	}
