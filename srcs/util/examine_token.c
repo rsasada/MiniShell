@@ -15,6 +15,7 @@
 void	trim_token(t_list *token)
 {
 	char	*content;
+	char	*tmp;
 
 	if (token == NULL)
 		return ;
@@ -22,9 +23,17 @@ void	trim_token(t_list *token)
 	{
 		content = (char *)token->content;
 		if (content[0] == '\"')
-			ft_strtrim(content, "\'");
+		{
+			tmp = ft_strtrim(content, "\'");
+			free(content);
+			content = tmp;
+		}
 		else if (content[0] == '\"')
-			ft_strtrim(content, "\"");
+		{
+			tmp = ft_strtrim(content, "\"");
+			free(content);
+			content = tmp; 
+		}
 		token = token->next;
 	}
 	return ;
