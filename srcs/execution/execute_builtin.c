@@ -32,10 +32,14 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 	return (1);
 }
 
-bool	check_builtin_cmd(t_ast_node *file_path)
+bool	check_builtin_cmd(t_ast_node *simple_cmd)
 {
-	char	*cmd_name;
+	t_ast_node	*file_path;
+	char		*cmd_name;
 
+	if (simple_cmd == NULL)
+		return (false);
+	file_path = simple_cmd->u_node_data.s_simple_cmd.file_path;
 	cmd_name = file_path->u_node_data.file_path_val;
 	if (ft_strncmp(cmd_name, "echo", 5) == 0
 		|| ft_strncmp(cmd_name, "export", 7) == 0
