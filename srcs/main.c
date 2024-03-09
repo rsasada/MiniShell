@@ -13,6 +13,7 @@
 #include "../include/minishell.h"
 #include "../include/execution.h"
 #include "../include/lexer.h"
+#include "../include/builtin.h"
 
 void	load_banner(void)
 {
@@ -46,6 +47,7 @@ void	handle_line(char *line, t_app *app)
 	add_history(line);
 	tokens = tokenizer(line, 0);
 	expand_env(app, &tokens);
+	trim_token(tokens);
 	root = ast_parser(&tokens);
 	execute(root, app);
 	ft_lstclear(&tokens, free_token);
@@ -58,6 +60,8 @@ void	run_shell_loop(t_app *app)
 	while (1)
 	{
 		line = readline("push-1.0 ");
+		if (line == NULL)
+			ft_exit(NULL, NULL);
 		handle_line(line, app);
 		free(line);
 	}
