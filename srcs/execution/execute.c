@@ -13,7 +13,7 @@
 #include "../../include/execution.h"
 
 void	execute_execve(t_ast_node *simple_cmd, t_app *app);
-void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app);
+void	execute_last_cmd(t_ast_node *cmd, int *prev_fd, t_app *app);
 void	execute_cmd(t_ast_node *ast, int *prev_fd,
 			bool last_process, t_app *app);
 void	process_cmds(t_ast_node *ast, int *prev_fd, t_app *app);
@@ -79,16 +79,14 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 	}
 }
 
-void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
+void	execute_last_cmd(t_ast_node	*cmd, int *prev_fd, t_app *app)
 {
 	pid_t		pid;
-	t_ast_node	*simple_cmd;
 
-	simple_cmd = ast->u_node_data.s_cmd.simple_cmd;
 	if (prev_fd[0] == NO_PIPE && check_builtin_cmd(
-			simple_cmd->u_node_data.s_simple_cmd.file_path))
+			cmd->u_node_data.s_cmd.simple_cmd))
 	{
-		execute_single_builtin_cmd(ast, app);
+		execute_single_builtin_cmd(cmd, app);
 		return ;
 	}
 	pid = fork();
@@ -96,8 +94,8 @@ void	execute_last_cmd(t_ast_node *ast, int *prev_fd, t_app *app)
 	{
 		if (prev_fd[0] != NO_PIPE)
 			redirect_input_to_pipe(prev_fd);
-		process_redirects(ast->u_node_data.s_cmd.redirection);
-		execute_execve(ast->u_node_data.s_cmd.simple_cmd, app);
+		process_redirects(cmd->u_node_data.s_cmd.redirection);
+		execute_execve(cmd->u_node_data.s_cmd.simple_cmd, app);
 		exit(0);
 	}
 	else
@@ -114,7 +112,9 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	char	*cmd_path;
 	char	**args;
 
-	if (check_builtin_cmd(simple_cmd->u_node_data.s_simple_cmd.file_path))
+	if (simple_cmd == NULL)
+		return ;
+	if (check_builtin_cmd(simple_cmd))
 	{
 		builtin_functions(simple_cmd, app);
 		return ;

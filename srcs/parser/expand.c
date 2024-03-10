@@ -49,7 +49,7 @@ char	*expand_token_value(t_app *app, const char *value)
 	{
 		if (value[i] == '\'')
 			quote_flag = !(quote_flag);
-		else if (value[i] == '$' && !quote_flag && \
+		if (value[i] == '$' && !quote_flag && \
 		check_char_after_dollar(value, &i))
 		{
 			temp = expand_env_helper(app, value, &i, &len);

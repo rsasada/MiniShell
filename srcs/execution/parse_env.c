@@ -12,28 +12,68 @@
 
 #include "../../include/execution.h"
 
+
+int		wrapped_access(char *path, int *error_code);
+void	exit_access_error(int error_code, char *path);
+
 char	*check_access(t_ast_node *file_path, char **env_path)
 {
 	int		i;
+	int		error_code;
 	char	*path;
 	char	*tmp;
 	char	*absol_path;
 
 	i = 0;
+	error_code = 0;
 	path = file_path->u_node_data.file_path_val;
-	if (access(path, X_OK) == 0)
+	if (wrapped_access(path, &error_code) == 0)
 		return (path);
 	while (env_path[i] != NULL)
 	{
 		tmp = ft_strjoin(env_path[i], "/");
 		absol_path = ft_strjoin(tmp, path);
 		free(tmp);
-		if (access(absol_path, X_OK) == 0)
+		if (wrapped_access(absol_path, &error_code) == 0)
 			return (absol_path);
 		free(absol_path);
 		i ++;
 	}
+	exit_access_error(error_code, path);
 	return (NULL);
+}
+
+int	wrapped_access(char *path, int *error_code)
+{
+	if (path == NULL)
+		return (1);
+	if (access(path, F_OK) != 0 && *error_code != X_OK)
+	{
+		*error_code = F_OK;
+		return (1);
+	}
+	if (access(path, X_OK) != 0)
+	{
+		*error_code = X_OK;
+		return (1);
+	}
+	return (0);
+}
+
+void	exit_access_error(int error_code, char *path)
+{
+	if (error_code == F_OK)
+	{
+		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putendl_fd(": command not found ", STDERR_FILENO);
+	}
+	else if (error_code == X_OK)
+	{
+		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putendl_fd(": Pemission denied ", STDERR_FILENO);
+	}
 }
 
 char	**split_env_path(t_list *env_list)
