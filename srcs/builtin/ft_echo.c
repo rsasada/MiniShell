@@ -12,7 +12,7 @@
 
 #include "../../include/builtin.h"
 
-bool	check_option(char **args);
+bool	check_option(char *arg);
 char	**get_args(t_ast_node *simple_cmd);
 
 int	ft_echo(t_app *app, t_ast_node *simple_cmd)
@@ -22,18 +22,16 @@ int	ft_echo(t_app *app, t_ast_node *simple_cmd)
 	char	**args;
 
 	(void)app;
+	i = 1;
 	args = get_args(simple_cmd);
-	option_flag = check_option(args);
-	if (option_flag == true)
-		i = 2;
-	else
-		i = 1;
+	option_flag = check_option(args[1]);
+	while (check_option(args[i]) == true)
+		i ++;
 	while (args[i] != NULL)
 	{
-		if ((option_flag == false && i != 1)
-			|| (option_flag == true && i != 2))
-			write(1, " ", 1);
 		ft_putstr_fd(args[i], 1);
+		if (args[i + 1] != NULL)
+			write(1, " ", 1);
 		i ++;
 	}
 	if (option_flag == false)
@@ -41,18 +39,18 @@ int	ft_echo(t_app *app, t_ast_node *simple_cmd)
 	return (1);
 }
 
-bool	check_option(char **args)
+bool	check_option(char *arg)
 {
 	size_t	i;
 	char	option;
 
 	i = 2;
 	option = 'n';
-	if (args[1] != NULL && ft_strncmp(args[1], "-n", 2) == 0)
+	if (arg != NULL && ft_strncmp(arg, "-n", 2) == 0)
 	{
-		while (args[1][i] != '\0')
+		while (arg[i] != '\0')
 		{
-			if (args[1][i] != option)
+			if (arg[i] != option)
 				return (false);
 			i ++;
 		}
