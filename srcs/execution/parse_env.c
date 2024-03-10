@@ -29,7 +29,7 @@ char	*check_access(t_ast_node *file_path, char **env_path)
 	path = file_path->u_node_data.file_path_val;
 	if (wrapped_access(path, &error_code) == 0)
 		return (path);
-	while (env_path[i] != NULL)
+	while (env_path != NULL && env_path[i] != NULL)
 	{
 		tmp = ft_strjoin(env_path[i], "/");
 		absol_path = ft_strjoin(tmp, path);
