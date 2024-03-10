@@ -34,7 +34,7 @@ char	*check_access(t_ast_node *file_path, char **env_path)
 		tmp = ft_strjoin(env_path[i], "/");
 		absol_path = ft_strjoin(tmp, path);
 		free(tmp);
-		if (wrapped_access(path, &error_code) == 0)
+		if (wrapped_access(absol_path, &error_code) == 0)
 			return (absol_path);
 		free(absol_path);
 		i ++;
@@ -47,18 +47,17 @@ int	wrapped_access(char *path, int *error_code)
 {
 	if (path == NULL)
 		return (1);
-	if (access(path, F_OK) && *error_code != X_OK)
+	if (access(path, F_OK) != 0 && *error_code != X_OK)
 	{
 		*error_code = F_OK;
 		return (1);
 	}
-	if (access(path, X_OK) == 0)
+	if (access(path, X_OK) != 0)
 	{
 		*error_code = X_OK;
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 void	exit_access_error(int error_code, char *path)

@@ -59,9 +59,9 @@ void	init_tokenizer(t_tokenizer *t)
 void	check_quote_error(t_tokenizer *t)
 {
 	if (t->q_state == INSIDE_DOUBLE_QUOTES)
-		exit_with_error("minishell: syntax error near Unclosed single quote");
-	else if (t->q_state == INSIDE_SINGLE_QUOTES)
 		exit_with_error("minishell: syntax error near Unclosed double quote");
+	else if (t->q_state == INSIDE_SINGLE_QUOTES)
+		exit_with_error("minishell: syntax error near Unclosed single quote");
 }
 
 void	delete_token_from_list(t_list **tokens, t_list *to_delete)
