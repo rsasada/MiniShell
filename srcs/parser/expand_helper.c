@@ -60,7 +60,7 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 	int		var_len;
 
 	result = NULL;
-	if (ft_strncmp(value, "$?", 2) == 0)
+	if (ft_strncmp(value + *i, "$?", 2) == 0)
 	{
 		(*i)++;
 		(*len)++;
