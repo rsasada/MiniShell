@@ -20,7 +20,6 @@ typedef enum token_type
 	TOKEN_WORD,
 	TOKEN_REDIRECT,
 	TOKEN_PIPE,
-	TOKEN_EOF
 }	t_token_type;
 
 typedef enum quote_state
@@ -56,7 +55,5 @@ void	delete_token_from_list(t_list **tokens, t_list *to_delete);
 bool	ft_is_metacharacter(char c);
 void	handle_double_quote(t_tokenizer *t);
 void	handle_single_quote(t_tokenizer *t);
-
-
 
 #endif

@@ -10,22 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../include/lexer.h"
+#include "../../include/lexer.h"
 
-void remove_quote_helper(char *str)
+void	remove_quote_helper(char *str)
 {
-	char *reader;
-	char *writer;
-	char current_quote;
+	char	*reader;
+	char	*writer;
+	char	current_quote;
 
 	reader = str;
 	writer = str;
 	current_quote = 0;
-	while(*reader)
+	while (*reader)
 	{
-		if((*reader == '\'' || *reader =='\"') && (current_quote == 0 || current_quote == *reader))
+		if ((*reader == '\'' || *reader == '\"') && \
+		(current_quote == 0 || current_quote == *reader))
 		{
-			if(current_quote == *reader)
+			if (current_quote == *reader)
 				current_quote = 0;
 			else
 				current_quote = *reader;

@@ -12,7 +12,6 @@
 
 #include "../../include/execution.h"
 
-
 int		wrapped_access(char *path, int *error_code);
 void	exit_access_error(int error_code, char *path);
 

@@ -35,7 +35,7 @@ void	init_app(t_app *app, char **envp)
 {
 	ft_memset(app, 0, sizeof(t_app));
 	init_env(app, envp);
-//	load_banner();
+	load_banner();
 	config_signal();
 }
 
@@ -47,7 +47,6 @@ void	handle_line(char *line, t_app *app)
 	add_history(line);
 	tokens = tokenizer(line, 0);
 	expand_env(app, &tokens);
-
 	root = ast_parser(&tokens);
 	execute(root, app);
 	ft_lstclear(&tokens, free_token);

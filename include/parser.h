@@ -113,7 +113,8 @@ int			is_valid_env_char(char c);
 char		*copy_char_to_result(char *result, char c, size_t *len);
 void		free_ast(t_ast_node *node);
 
-void	expand_env(t_app *app, t_list **tokens);
-char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len);
-void	remove_quote(t_list *token);
+void		expand_env(t_app *app, t_list **tokens);
+char		*expand_env_helper(t_app *app, const char *value, \
+int *i, size_t *len);
+void		remove_quote(t_list *token);
 #endif

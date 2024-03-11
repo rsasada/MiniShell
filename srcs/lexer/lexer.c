@@ -68,7 +68,6 @@ bool	ft_is_quote(t_tokenizer *t)
 	return (true);
 }
 
-
 bool	ft_is_pipeline(t_tokenizer *t)
 {
 	if (t->line[t->i] == '|')
