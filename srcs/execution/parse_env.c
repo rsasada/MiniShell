@@ -64,13 +64,13 @@ void	exit_access_error(int error_code, char *path)
 {
 	if (error_code == F_OK)
 	{
-		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd("push: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putendl_fd(": command not found ", STDERR_FILENO);
 	}
 	else if (error_code == X_OK)
 	{
-		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd("push: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putendl_fd(": Pemission denied ", STDERR_FILENO);
 	}
