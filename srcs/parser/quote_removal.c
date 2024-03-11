@@ -12,29 +12,39 @@
 
 #include	"../../include/lexer.h"
 
-void	trim_token(t_list *token)
+void remove_quote_helper(char *str)
+{
+	char *reader;
+	char *writer;
+	char current_quote;
+
+	reader = str;
+	writer = str;
+	current_quote = 0;
+	while(*reader)
+	{
+		if((*reader == '\'' || *reader =='\"') && (current_quote == 0 || current_quote == *reader))
+		{
+			if(current_quote == *reader)
+				current_quote = 0;
+			else
+				current_quote = *reader;
+		}
+		else
+			*writer++ = *reader;
+		reader++;
+	}
+	*writer = '\0';
+}
+
+void	remove_quote(t_list *token)
 {
 	char	*content;
-	char	*tmp;
 
-	if (token == NULL)
-		return ;
 	while (token != NULL)
 	{
-		content = ((t_token *)token->content)->value;
-		if (content[0] == '\'')
-		{
-			tmp = ft_strtrim(content, "\'");
-			free(((t_token *)token->content)->value);
-			((t_token *)token->content)->value = tmp;
-		}
-		else if (content[0] == '\"')
-		{
-			tmp = ft_strtrim(content, "\"");
-			free(((t_token *)token->content)->value);
-			((t_token *)token->content)->value = tmp;
-		}
+		content = ((t_token *) token->content)->value;
+		remove_quote_helper(content);
 		token = token->next;
 	}
-	return ;
 }

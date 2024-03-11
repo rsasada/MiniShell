@@ -108,4 +108,5 @@ void	expand_env(t_app *app, t_list **tokens)
 		}
 		cur = temp;
 	}
+	remove_quote(*tokens);
 }

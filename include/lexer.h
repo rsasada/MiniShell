@@ -57,6 +57,6 @@ bool	ft_is_metacharacter(char c);
 void	handle_double_quote(t_tokenizer *t);
 void	handle_single_quote(t_tokenizer *t);
 
-void	trim_token(t_list *token);
+
 
 #endif

@@ -57,8 +57,7 @@ t_list	*find_env(t_list **env_list, char *key);
 void	*ft_realloc(void *ptr, size_t size);
 void	ft_merge_list_at(t_list **first_list, \
 		t_list **second_list, int position);
-void	expand_env(t_app *app, t_list **tokens);
-char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len);
+
 
 void	remove_env(t_list **env_list, char *arg);
 void	free_env(void *env);
