@@ -24,6 +24,7 @@
 # include <sys/ioctl.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <errno.h>
 
 int	g_exit_code;
 
