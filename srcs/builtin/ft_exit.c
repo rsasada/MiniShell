@@ -74,6 +74,7 @@ int	ft_exit(t_app *app, t_list *argv)
 	{
 		printf("exit\n");
 		ft_putendl_fd("bash: exit: too many arguments", STDERR_FILENO);
+		g_exit_code = 1;
 	}
 	else
 		exit_with_code(first_arg);
