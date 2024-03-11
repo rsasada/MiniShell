@@ -14,7 +14,7 @@ endif
 
 SRCS_MAIN		= srcs/main.c srcs/error.c srcs/init_signal.c \
 					 srcs/env.c
-SRCS_LEXER		= srcs/lexer/lexer_utils.c srcs/lexer/lexer.c
+SRCS_LEXER		= srcs/lexer/lexer_utils.c srcs/lexer/lexer.c srcs/lexer/lexer_quote.c
 SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/parse_argv.c \
 					srcs/parser/parse_cmd.c srcs/parser/parse_helper.c srcs/parser/parse_here_doc.c \
 					srcs/parser/parse_io_redirect.c srcs/parser/parse_main.c srcs/parser/parse_pipeline.c \

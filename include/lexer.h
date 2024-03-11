@@ -53,6 +53,10 @@ void	new_token(t_tokenizer *t, t_token_type type);
 void	check_quote_error(t_tokenizer *t);
 void	delete_token_from_list(t_list **tokens, t_list *to_delete);
 
+bool	ft_is_metacharacter(char c);
+void	handle_double_quote(t_tokenizer *t);
+void	handle_single_quote(t_tokenizer *t);
+
 void	trim_token(t_list *token);
 
 #endif

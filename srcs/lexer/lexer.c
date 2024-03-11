@@ -60,27 +60,14 @@ bool	skip_blanks(t_tokenizer *t)
 bool	ft_is_quote(t_tokenizer *t)
 {
 	if (t->line[t->i] == '\'')
-	{
-		t->count ++;
-		t->i ++;
-		if (t->q_state == INSIDE_SINGLE_QUOTES)
-			new_token(t, TOKEN_WORD);
-		else if (t->q_state == OUTSIDE_QUOTES)
-			t->q_state = INSIDE_SINGLE_QUOTES;
-	}
+		handle_single_quote(t);
 	else if (t->line[t->i] == '\"')
-	{
-		t->count ++;
-		t->i ++;
-		if (t->q_state == INSIDE_DOUBLE_QUOTES)
-			new_token(t, TOKEN_WORD);
-		else if (t->q_state == OUTSIDE_QUOTES)
-			t->q_state = INSIDE_DOUBLE_QUOTES;
-	}
+		handle_double_quote(t);
 	else
 		return (false);
 	return (true);
 }
+
 
 bool	ft_is_pipeline(t_tokenizer *t)
 {
