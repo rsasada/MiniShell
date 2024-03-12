@@ -33,9 +33,7 @@ t_ast_node	*parse_simple_cmd(t_list **cur_token)
 	t_ast_node	*argv_node;
 
 	if (*cur_token == NULL || !accept_word(*cur_token))
-	{
 		return (NULL);
-	}
 	file_path_node = create_file_path_node(
 			((t_token *)(*cur_token)->content)->value);
 	*cur_token = (*cur_token)->next;
@@ -43,9 +41,7 @@ t_ast_node	*parse_simple_cmd(t_list **cur_token)
 	{
 		argv_node = parse_argv(cur_token);
 		if (!argv_node)
-		{
 			return (NULL);
-		}
 		return (create_simple_cmd_node(file_path_node, argv_node));
 	}
 	return (create_simple_cmd_node(file_path_node, NULL));

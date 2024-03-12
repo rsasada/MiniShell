@@ -22,7 +22,7 @@ int position)
 
 	temp = *first_list;
 	i = 0;
-	while (i < position && temp != NULL && temp->next != NULL)
+	while (i < position && temp != NULL)
 	{
 		if (i == position - 1)
 		{
