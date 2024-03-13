@@ -121,9 +121,8 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	}
 	args = get_args(simple_cmd);
 	env_path = convert_env_to_char(app->env_lst);
-	cmd_path = get_cmd_path(simple_cmd->u_node_data.s_simple_cmd.file_path,
+	cmd_path = check_access(simple_cmd->u_node_data.s_simple_cmd.file_path,
 			split_env_path(app->env_lst));
-	validate_cmd_path(cmd_path, simple_cmd->u_node_data.s_simple_cmd.file_path);
 	if (execve(cmd_path, args, env_path) == -1)
 		exit(errno);
 }

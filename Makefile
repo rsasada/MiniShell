@@ -22,7 +22,7 @@ SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/p
 					srcs/parser/expand_utils.c srcs/parser/expand_helper.c srcs/parser/quote_removal.c
 SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/execution/parse_env.c \
 					srcs/execution/redirect.c srcs/execution/redirect_utils.c \
-					srcs/execution/execute_builtin.c srcs/execution/examine_path.c
+					srcs/execution/execute_builtin.c
 SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c
 SRCS_BUILTIN	= srcs/builtin/ft_cd.c srcs/builtin/ft_env.c srcs/builtin/ft_exit.c srcs/builtin/ft_export.c \
 					srcs/builtin/ft_pwd.c srcs/builtin/ft_unset.c srcs/builtin/ft_echo.c srcs/builtin/builtin_utils.c

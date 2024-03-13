@@ -30,8 +30,7 @@ void	execute(t_ast_node *ast, t_app *app);
 
 char	**convert_env_to_char(t_list *env_list);
 char	**split_env_path(t_list *env_list);
-char	*get_cmd_path(t_ast_node *file_node, char **env_path);
-void	validate_cmd_path(char *cmd_path, t_ast_node *cmd_node);
+char	*check_access(t_ast_node *file_path, char **env_path);
 
 bool	check_builtin_cmd(t_ast_node *simple_cmd);
 int		builtin_functions(t_ast_node *simple_cmd, t_app *app);
