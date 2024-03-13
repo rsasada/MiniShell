@@ -19,14 +19,6 @@ void	exit_with_error(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-void	custom_error(int exit_code, char *error_message, char *cmd)
-{
-	ft_putstr_fd("push: ", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putendl_fd(error_message, STDERR_FILENO);
-	exit(exit_code);
-}
-
 void	handling_error(char *error_message, int exit_code)
 {
 	ft_putendl_fd(error_message, STDERR_FILENO);
