@@ -14,7 +14,7 @@
 
 bool	ft_is_metacharacter(char c)
 {
-	return (c && ft_strchr("<> |\t\n", c));
+	return (c && strchr("<> |\t\n", c));
 }
 
 void	handle_double_quote(t_tokenizer *t)
