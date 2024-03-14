@@ -25,6 +25,13 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <sys/stat.h>
+
+//Error_message
+# define PERM_DENIED ": Permission denied"
+# define CMD_NOT_FOUND ": command not found"
+# define FILE_NOT_FOUND ": No such file or directory"
+# define IS_DIR ": is a directory"
 
 int	g_exit_code;
 
@@ -43,6 +50,7 @@ typedef struct s_env
 
 // error.c
 void	exit_with_error(char *error_message);
+void	custom_error(int defined_code, char *error_message, char *cmd);
 void	*print_syntax_error(char *error, int *error_code);
 void	handling_error(char *error_message, int exit_code);
 
