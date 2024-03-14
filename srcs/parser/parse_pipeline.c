@@ -20,7 +20,6 @@ t_ast_node	*parse_pipeline(t_list **cur_token, int *error_code)
 
 	if (cur_token == NULL || *cur_token == NULL)
 		return (NULL);
-	reorder_tokens(cur_token);
 	left = parse_cmd(cur_token, error_code);
 	if (left == NULL)
 		return (NULL);
