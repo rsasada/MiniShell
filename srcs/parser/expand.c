@@ -101,10 +101,13 @@ void	expand_env(t_app *app, t_list **tokens)
 		if (token && token->type == TOKEN_WORD)
 		{
 			new_value = expand_token_value(app, token->value);
-			if (new_value)
+			if (new_value && *new_value)
 				replace_new_value(tokens, &cur, new_value);
-			else
+			else if (new_value)
+			{
+				free(new_value);
 				delete_token_from_list(tokens, cur);
+			}
 		}
 		cur = temp;
 	}

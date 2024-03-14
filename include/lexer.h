@@ -50,7 +50,9 @@ void	init_tokenizer(t_tokenizer *t);
 t_list	*malloc_token(char *value, t_token_type type);
 void	new_token(t_tokenizer *t, t_token_type type);
 void	check_quote_error(t_tokenizer *t);
+void	*copy_token(void *content);
 void	delete_token_from_list(t_list **tokens, t_list *to_delete);
+void	reorder_tokens(t_list **tokens);
 
 bool	ft_is_metacharacter(char c);
 void	handle_double_quote(t_tokenizer *t);

@@ -26,9 +26,7 @@ t_ast_node	*parse_redirect(t_list **cur_token, int *error_code)
 	{
 		redirect = parse_redirect(cur_token, error_code);
 		if (!redirect)
-		{
 			return (NULL);
-		}
 		return (create_pipeline_node(io_redirect, redirect));
 	}
 	return (io_redirect);
