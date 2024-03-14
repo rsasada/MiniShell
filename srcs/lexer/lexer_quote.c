@@ -46,3 +46,11 @@ void	handle_single_quote(t_tokenizer *t)
 	else if (t->q_state == OUTSIDE_QUOTES)
 		t->q_state = INSIDE_SINGLE_QUOTES;
 }
+
+void	check_quote_error(t_tokenizer *t)
+{
+	if (t->q_state == INSIDE_DOUBLE_QUOTES)
+		exit_with_error("minishell: syntax error near Unclosed double quote");
+	else if (t->q_state == INSIDE_SINGLE_QUOTES)
+		exit_with_error("minishell: syntax error near Unclosed single quote");
+}

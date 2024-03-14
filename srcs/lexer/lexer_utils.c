@@ -56,12 +56,28 @@ void	init_tokenizer(t_tokenizer *t)
 	t->head = NULL;
 }
 
-void	check_quote_error(t_tokenizer *t)
+void	*copy_token(void *content)
 {
-	if (t->q_state == INSIDE_DOUBLE_QUOTES)
-		exit_with_error("minishell: syntax error near Unclosed double quote");
-	else if (t->q_state == INSIDE_SINGLE_QUOTES)
-		exit_with_error("minishell: syntax error near Unclosed single quote");
+	t_token	*src;
+	t_token	*new;
+
+	src = (t_token *) content;
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->type = src->type;
+	if (src->value)
+	{
+		new->value = ft_strdup(src->value);
+		if (!new->value)
+		{
+			free(new);
+			return (NULL);
+		}
+	}
+	else
+		new->value = NULL;
+	return (new);
 }
 
 void	delete_token_from_list(t_list **tokens, t_list *to_delete)

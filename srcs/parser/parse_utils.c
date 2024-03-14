@@ -51,10 +51,3 @@ static void	process_tokens(t_list **head)
 		}
 	}
 }
-
-void	reorder_tokens(t_list **head)
-{
-	if (head == NULL || *head == NULL)
-		return ;
-	process_tokens(head);
-}
