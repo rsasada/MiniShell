@@ -92,7 +92,7 @@ bool	ft_is_redirect(t_tokenizer *t)
 		if (t->line[t->i] == '<' || t->line[t->i] == '>')
 		{
 			if (t->count != 0)
-				new_token(t, TOKEN_REDIRECT);
+				new_token(t, TOKEN_WORD);
 			if (t->line[t->i] == t->line[t->i + 1])
 			{
 				t->count += 2;

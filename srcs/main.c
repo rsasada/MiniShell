@@ -35,7 +35,7 @@ void	init_app(t_app *app, char **envp)
 {
 	ft_memset(app, 0, sizeof(t_app));
 	init_env(app, envp);
-	load_banner();
+	// load_banner();
 	config_signal();
 }
 
