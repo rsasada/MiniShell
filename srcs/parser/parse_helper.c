@@ -36,8 +36,11 @@ int	accept_word(t_list *cur_token)
 	return (is_expected(cur_token, TOKEN_WORD));
 }
 
-void	free_ast(t_ast_node *node)
+void	free_ast(void *content)
 {
+	t_ast_node	*node;
+
+	node = (t_ast_node *) content;
 	if (node == NULL)
 		return ;
 	if (node->node_type == NODE_PIPELINE)

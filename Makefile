@@ -2,7 +2,7 @@
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -O0 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -O0
 
 
 ARCH := $(shell uname -m)
@@ -24,10 +24,10 @@ SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/p
 SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/execution/parse_env.c \
 					srcs/execution/redirect.c srcs/execution/redirect_utils.c \
 					srcs/execution/execute_builtin.c srcs/execution/examine_path.c
-SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c
+SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c srcs/util/realloc_str.c
 SRCS_BUILTIN	= srcs/builtin/ft_cd.c srcs/builtin/ft_env.c srcs/builtin/ft_exit.c srcs/builtin/ft_export.c \
 					srcs/builtin/ft_pwd.c srcs/builtin/ft_unset.c srcs/builtin/ft_echo.c srcs/builtin/builtin_utils.c
-SRCS_LIB_EX		= srcs/libft_extended/ft_realloc.c srcs/libft_extended/ft_merge_list_at.c
+SRCS_LIB_EX		= srcs/libft_extended/ft_merge_list_at.c
 SRCS = ${SRCS_MAIN} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_EXECUTION} ${SRCS_LIB_EX} ${SRCS_UTIL} ${SRCS_BUILTIN}
 
 OBJS = $(SRCS:%.c=%.o)
@@ -37,7 +37,7 @@ LIBFT = libft/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(INPUTRC)
-	$(CC) $(CFLAGS) -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)  -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include
 
 $(LIBFT) :
 	$(MAKE) -j3 -C libft

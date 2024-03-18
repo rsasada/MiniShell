@@ -62,5 +62,5 @@ t_ast_node	*create_arg_list_node(void)
 
 void	free_arg_list_node(t_ast_node *node)
 {
-	ft_lstclear(&node->u_node_data.arg_list, free);
+	ft_lstclear(&node->u_node_data.arg_list, free_ast);
 }

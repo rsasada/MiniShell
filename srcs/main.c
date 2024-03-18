@@ -15,6 +15,8 @@
 #include "../include/lexer.h"
 #include "../include/builtin.h"
 
+int	g_exit_code = 0;
+
 void	load_banner(void)
 {
 	printf("\033[34m");
@@ -35,7 +37,7 @@ void	init_app(t_app *app, char **envp)
 {
 	ft_memset(app, 0, sizeof(t_app));
 	init_env(app, envp);
-	// load_banner();
+//	load_banner();
 	config_signal();
 }
 
@@ -51,6 +53,7 @@ void	handle_line(char *line, t_app *app)
 	root = ast_parser(&tokens);
 	execute(root, app);
 	ft_lstclear(&tokens, free_token);
+	free_ast(root);
 }
 
 void	run_shell_loop(t_app *app)

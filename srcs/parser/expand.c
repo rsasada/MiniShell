@@ -72,7 +72,10 @@ void	replace_new_value(t_list **tokens, t_list **old, char *new_value)
 	new = NULL;
 	i = 0;
 	if (new_value)
+	{
 		new = tokenizer(new_value, 1);
+		free(new_value);
+	}
 	cur = *tokens;
 	while (cur)
 	{

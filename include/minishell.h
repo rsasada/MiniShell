@@ -17,6 +17,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
@@ -33,7 +34,7 @@
 # define FILE_NOT_FOUND ": No such file or directory"
 # define IS_DIR ": is a directory"
 
-int	g_exit_code;
+extern int	g_exit_code;
 
 typedef struct s_app
 {
@@ -62,7 +63,6 @@ void	init_env(t_app *app, char **envp);
 t_list	*find_env(t_list **env_list, char *key);
 
 // libft_extension
-void	*ft_realloc(void *ptr, size_t size);
 void	ft_merge_list_at(t_list **first_list, \
 		t_list **second_list, int position);
 
@@ -71,5 +71,6 @@ void	free_env(void *env);
 void	add_env(t_list **env_list, char *key, char *value);
 
 void	free_token(void *token);
+char	*realloc_str(char *str, size_t size);
 
 #endif
