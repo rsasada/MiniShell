@@ -116,4 +116,5 @@ void		expand_env(t_app *app, t_list **tokens);
 char		*expand_env_helper(t_app *app, const char *value, \
 int *i, size_t *len);
 void		remove_quote(t_list *token);
+void		consume_token(t_list **cur_token);
 #endif

@@ -25,7 +25,7 @@ t_ast_node	*parse_pipeline(t_list **cur_token, int *error_code)
 		return (NULL);
 	if ((*cur_token) != NULL && accept_pipe(*cur_token))
 	{
-		*cur_token = (*cur_token)->next;
+		consume_token(cur_token);
 		if (*cur_token == NULL)
 			return (print_syntax_error("newline", error_code));
 		right = parse_pipeline(cur_token, error_code);

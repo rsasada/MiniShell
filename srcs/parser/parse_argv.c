@@ -42,7 +42,7 @@ t_ast_node	*parse_argv(t_list **cur_token)
 		{
 			return (NULL);
 		}
-		*cur_token = (*cur_token)->next;
+		consume_token(cur_token);
 		append_arg(args_node, arg_node);
 	}
 	return (args_node);

@@ -38,6 +38,6 @@ t_ast_node	*parse_io_redirect(t_list **cur_token, int *error_code)
 				((t_token *)(*cur_token)->content)->value);
 	if (!file_name_node)
 		return (NULL);
-	*cur_token = (*cur_token)->next;
+	consume_token(cur_token);
 	return (create_redirection_node(op, file_name_node));
 }
