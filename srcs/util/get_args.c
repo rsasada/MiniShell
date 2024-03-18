@@ -92,5 +92,6 @@ char	**get_args(t_ast_node *simple_cmd)
 		free(ret);
 		return (NULL);
 	}
+	free(cur);
 	return (ret);
 }

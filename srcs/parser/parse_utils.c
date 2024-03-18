@@ -16,7 +16,7 @@ void	consume_token(t_list **cur_token)
 {
 	t_list	*next_token;
 
-	if(cur_token == NULL || *cur_token == NULL)
+	if (cur_token == NULL || *cur_token == NULL)
 		return ;
 	next_token = (*cur_token)->next;
 	ft_lstdelone(*cur_token, free_token);

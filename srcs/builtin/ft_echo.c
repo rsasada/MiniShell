@@ -15,6 +15,21 @@
 bool	check_option(char *arg);
 char	**get_args(t_ast_node *simple_cmd);
 
+static void	free_args(char **args)
+{
+	int	i;
+
+	if (!args)
+		return ;
+	i = 0;
+	while (args[i] != NULL)
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
 int	ft_echo(t_app *app, t_ast_node *simple_cmd)
 {
 	size_t	i;
@@ -36,6 +51,7 @@ int	ft_echo(t_app *app, t_ast_node *simple_cmd)
 	}
 	if (option_flag == false)
 		write(1, "\n", 1);
+	free_args(args);
 	return (1);
 }
 
