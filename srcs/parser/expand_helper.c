@@ -34,7 +34,7 @@ static void	replace_with_env(char *var_value, char **result, size_t *len)
 	size_t	var_value_len;
 
 	var_value_len = ft_strlen(var_value);
-	*result = ft_realloc(*result, *len + var_value_len + 1);
+	*result = realloc_str(*result, *len + var_value_len + 1);
 	if (!(*result))
 		exit_with_error("malloc");
 	ft_strlcpy(*result, var_value, var_value_len + 1);

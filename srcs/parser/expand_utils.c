@@ -21,7 +21,7 @@ char	*copy_char_to_result(char *result, char c, size_t *len)
 {
 	char	*temp;
 
-	temp = ft_realloc(result, *len + 2);
+	temp = realloc_str(result, *len + 2);
 	if (!temp)
 		exit_with_error("realloc");
 	temp[*len] = c;

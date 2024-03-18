@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   realloc_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jongykim <jongykim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 00:46:20 by jongykim          #+#    #+#             */
-/*   Updated: 2024/01/23 00:46:20 by jongykim         ###   ########.fr       */
+/*   Created: 2024/03/18 11:03:48 by jongykim          #+#    #+#             */
+/*   Updated: 2024/03/18 11:03:48 by jongykim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+char	*realloc_str(char *str, size_t size)
 {
-	void	*new_ptr;
+	char	*new_str;
+	size_t	old_size;
 
-	if (size == 0)
+	new_str = malloc(size);
+	if (!new_str)
+		return (NULL);
+	ft_memset(new_str, 0, size);
+	if (str != NULL)
 	{
-		free(ptr);
-		return (NULL);
+		old_size = ft_strlen(str);
+		if (old_size > 0)
+		{
+			if (old_size < size)
+				ft_memcpy(new_str, str, old_size);
+			else
+				ft_memcpy(new_str, str, old_size - 1);
+		}
+		free(str);
 	}
-	if (!ptr)
-		return (malloc(size));
-	new_ptr = malloc(size);
-	if (!new_ptr)
-		return (NULL);
-	ft_memcpy(new_ptr, ptr, size);
-	free(ptr);
-	return (new_ptr);
+	return (new_str);
 }
