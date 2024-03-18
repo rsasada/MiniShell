@@ -2,7 +2,7 @@
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -O0 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -O0
 
 
 ARCH := $(shell uname -m)
@@ -37,7 +37,7 @@ LIBFT = libft/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(INPUTRC)
-	$(CC) $(CFLAGS) -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)  -lft -Llibft -lreadline -L $(RLDIR)/lib -I $(RLDIR)/include
 
 $(LIBFT) :
 	$(MAKE) -j3 -C libft
