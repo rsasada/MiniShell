@@ -74,6 +74,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 			close_pipe(prev_fd);
 		prev_fd[0] = pipe_fd[0];
 		prev_fd[1] = pipe_fd[1];
+		add_pid_storage(app->pid_storage, pid);
 		return ;
 	}
 }
