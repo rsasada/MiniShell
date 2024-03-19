@@ -69,11 +69,12 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 	var_name = create_var_name(value, i, &var_len);
 	env_node = find_env(&app->env_lst, var_name);
 	if (env_node)
-		var_value = ((t_env *) env_node->content)->value;
+		var_value = ft_strdup(((t_env *) env_node->content)->value);
 	else
 		var_value = ft_strdup("");
 	handle_var_value(&var_value, &result, len);
 	free(var_name);
+	free(var_value);
 	*i += var_len;
 	return (result);
 }

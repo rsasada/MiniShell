@@ -17,6 +17,16 @@ int	is_valid_env_char(char c)
 	return (ft_isalnum(c) || c == '_');
 }
 
+char	*join_and_free_str(char *ret, char *temp)
+{
+	char	*new;
+
+	new = ft_strjoin(ret, temp);
+	free(temp);
+	free(ret);
+	return (new);
+}
+
 char	*copy_char_to_result(char *result, char c, size_t *len)
 {
 	char	*temp;

@@ -110,6 +110,7 @@ t_ast_node	*create_file_name_node(char *file_path);
 
 int			is_valid_env_char(char c);
 char		*copy_char_to_result(char *result, char c, size_t *len);
+char		*join_and_free_str(char *ret, char *temp);
 void		free_ast(void *content);
 
 void		expand_env(t_app *app, t_list **tokens);

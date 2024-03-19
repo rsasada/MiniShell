@@ -67,7 +67,10 @@ char	*get_cmd_path(t_ast_node *file_node, char **env_path)
 		full_path = get_full_path(cmd, env_path[i]);
 		if (is_path_exist(full_path))
 			return (full_path);
+		else
+			free(full_path);
 		i++;
 	}
+	free_strings(env_path);
 	return (NULL);
 }

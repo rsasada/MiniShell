@@ -37,3 +37,18 @@ void	free_env(void *env)
 		free(e);
 	}
 }
+
+void	free_strings(char **strings)
+{
+	int	i;
+
+	if (!strings)
+		return ;
+	i = 0;
+	while (strings[i] != NULL)
+	{
+		free(strings[i]);
+		i++;
+	}
+	free(strings);
+}

@@ -53,8 +53,7 @@ char	*expand_token_value(t_app *app, const char *value)
 		check_char_after_dollar(value, &i))
 		{
 			temp = expand_env_helper(app, value, &i, &len);
-			result = ft_strjoin(result, temp);
-			free(temp);
+			result = join_and_free_str(result, temp);
 		}
 		else
 			result = copy_char_to_result(result, value[i], &len);
