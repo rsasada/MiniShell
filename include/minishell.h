@@ -41,6 +41,7 @@ typedef struct s_app
 	t_list	*env_lst;
 	t_list	*pid_storage;
 	char	*home_path;
+	char	*cur_directory;
 }	t_app;
 
 typedef struct s_env

@@ -23,6 +23,8 @@ static void	update_pwd(t_app *app, char *cwd)
 	if (!oldpwd)
 		exit_with_error("Malloc");
 	add_env(&app->env_lst, "PWD", pwd);
+	free(app->cur_directory);
+	app->cur_directory = ft_strdup(pwd);
 	add_env(&app->env_lst, "OLDPWD", oldpwd);
 	free(oldpwd);
 }
