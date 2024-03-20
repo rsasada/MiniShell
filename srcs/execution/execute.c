@@ -64,7 +64,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 		if (prev_fd[0] != NO_PIPE)
 			redirect_input_to_pipe(prev_fd);
 		redirect_output_to_pipe(pipe_fd);
-		process_redirects(ast->u_node_data.s_cmd.redirection);
+		process_redirects(ast->u_node_data.s_cmd.redirection, NULL);
 		execute_execve(ast->u_node_data.s_cmd.simple_cmd, app);
 		exit(0);
 	}
@@ -94,7 +94,7 @@ void	execute_last_cmd(t_ast_node	*cmd, int *prev_fd, t_app *app)
 	{
 		if (prev_fd[0] != NO_PIPE)
 			redirect_input_to_pipe(prev_fd);
-		process_redirects(cmd->u_node_data.s_cmd.redirection);
+		process_redirects(cmd->u_node_data.s_cmd.redirection, NULL);
 		execute_execve(cmd->u_node_data.s_cmd.simple_cmd, app);
 		exit(0);
 	}
