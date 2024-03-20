@@ -49,6 +49,14 @@ typedef struct s_env
 	char	*value;
 }	t_env;
 
+typedef enum signal_type
+{
+	EXECUTE_HEREDOC,
+	PARENT,
+	CHILD,
+	SHELL_LOOP,
+}	t_signal_type;
+
 // error.c
 void	exit_with_error(char *error_message);
 void	custom_error(int defined_code, char *error_message, char *cmd);

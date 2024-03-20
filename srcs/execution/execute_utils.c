@@ -53,7 +53,7 @@ void	wait_child(int pid)
 	g_exit_code = WEXITSTATUS(status);
 	if (WIFEXITED(status) == 0)
 	{
-		if (WTERMSIG(status) >> 4 == SIGQUIT)
+		if (WTERMSIG(status) == SIGQUIT)
 			ft_putstr_fd("Quit: 3", STDERR_FILENO);
 		else
 			ft_putendl_fd("", STDERR_FILENO);

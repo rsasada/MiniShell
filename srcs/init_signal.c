@@ -12,40 +12,42 @@
 
 #include "../include/minishell.h"
 
-void	signal_handler(int signum);
+void	sigint_handler(int signum);
 
-void	config_signal(void)
+void	config_signal(t_signal_type	type)
 {
-	struct sigaction	new;
-	struct sigaction	old;
 
-	sigemptyset(&new.sa_mask);
-	new.sa_handler = signal_handler;
-	new.sa_flags = 0;
-	if (-1 == sigaction(SIGINT, &new, &old))
-		exit(1);
-	if (-1 == sigaction(SIGTERM, &new, &old))
-		exit(1);
-	if (-1 == sigaction(SIGQUIT, &new, &old))
-		exit(1);
+	if (type == SHELL_LOOP)
+	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (type == EXECUTE_HEREDOC)
+	{
+		signal(SIGINT, );
+		signal(SIGQUIT, );
+	}
+	else if (type == PARENT)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (type == CHILD)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+	}
 }
 
-void	signal_handler(int signum)
+void	sigint_handler(int signum)
 {
-	pid_t	pid;
+	rl_replace_line("", 0);
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_redisplay();
+}
 
-	config_signal();
-	pid = waitpid(-1, NULL, WNOHANG);
-	if (signum == SIGINT)
-	{
-		rl_replace_line("", 0);
-		if (pid == -1)
-		{
-			write(1, "\n", 1);
-			rl_on_new_line();
-			rl_redisplay();
-		}
-		else
-			write(1, "\n", 1);
-	}
+void	heredoc_signal_handler(int	signum)
+{	
+
 }
