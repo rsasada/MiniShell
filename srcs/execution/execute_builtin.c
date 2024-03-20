@@ -17,17 +17,18 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 {
 	int			stdin_backup;
 	int			stdout_backup;
+	int			redirect_flag;
 
 	if (ast == NULL)
 		return (0);
+	redirect_flag = 0;
 	stdin_backup = dup(STDIN_FILENO);
 	stdout_backup = dup(STDOUT_FILENO);
 	if (stdin_backup < 0 || stdout_backup < 0)
 		exit(1);
-	process_redirects(ast->u_node_data.s_cmd.redirection);
-	if (builtin_functions(ast->u_node_data.s_cmd.simple_cmd, app) == 1 && \
-		g_exit_code == 0)
-		g_exit_code = 0;
+	process_redirects(ast->u_node_data.s_cmd.redirection, &redirect_flag);
+	if (redirect_flag == 0)
+		builtin_functions(ast->u_node_data.s_cmd.simple_cmd, app);
 	dup2(stdin_backup, STDIN_FILENO);
 	dup2(stdout_backup, STDOUT_FILENO);
 	return (1);

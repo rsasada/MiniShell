@@ -25,7 +25,7 @@ void	redirect_input_to_pipe(int	*pipe_fd);
 void	prepare_pipe(int *pipe_fd);
 void	add_pid_storage(t_list *pid_storage, pid_t child_pid);
 
-void	process_redirects(t_ast_node *s_r);
+void	process_redirects(t_ast_node *s_r, int *flag);
 void	execute(t_ast_node *ast, t_app *app);
 
 char	**convert_env_to_char(t_list *env_list);
