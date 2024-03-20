@@ -60,7 +60,7 @@ char	*get_cmd_path(t_ast_node *file_node, char **env_path)
 		custom_error(127, FILE_NOT_FOUND, cmd);
 	}
 	i = 0;
-	if (!env_path)
+	if (!env_path || !*env_path)
 		custom_error(127, FILE_NOT_FOUND, cmd);
 	while (env_path && env_path[i])
 	{
