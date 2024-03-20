@@ -17,7 +17,14 @@ static void	update_pwd(t_app *app, char *cwd)
 	char	*pwd;
 	char	*oldpwd;
 
-	pwd = cwd;
+	if (!cwd)
+	{
+		perror("cd: error retrieving current directory: " \
+		"getcwd: cannot access parent directories");
+		pwd = ft_strjoin(app->cur_directory, "/.");
+	}
+	else
+		pwd = cwd;
 	oldpwd = ft_strdup(((t_env *) \
 			(find_env(&app->env_lst, "PWD")->content))->value);
 	if (!oldpwd)
@@ -27,6 +34,7 @@ static void	update_pwd(t_app *app, char *cwd)
 	app->cur_directory = ft_strdup(pwd);
 	add_env(&app->env_lst, "OLDPWD", oldpwd);
 	free(oldpwd);
+	free(pwd);
 }
 
 static void	chdir_oldpwd(t_list *env_list)
@@ -105,6 +113,5 @@ int	ft_cd(t_app *app, t_list *argv)
 	}
 	cwd = getcwd(NULL, 0);
 	update_pwd(app, cwd);
-	free(cwd);
 	return (1);
 }
