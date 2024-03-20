@@ -27,6 +27,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <dirent.h>
 
 //Error_message
 # define PERM_DENIED ": Permission denied"
@@ -74,5 +75,5 @@ void	add_env(t_list **env_list, char *key, char *value);
 void	free_token(void *token);
 void	free_strings(char **strings);
 char	*realloc_str(char *str, size_t size);
-
+void	clear_tmp(void);
 #endif

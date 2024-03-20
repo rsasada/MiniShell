@@ -68,7 +68,7 @@ static void	write_heredoc_to_file(int fd, char *limiter)
 
 	while (1)
 	{
-		line = readline("heredoc> ");
+		line = readline("> ");
 		if (!line || ft_strncmp(line, limiter, ft_strlen(line)) == 0)
 		{
 			free(line);
@@ -82,9 +82,10 @@ static void	write_heredoc_to_file(int fd, char *limiter)
 
 t_ast_node	*parse_here_doc(t_list **cur_token)
 {
-	char	*limiter;
-	char	*filename;
-	int		fd;
+	char		*limiter;
+	char		*filename;
+	int			fd;
+	t_ast_node	*node;
 
 	limiter = ((t_token *)(*cur_token)->content)->value;
 	filename = create_temp_file();
@@ -95,5 +96,7 @@ t_ast_node	*parse_here_doc(t_list **cur_token)
 		exit_with_error("here_doc");
 	write_heredoc_to_file(fd, limiter);
 	close(fd);
-	return (create_file_name_node(filename));
+	node = create_file_name_node(filename);
+	free(filename);
+	return (node);
 }
