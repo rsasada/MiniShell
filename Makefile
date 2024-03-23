@@ -24,7 +24,8 @@ SRCS_PARSER		= srcs/parser/expand.c srcs/parser/node_constructor.c srcs/parser/p
 SRCS_EXECUTION	= srcs/execution/execute.c srcs/execution/execute_utils.c srcs/execution/parse_env.c \
 					srcs/execution/redirect.c srcs/execution/redirect_utils.c \
 					srcs/execution/execute_builtin.c srcs/execution/examine_path.c
-SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c srcs/util/realloc_str.c
+SRCS_UTIL		= srcs/util/get_args.c srcs/util/memory_utils.c srcs/util/realloc_str.c \
+					srcs/util/remove_here_docs.c
 SRCS_BUILTIN	= srcs/builtin/ft_cd.c srcs/builtin/ft_env.c srcs/builtin/ft_exit.c srcs/builtin/ft_export.c \
 					srcs/builtin/ft_pwd.c srcs/builtin/ft_unset.c srcs/builtin/ft_echo.c srcs/builtin/builtin_utils.c
 SRCS_LIB_EX		= srcs/libft_extended/ft_merge_list_at.c

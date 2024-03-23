@@ -58,6 +58,7 @@ void	wait_child(int last_pid, t_list *pid_storage)
 	}
 	waitpid(last_pid, &status, 0);
 	g_exit_code = WEXITSTATUS(status);
+
 	if (WIFEXITED(status) == 0)
 	{
 		if (WTERMSIG(status) == SIGQUIT)

@@ -19,9 +19,12 @@ int	ft_pwd(t_app *app, t_list *argv)
 	(void)app;
 	(void)argv;
 	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		exit_with_error("getcwd");
-	ft_putendl_fd(cwd, STDOUT_FILENO);
+	if (cwd)
+		ft_putendl_fd(cwd, STDOUT_FILENO);
+	else if (app->cur_directory)
+		ft_putendl_fd(app->cur_directory, STDOUT_FILENO);
+	else
+		exit_with_error("unexpected : failed getcwd ");
 	free(cwd);
 	return (0);
 }

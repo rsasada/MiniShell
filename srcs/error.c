@@ -30,7 +30,7 @@ void	custom_error(int exit_code, char *error_message, char *cmd)
 void	handling_error(char *error_message, int exit_code)
 {
 	ft_putendl_fd(error_message, STDERR_FILENO);
-	g_exit_code = exit_code;
+	g_signal = exit_code;
 }
 
 void	*print_syntax_error(char *error, int *error_code)

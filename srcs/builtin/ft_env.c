@@ -19,7 +19,7 @@ int	ft_env(t_app *app, t_list *arg)
 
 	if (arg)
 	{
-		g_exit_code = 1;
+		g_signal = 1;
 		ft_putendl_fd("push: too many arguments", 2);
 		return (0);
 	}
@@ -33,6 +33,6 @@ int	ft_env(t_app *app, t_list *arg)
 		printf("\n");
 		cur = cur->next;
 	}
-	g_exit_code = 0;
+	g_signal = 0;
 	return (1);
 }

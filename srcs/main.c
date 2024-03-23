@@ -15,7 +15,7 @@
 #include "../include/lexer.h"
 #include "../include/builtin.h"
 
-int	g_exit_code = 0;
+int	g_signal = 0;
 
 void	load_banner(void)
 {
@@ -53,6 +53,7 @@ void	handle_line(char *line, t_app *app)
 	execute(root, app);
 	ft_lstclear(&tokens, free_token);
 	free_ast(root);
+	clear_tmp();
 }
 
 void	run_shell_loop(t_app *app)
