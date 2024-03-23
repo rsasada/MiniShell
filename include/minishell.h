@@ -64,7 +64,7 @@ void	*print_syntax_error(char *error, int *error_code);
 void	handling_error(char *error_message, int exit_code);
 
 // init_signal.c
-void	config_signal(void);
+void	config_signal(t_signal_type	type);
 
 //env.c
 void	init_env(t_app *app, char **envp);

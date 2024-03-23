@@ -74,7 +74,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 			close_pipe(prev_fd);
 		prev_fd[0] = pipe_fd[0];
 		prev_fd[1] = pipe_fd[1];
-		add_pid_storage(app->pid_storage, pid);
+		add_pid_storage(app, pid);
 		return ;
 	}
 }
@@ -102,7 +102,7 @@ void	execute_last_cmd(t_ast_node	*cmd, int *prev_fd, t_app *app)
 	{
 		if (prev_fd[0] != NO_PIPE)
 			close_pipe(prev_fd);
-		wait_child(pid);
+		wait_child(pid, app->pid_storage);
 	}
 }
 
@@ -112,6 +112,7 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	char	*cmd_path;
 	char	**args;
 
+	config_signal(CHILD);
 	if (simple_cmd == NULL)
 		return ;
 	if (check_builtin_cmd(simple_cmd))

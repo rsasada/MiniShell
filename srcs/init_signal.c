@@ -13,10 +13,10 @@
 #include "../include/minishell.h"
 
 void	sigint_handler(int signum);
+void	heredoc_signal_handler(int signum);
 
 void	config_signal(t_signal_type	type)
 {
-
 	if (type == SHELL_LOOP)
 	{
 		signal(SIGINT, sigint_handler);
@@ -24,8 +24,8 @@ void	config_signal(t_signal_type	type)
 	}
 	else if (type == EXECUTE_HEREDOC)
 	{
-		signal(SIGINT, );
-		signal(SIGQUIT, );
+		signal(SIGINT, heredoc_signal_handler);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (type == PARENT)
 	{
@@ -35,19 +35,34 @@ void	config_signal(t_signal_type	type)
 	else if (type == CHILD)
 	{
 		signal(SIGINT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 	}
 }
 
 void	sigint_handler(int signum)
 {
-	rl_replace_line("", 0);
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
+	pid_t	pid;
+
+	pid = waitpid(-1, NULL, WNOHANG);
+	if (signum == SIGINT)
+	{
+		rl_replace_line("", 0);
+		if (pid == -1)
+		{
+			write(1, "\n", 1);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+		else
+			write(1, "\n", 1);
+	}
 }
 
-void	heredoc_signal_handler(int	signum)
-{	
-
+void	heredoc_signal_handler(int signum)
+{
+	(void)signum;
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	g_exit_code = 130;
 }
