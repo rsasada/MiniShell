@@ -62,9 +62,7 @@ void	wait_child(int last_pid, t_list *pid_storage)
 	if (WIFEXITED(status) == 0)
 	{
 		if (WTERMSIG(status) == SIGQUIT)
-		{
 			ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
-			g_signal = 131;
-		}
+		g_signal = WTERMSIG(status) + 128;
 	}
 }
