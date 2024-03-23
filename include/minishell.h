@@ -35,7 +35,7 @@
 # define FILE_NOT_FOUND ": No such file or directory"
 # define IS_DIR ": is a directory"
 
-extern int	g_exit_code;
+extern int	g_signal;
 
 typedef struct s_app
 {

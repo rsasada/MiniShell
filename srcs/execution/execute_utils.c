@@ -50,7 +50,7 @@ void	wait_child(int pid)
 	int	status;
 
 	waitpid(pid, &status, 0);
-	g_exit_code = WEXITSTATUS(status);
+	g_signal = WEXITSTATUS(status);
 	if (WIFEXITED(status) == 0)
 	{
 		if (WTERMSIG(status) >> 4 == SIGQUIT)

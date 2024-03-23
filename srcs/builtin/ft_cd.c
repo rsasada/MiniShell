@@ -46,7 +46,7 @@ static void	chdir_oldpwd(t_list *env_list)
 	if (oldpwd_path == NULL)
 	{
 		ft_putendl_fd("push: cd: OLDPWD not set", STDERR_FILENO);
-		g_exit_code = 1;
+		g_signal = 1;
 		return ;
 	}
 }
@@ -66,7 +66,7 @@ static void	chdir_home(t_app *app, t_list *env_list, int argc)
 	if (!home_path && argc == 0)
 	{
 		ft_putendl_fd("push: cd: HOME not set", STDERR_FILENO);
-		g_exit_code = 1;
+		g_signal = 1;
 		return ;
 	}
 	else if (!home_path)

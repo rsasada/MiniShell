@@ -64,7 +64,7 @@ char	*expand_env_helper(t_app *app, const char *value, int *i, size_t *len)
 	{
 		(*i)++;
 		(*len)++;
-		return (ft_itoa(g_exit_code));
+		return (ft_itoa(g_signal));
 	}
 	var_name = create_var_name(value, i, &var_len);
 	env_node = find_env(&app->env_lst, var_name);
