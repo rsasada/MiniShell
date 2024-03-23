@@ -26,8 +26,8 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 		exit(1);
 	process_redirects(ast->u_node_data.s_cmd.redirection);
 	if (builtin_functions(ast->u_node_data.s_cmd.simple_cmd, app) == 1 && \
-		g_exit_code == 0)
-		g_exit_code = 0;
+		g_signal == 0)
+		g_signal = 0;
 	dup2(stdin_backup, STDIN_FILENO);
 	dup2(stdout_backup, STDOUT_FILENO);
 	return (1);

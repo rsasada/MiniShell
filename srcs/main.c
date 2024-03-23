@@ -15,7 +15,7 @@
 #include "../include/lexer.h"
 #include "../include/builtin.h"
 
-int	g_exit_code = 0;
+int	g_signal = 0;
 
 void	load_banner(void)
 {
