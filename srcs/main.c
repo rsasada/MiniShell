@@ -37,8 +37,7 @@ void	init_app(t_app *app, char **envp)
 {
 	ft_memset(app, 0, sizeof(t_app));
 	init_env(app, envp);
-//	load_banner();
-	config_signal();
+	load_banner();
 }
 
 void	handle_line(char *line, t_app *app)
@@ -63,6 +62,7 @@ void	run_shell_loop(t_app *app)
 
 	while (1)
 	{
+		config_signal(SHELL_LOOP);
 		line = readline("push-1.0 ");
 		if (line == NULL)
 			ft_exit(NULL, NULL);

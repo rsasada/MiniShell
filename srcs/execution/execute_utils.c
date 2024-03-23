@@ -45,17 +45,26 @@ void	prepare_pipe(int *pipe_fd)
 	}
 }
 
-void	wait_child(int pid)
+void	wait_child(int last_pid, t_list *pid_storage)
 {
 	int	status;
+	int	*pid;
 
-	waitpid(pid, &status, 0);
-	g_signal = WEXITSTATUS(status);
+	while (pid_storage != NULL)
+	{
+		pid = pid_storage->content;
+		waitpid(*pid, &status, 0);
+		pid_storage = pid_storage->next;
+	}
+	waitpid(last_pid, &status, 0);
+	g_exit_code = WEXITSTATUS(status);
+
 	if (WIFEXITED(status) == 0)
 	{
-		if (WTERMSIG(status) >> 4 == SIGQUIT)
-			ft_putstr_fd("Quit: 3", STDERR_FILENO);
-		else
-			ft_putendl_fd("", STDERR_FILENO);
+		if (WTERMSIG(status) == SIGQUIT)
+		{
+			ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
+			g_exit_code = 131;
+		}
 	}
 }

@@ -87,6 +87,7 @@ t_ast_node	*parse_here_doc(t_list **cur_token)
 	int			fd;
 	t_ast_node	*node;
 
+	config_signal(EXECUTE_HEREDOC);
 	limiter = ((t_token *)(*cur_token)->content)->value;
 	filename = create_temp_file();
 	if (!filename)
