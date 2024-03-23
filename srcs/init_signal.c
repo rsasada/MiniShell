@@ -64,5 +64,5 @@ void	heredoc_signal_handler(int signum)
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	g_exit_code = 130;
+	g_signal = 130;
 }
