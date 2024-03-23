@@ -69,7 +69,7 @@ static void	write_heredoc_to_file(int fd, char *limiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strncmp(line, limiter, ft_strlen(line)) == 0)
+		if (!line || ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
 			free(line);
 			break ;
