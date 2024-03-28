@@ -51,7 +51,7 @@ typedef struct s_env
 	char	*value;
 }	t_env;
 
-typedef enum signal_type
+typedef enum e_signal_type
 {
 	EXECUTE_HEREDOC,
 	PARENT,
