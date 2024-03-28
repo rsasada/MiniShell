@@ -60,8 +60,16 @@ void	sigint_handler(int signum)
 
 void	heredoc_signal_handler(int signum)
 {
+	struct termios	oldt;
+	struct termios	newt;
+
+	tcgetattr(STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag &= ~(ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 	(void)signum;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	g_signal = 130;
