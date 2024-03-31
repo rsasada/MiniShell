@@ -58,7 +58,7 @@ void	execute_cmd(t_ast_node *ast, int *prev_fd,
 	if (last_process)
 		return (execute_last_cmd(ast, prev_fd, app));
 	prepare_pipe(pipe_fd);
-	pid = fork();
+	pid = safe_fork();
 	if (pid == 0)
 	{
 		if (prev_fd[0] != NO_PIPE)
@@ -89,7 +89,7 @@ void	execute_last_cmd(t_ast_node	*cmd, int *prev_fd, t_app *app)
 		execute_single_builtin_cmd(cmd, app);
 		return ;
 	}
-	pid = fork();
+	pid = safe_fork();
 	if (pid == 0)
 	{
 		if (prev_fd[0] != NO_PIPE)

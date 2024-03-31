@@ -84,4 +84,7 @@ void	free_token(void *token);
 void	free_strings(char **strings);
 char	*realloc_str(char *str, size_t size);
 void	clear_tmp(void);
+
+pid_t	safe_fork(void);
+
 #endif
