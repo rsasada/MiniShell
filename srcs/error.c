@@ -41,3 +41,9 @@ void	*print_syntax_error(char *error, int *error_code)
 	*error_code = SYNTAX_ERROR;
 	return (NULL);
 }
+
+void	*adhoc_handle_newline_error(char *error, int *error_code, char *op)
+{
+	free(op);
+	return (print_syntax_error(error, error_code));
+}
