@@ -16,6 +16,7 @@ static int	is_overflow(char *code)
 {
 	unsigned long long	num;
 
+	num = 0;
 	while (ft_isdigit(*code))
 	{
 		if (num > LLONG_MAX / 10 || \
