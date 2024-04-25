@@ -47,6 +47,8 @@ void	handle_line(char *line, t_app *app)
 
 	add_history(line);
 	tokens = tokenizer(line, 0);
+	if (tokens == NULL)
+		return ;
 	expand_env(app, &tokens);
 	reorder_tokens(&tokens);
 	root = ast_parser(&tokens);

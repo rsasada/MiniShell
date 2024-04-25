@@ -47,10 +47,21 @@ void	handle_single_quote(t_tokenizer *t)
 		t->q_state = INSIDE_SINGLE_QUOTES;
 }
 
-void	check_quote_error(t_tokenizer *t)
+int	check_quote_error(t_tokenizer *t)
 {
 	if (t->q_state == INSIDE_DOUBLE_QUOTES)
-		exit_with_error("minishell: syntax error near Unclosed double quote");
+	{
+		ft_putendl_fd("minishell: syntax error near Unclosed double quote",
+			STDERR_FILENO);
+		ft_lstclear(&t->head, free_token);
+		return (1);
+	}
 	else if (t->q_state == INSIDE_SINGLE_QUOTES)
-		exit_with_error("minishell: syntax error near Unclosed single quote");
+	{
+		ft_putendl_fd("minishell: syntax error near Unclosed single quote",
+			STDERR_FILENO);
+		ft_lstclear(&t->head, free_token);
+		return (1);
+	}
+	return (0);
 }
