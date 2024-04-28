@@ -87,5 +87,5 @@ char	*realloc_str(char *str, size_t size);
 void	clear_tmp(void);
 
 pid_t	safe_fork(void);
-
+char	*get_home(t_app *app);
 #endif
