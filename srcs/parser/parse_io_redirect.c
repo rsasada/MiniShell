@@ -27,7 +27,7 @@ t_ast_node	*parse_io_redirect(t_list **cur_token, int *error_code)
 	op = ft_strdup(token->value);
 	consume_token(cur_token);
 	if (*cur_token == NULL)
-		return (print_syntax_error("newline", error_code));
+		return (adhoc_handle_newline_error("newline", error_code, op));
 	else if (!accept_word(*cur_token))
 		return (print_syntax_error(\
 				((t_token *)(*cur_token)->content)->value, error_code));

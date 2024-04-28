@@ -63,6 +63,7 @@ typedef enum e_signal_type
 void	exit_with_error(char *error_message);
 void	custom_error(int defined_code, char *error_message, char *cmd);
 void	*print_syntax_error(char *error, int *error_code);
+void	*adhoc_handle_newline_error(char *error, int *error_code, char *op);
 void	handling_error(char *error_message, int exit_code);
 
 // init_signal.c
@@ -86,5 +87,5 @@ char	*realloc_str(char *str, size_t size);
 void	clear_tmp(void);
 
 pid_t	safe_fork(void);
-
+char	*get_home(t_app *app);
 #endif

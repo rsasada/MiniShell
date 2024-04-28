@@ -36,7 +36,7 @@ static int	is_num(char *code)
 	if (*c == '-' || *c == '+')
 		c++;
 	if (*c == '\0')
-		return (0);
+		return (1);
 	while (*c)
 	{
 		if (ft_isdigit(*c))

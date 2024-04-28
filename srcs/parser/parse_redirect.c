@@ -25,6 +25,8 @@ t_ast_node	*parse_redirect(t_list **cur_token, int *error_code)
 	if (*cur_token && accept_redirect(*cur_token))
 	{
 		redirect = parse_redirect(cur_token, error_code);
+		if (*error_code == SYNTAX_ERROR)
+			free_ast(io_redirect);
 		if (!redirect)
 			return (NULL);
 		return (create_pipeline_node(io_redirect, redirect));

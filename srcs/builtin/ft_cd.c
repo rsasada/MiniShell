@@ -75,12 +75,12 @@ static void	chdir_home(t_app *app, t_list *env_list, int argc)
 		ft_chdir(home_path);
 }
 
-static void	chdir_home_with_path(t_app *app, t_list *env_list, char *path)
+static void	chdir_home_with_path(t_app *app, char *path)
 {
 	char	*home_path;
 	char	*full_path;
 
-	home_path = ((t_env *)(find_env(&env_list, "HOME")->content))->value;
+	home_path = app->home_path;
 	if (!home_path && !app->home_path)
 		exit_with_error("Unexpected : No Home path set");
 	full_path = ft_strjoin(home_path, (path + 1));
@@ -105,7 +105,7 @@ int	ft_cd(t_app *app, t_list *argv)
 		if (ft_strncmp(path, "~", 2) == 0)
 			chdir_home(app, env_list, 1);
 		else if (ft_strncmp(path, "~/", 2) == 0)
-			chdir_home_with_path(app, env_list, path);
+			chdir_home_with_path(app, path);
 		else if (ft_strncmp(path, "-", 2) == 0)
 			chdir_oldpwd(env_list);
 		else

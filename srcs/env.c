@@ -23,12 +23,16 @@ void	get_env(t_env *env, char **envp, int i)
 	*delimit = '\0';
 	value = delimit + 1;
 	env->key = ft_strdup(key);
-	env->value = ft_strdup(value);
+	if (strncmp(key, "OLDPWD", 7) == 0)
+		env->value = ft_strdup("");
+	else
+		env->value = ft_strdup(value);
 }
 
 void	init_env(t_app *app, char **envp)
 {
 	int		i;
+	char	*pwd;
 	t_env	*env_entry;
 
 	i = 0;
@@ -44,10 +48,11 @@ void	init_env(t_app *app, char **envp)
 		ft_lstadd_back(&app->env_lst, ft_lstnew(env_entry));
 		i++;
 	}
-	app->home_path = ft_strdup(\
-			((t_env *) find_env(&app->env_lst, "HOME")->content)->value);
-	app->cur_directory = ft_strdup(\
-			((t_env *) find_env(&app->env_lst, "PWD")->content)->value);
+	pwd = getcwd(NULL, 0);
+	add_env(&app->env_lst, "PWD", pwd);
+	app->home_path = get_home(app);
+	app->cur_directory = ft_strdup(pwd);
+	free(pwd);
 }
 
 t_list	*find_env(t_list **env_list, char *key)
