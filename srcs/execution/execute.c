@@ -116,7 +116,10 @@ void	execute_execve(t_ast_node *simple_cmd, t_app *app)
 	if (simple_cmd == NULL)
 		return ;
 	if (check_builtin_cmd(simple_cmd))
-		exit(builtin_functions(simple_cmd, app));
+	{
+		builtin_functions(simple_cmd, app);
+		return ;
+	}
 	args = get_args(simple_cmd);
 	env_path = convert_env_to_char(app->env_lst);
 	cmd_path = get_cmd_path(simple_cmd->u_node_data.s_simple_cmd.file_path,

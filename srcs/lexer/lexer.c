@@ -37,8 +37,7 @@ t_list	*tokenizer(char	*line, int is_env)
 		t.count ++;
 		t.i ++;
 	}
-	if (check_quote_error(&t) != 0)
-		return (NULL);
+	check_quote_error(&t);
 	if (t.count != 0)
 		new_token(&t, TOKEN_WORD);
 	return (t.head);
