@@ -28,11 +28,13 @@ int	execute_single_builtin_cmd(t_ast_node *ast, t_app *app)
 		exit(1);
 	process_redirects(ast->u_node_data.s_cmd.redirection, &redirect_flag);
 	if (redirect_flag == 0)
-		builtin_functions(ast->u_node_data.s_cmd.simple_cmd, app);
+		g_signal = builtin_functions(ast->u_node_data.s_cmd.simple_cmd, app);
 	else
 		g_signal = 1;
 	dup2(stdin_backup, STDIN_FILENO);
 	dup2(stdout_backup, STDOUT_FILENO);
+	close(stdin_backup);
+	close(stdout_backup);
 	return (1);
 }
 
