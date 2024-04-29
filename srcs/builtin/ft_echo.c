@@ -37,7 +37,7 @@ int	ft_echo(t_app *app, t_ast_node *simple_cmd)
 	if (option_flag == false)
 		write(1, "\n", 1);
 	free_strings(args);
-	return (1);
+	return (BUILTIN_SUCCESS);
 }
 
 bool	check_option(char *arg)

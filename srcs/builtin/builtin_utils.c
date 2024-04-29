@@ -12,15 +12,15 @@
 
 #include "../../include/builtin.h"
 
-void	ft_chdir(char *path)
+int	ft_chdir(char *path)
 {
 	if (chdir(path) == -1)
 	{
 		ft_putstr_fd("push: cd: ", STDERR_FILENO);
 		perror(path);
-		g_signal = EXIT_FAILURE;
-		return ;
+		return (false);
 	}
+	return (true);
 }
 
 void	print_env(t_app *app, int is_export)

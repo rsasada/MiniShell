@@ -21,7 +21,7 @@ int	ft_env(t_app *app, t_list *arg)
 	{
 		g_signal = 1;
 		ft_putendl_fd("push: too many arguments", 2);
-		return (0);
+		return (BUILTIN_FAILURE);
 	}
 	env_list = app->env_lst;
 	cur = env_list;
@@ -33,6 +33,5 @@ int	ft_env(t_app *app, t_list *arg)
 		printf("\n");
 		cur = cur->next;
 	}
-	g_signal = 0;
-	return (1);
+	return (BUILTIN_SUCCESS);
 }

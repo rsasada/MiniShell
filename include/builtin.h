@@ -16,7 +16,10 @@
 # include "minishell.h"
 # include "parser.h"
 
-void	ft_chdir(char *path);
+# define BUILTIN_SUCCESS 0
+# define BUILTIN_FAILURE 1
+
+int		ft_chdir(char *path);
 void	print_env(t_app *app, int is_export);
 int		ft_cd(t_app *app, t_list *argv);
 int		ft_env(t_app *app, t_list *argv);

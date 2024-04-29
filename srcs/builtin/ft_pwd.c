@@ -26,5 +26,5 @@ int	ft_pwd(t_app *app, t_list *argv)
 	else
 		exit_with_error("unexpected : failed getcwd ");
 	free(cwd);
-	return (0);
+	return (BUILTIN_SUCCESS);
 }

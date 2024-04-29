@@ -37,7 +37,7 @@ int	ft_unset(t_app *app, t_list *argv)
 	char	*arg;
 
 	if (!app)
-		return (0);
+		return (BUILTIN_FAILURE);
 	argv_cur = argv;
 	while (argv_cur)
 	{
@@ -51,5 +51,5 @@ int	ft_unset(t_app *app, t_list *argv)
 		remove_env(&(app->env_lst), arg);
 		argv_cur = argv_cur->next;
 	}
-	return (1);
+	return (BUILTIN_SUCCESS);
 }

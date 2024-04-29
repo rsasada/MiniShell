@@ -93,7 +93,7 @@ static void	process_args(t_app *app, t_list *argv)
 int	ft_export(t_app *app, t_list *argv)
 {
 	if (!process_first_arg(app, argv))
-		return (0);
+		return (BUILTIN_FAILURE);
 	process_args(app, argv);
-	return (1);
+	return (BUILTIN_SUCCESS);
 }
