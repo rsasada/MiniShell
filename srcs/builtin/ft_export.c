@@ -86,7 +86,7 @@ static int	process_args(t_app *app, t_list *argv)
 		{
 			ft_putstr_fd("push: export: `", STDERR_FILENO);
 			ft_putstr_fd(arg, STDERR_FILENO);
-			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
+			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 			status = 1;
 		}
 		argv_cur = argv_cur->next;
