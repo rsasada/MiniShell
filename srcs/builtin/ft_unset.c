@@ -46,7 +46,8 @@ int	ft_unset(t_app *app, t_list *argv)
 		{
 			ft_putstr_fd("push: unset: `", STDERR_FILENO);
 			ft_putstr_fd(arg, STDERR_FILENO);
-			handling_error("': not a valid identifier", 1);
+			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
+			return (BUILTIN_FAILURE);
 		}
 		remove_env(&(app->env_lst), arg);
 		argv_cur = argv_cur->next;

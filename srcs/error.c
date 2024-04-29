@@ -27,12 +27,6 @@ void	custom_error(int exit_code, char *error_message, char *cmd)
 	exit(exit_code);
 }
 
-void	handling_error(char *error_message, int exit_code)
-{
-	ft_putendl_fd(error_message, STDERR_FILENO);
-	g_signal = exit_code;
-}
-
 void	*print_syntax_error(char *error, int *error_code)
 {
 	ft_putstr_fd("push: syntax error near unexpected token `", 2);

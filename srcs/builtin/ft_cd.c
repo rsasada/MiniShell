@@ -46,9 +46,9 @@ static int	chdir_oldpwd(t_list *env_list)
 	if (oldpwd_path == NULL)
 	{
 		ft_putendl_fd("push: cd: OLDPWD not set", STDERR_FILENO);
-		return (0);
+		return (BUILTIN_FAILURE);
 	}
-	return (1);
+	return (BUILTIN_SUCCESS);
 }
 
 static int	chdir_home(t_app *app, t_list *env_list, int argc)
@@ -66,7 +66,7 @@ static int	chdir_home(t_app *app, t_list *env_list, int argc)
 	if (!home_path && argc == 0)
 	{
 		ft_putendl_fd("push: cd: HOME not set", STDERR_FILENO);
-		return (false);
+		return (BUILTIN_FAILURE);
 	}
 	else if (!home_path)
 		return (ft_chdir(app->home_path));
@@ -74,19 +74,22 @@ static int	chdir_home(t_app *app, t_list *env_list, int argc)
 		return (ft_chdir(home_path));
 }
 
-static void	chdir_home_with_path(t_app *app, char *path)
+static int	chdir_home_with_path(t_app *app, char *path)
 {
 	char	*home_path;
 	char	*full_path;
+	int		status;
 
+	status = BUILTIN_SUCCESS;
 	home_path = app->home_path;
 	if (!home_path && !app->home_path)
 		exit_with_error("Unexpected : No Home path set");
 	full_path = ft_strjoin(home_path, (path + 1));
 	if (!full_path)
 		exit_with_error("malloc");
-	ft_chdir(full_path);
+	status = ft_chdir(full_path);
 	free(full_path);
+	return (status);
 }
 
 int	ft_cd(t_app *app, t_list *argv)
@@ -94,9 +97,9 @@ int	ft_cd(t_app *app, t_list *argv)
 	char	*path;
 	char	*cwd;
 	t_list	*env_list;
-	int		status;
+	int		ret;
 
-	status = 0;
+	ret = BUILTIN_SUCCESS;
 	env_list = app->env_lst;
 	if (!argv)
 		chdir_home(app, env_list, 0);
@@ -104,17 +107,15 @@ int	ft_cd(t_app *app, t_list *argv)
 	{
 		path = ((t_ast_node *)(argv->content))->u_node_data.file_name_val;
 		if (ft_strncmp(path, "~", 2) == 0)
-			status = chdir_home(app, env_list, 1);
+			ret = chdir_home(app, env_list, 1);
 		else if (ft_strncmp(path, "~/", 2) == 0)
-			chdir_home_with_path(app, path);
+			ret = chdir_home_with_path(app, path);
 		else if (ft_strncmp(path, "-", 2) == 0)
-			status = chdir_oldpwd(env_list);
+			ret = chdir_oldpwd(env_list);
 		else
-			status = ft_chdir(path);
+			ret = ft_chdir(path);
 	}
-	if (!status)
-		return (BUILTIN_FAILURE);
 	cwd = getcwd(NULL, 0);
 	update_pwd(app, cwd);
-	return (BUILTIN_SUCCESS);
+	return (ret);
 }

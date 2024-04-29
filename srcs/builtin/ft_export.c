@@ -69,11 +69,13 @@ static void	export_env(t_app *app, char *arg)
 	}
 }
 
-static void	process_args(t_app *app, t_list *argv)
+static int	process_args(t_app *app, t_list *argv)
 {
 	t_list	*argv_cur;
 	char	*arg;
+	int		status;
 
+	status = 0;
 	argv_cur = argv;
 	while (argv_cur)
 	{
@@ -84,16 +86,19 @@ static void	process_args(t_app *app, t_list *argv)
 		{
 			ft_putstr_fd("push: export: `", STDERR_FILENO);
 			ft_putstr_fd(arg, STDERR_FILENO);
-			handling_error("': not a valid identifier", 1);
+			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
+			status = 1;
 		}
 		argv_cur = argv_cur->next;
 	}
+	return (status);
 }
 
 int	ft_export(t_app *app, t_list *argv)
 {
 	if (!process_first_arg(app, argv))
 		return (BUILTIN_FAILURE);
-	process_args(app, argv);
+	if (process_args(app, argv) == 1)
+		return (BUILTIN_FAILURE);
 	return (BUILTIN_SUCCESS);
 }

@@ -18,9 +18,9 @@ int	ft_chdir(char *path)
 	{
 		ft_putstr_fd("push: cd: ", STDERR_FILENO);
 		perror(path);
-		return (false);
+		return (BUILTIN_FAILURE);
 	}
-	return (true);
+	return (BUILTIN_SUCCESS);
 }
 
 void	print_env(t_app *app, int is_export)
