@@ -55,6 +55,7 @@ void	sigint_handler(int signum)
 		}
 		else
 			write(1, "\n", 1);
+		g_signal = 1;
 	}
 }
 
