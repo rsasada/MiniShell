@@ -1,4 +1,4 @@
-# MiniShell
+# MiniShell by Risasada && jongykim
 We rewrite a simple shell
 
 
