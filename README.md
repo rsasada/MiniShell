@@ -14,14 +14,13 @@ https://github.com/rsasada/MiniShell/assets/81406794/3518c118-65aa-47e8-923a-ab5
 # Available options
 PowerUpShell runs executables from an absolute, relative or environment PATH (/bin/ls or ls), including arguments or options. ' and " work the same as bash, except for multiline commands.
 
-You can separate commands with ;, as well as use redirections > >> < and pipes |.
+You can separate commands with ;, as well as use redirections > >> < and pipes |, heredocument <<.
 
-Environment variables are handled, like $HOME, including the return code $?.
+Environment variables are handled, like $HOME, including the return code $?(exit).
 
 Finally, you can use Ctrl-C to interrupt and Ctrl-\ to quit a program, as well as Ctrl-D to throw an EOF, same as in bash.
 
 A few of the functions are "built-in", meaning we don't call the executable, we re-coded them directly. It's the case for echo, pwd, cd, env, export, unset and exit.
-
 
 We based the basic design on Bash.
 
