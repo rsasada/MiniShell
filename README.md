@@ -1,6 +1,9 @@
 # MiniShell
 We rewrite a simple shell
 
+
+We've named it PowerUpShell, but it's powering down.
+
 # Available options
 Minishell runs executables from an absolute, relative or environment PATH (/bin/ls or ls), including arguments or options. ' and " work the same as bash, except for multiline commands.
 
