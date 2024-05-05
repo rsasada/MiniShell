@@ -1,7 +1,7 @@
 # MiniShell
 We rewrite a simple shell
 
-#Available options
+# Available options
 Minishell runs executables from an absolute, relative or environment PATH (/bin/ls or ls), including arguments or options. ' and " work the same as bash, except for multiline commands.
 
 You can separate commands with ;, as well as use redirections > >> < and pipes |.
