@@ -6,7 +6,8 @@ We've named it PowerUpShell, but it's powering down.
 
 
 
-Uploading 画面収録 2024-05-05 17.01.08.mov…
+https://github.com/rsasada/MiniShell/assets/81406794/3518c118-65aa-47e8-923a-ab5e9bbb57d0
+
 
 
 
