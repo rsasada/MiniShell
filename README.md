@@ -4,6 +4,12 @@ We rewrite a simple shell
 
 We've named it PowerUpShell, but it's powering down.
 
+
+
+Uploading 画面収録 2024-05-05 17.01.08.mov…
+
+
+
 # Available options
 PowerUpShell runs executables from an absolute, relative or environment PATH (/bin/ls or ls), including arguments or options. ' and " work the same as bash, except for multiline commands.
 
