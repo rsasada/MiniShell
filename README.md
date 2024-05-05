@@ -1,4 +1,4 @@
-# MiniShell by Risasada && jongykim
+# PowerUpShell by Risasada && jongykim
 We rewrite a simple shell
 
 
